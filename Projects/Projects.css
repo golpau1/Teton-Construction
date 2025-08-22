@@ -1,0 +1,657 @@
+/* =========================================================
+   PROJECTS PAGE STYLES (Clean, Consolidated)
+   1. Imports
+   2. Base Layout
+   3. Header & Footer
+   4. Grid & Cards
+   5. Card Labels & Variants
+   6. Navigation & Footer Nav
+   7. Animation
+   8. Mobile (<=700px) Overrides
+   ========================================================= */
+
+/* 1. Imports */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300&display=swap');
+
+/* 2. Base Layout */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  background: #fff;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main.projects-grid {
+  flex: 1 0 auto;
+}
+
+/* 3. Header & Footer */
+.site-header,
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.logo p {
+  font-size: 0.7rem;
+  margin: 0;
+  letter-spacing: 3.5px;
+  color: #555;
+}
+
+.site-header nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 25px;
+}
+
+.site-header nav a {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* 4. Grid & Cards */
+.projects-grid {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 40px;
+  column-gap: 16px;
+  padding: 20px;
+  min-height: 0;
+}
+
+.projects-grid > div {
+  padding: 0 6px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.project-card {
+  position: relative;
+  overflow: hidden;
+  background: #f0f0f0;
+  border-radius: 0;
+  margin-bottom: 0;
+  box-shadow: none;
+  transition: box-shadow 0.32s cubic-bezier(.4, 2, .6, 1);
+  height: 475px;
+  max-height: 100%;
+  width: 100%;
+}
+
+.project-card:hover {
+  box-shadow: none;
+  z-index: 2;
+}
+
+.project-card:nth-last-child(-n+2) {
+  margin-bottom: 0;
+}
+
+.project-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 5. Card Labels & Variants */
+.card-info {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  z-index: 2;
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.dark-overlay .card-info {
+  color: #fff;
+}
+
+.card-info span {
+  display: block;
+}
+
+.project-name {
+  margin-bottom: 5px;
+}
+
+.card-label {
+  position: relative;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 17px;
+  font-weight: 300;
+  color: #3c3c3c;
+  font-family: 'Lexend', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+}
+
+.card-label .under-construction {
+  display: none;
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: #3c3c3c;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+  font-family: 'Lexend', sans-serif;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(60px);
+  text-align: right;
+  transition:
+    opacity 0.36s cubic-bezier(.4, 2, .6, 1),
+    transform 0.36s cubic-bezier(.4, 2, .6, 1);
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+.projects-grid > div:hover .under-construction {
+  display: inline-block;
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+  animation: slideInRight 0.36s cubic-bezier(.4, 2, .6, 1) both;
+}
+
+.card-label.violet,
+.card-label.violet .under-construction {
+  font-family: 'Lexend', sans-serif;
+  font-weight: 300;
+}
+
+.card-label.violet {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: #111;
+  width: 100%;
+  gap: 10px;
+  font-size: 1.1rem;
+}
+
+.card-label.violet .under-construction {
+  color: #111;
+  opacity: 0.85;
+  font-size: 0.95rem;
+  margin: 0 0 0 auto;
+}
+
+.violet-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.violet-card img {
+  position: relative;
+  z-index: 0;
+}
+
+.projects-grid > div:nth-child(2) .project-card img {
+  transform: scale(1.22);
+  object-position: center 30%; /* moved DOWN (lower value shows lower portion in view) */
+  transition: transform 0.3s, object-position 0.3s;
+  box-shadow: none;
+}
+
+/* Zoom the 64 Dawn Parade image (third card) */
+.projects-grid > div:nth-child(3) .project-card img {
+  transform: scale(1.2);
+  object-position: center center;
+  transition: transform 0.3s ease;
+}
+
+.projects-grid > div:nth-child(2) .project-card {
+  border: 1px solid #e0e0e0;
+}
+
+/* Faint border for 64 Dawn Parade card (third card) */
+.projects-grid > div:nth-child(3) .project-card {
+  border: 1px solid rgba(0,0,0,0.08);
+  background: #f8f8f8;
+}
+
+/* 6. Navigation & Footer Nav */
+.bottom-nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 30px 0 0;
+}
+
+.bottom-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+.bottom-nav a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 300;
+  font-family: 'Lexend', sans-serif;
+  transition: color 0.2s;
+}
+
+.bottom-nav a:hover {
+  color: #b85c5c;
+}
+
+.custom-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  width: 100%;
+  background: #fff;
+  padding: 0 48px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 10;
+  gap: 24px;
+  border-top: 1px solid #e3e3e3;
+}
+
+.footer-left-logo {
+  position: absolute;
+  left: 48px;
+  width: 154px;
+  height: 154px;
+  object-fit: contain;
+  opacity: 0.92;
+  transition: opacity 0.2s, transform 0.2s;
+  filter: brightness(0) saturate(100%); /* force to pure black */
+}
+
+.footer-right-icon {
+  position: absolute;
+  right: 48px;
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  opacity: 0.92;
+  transition: opacity 0.2s, transform 0.2s;
+  /* Make the icon render as solid black (works for colored or white assets) */
+  filter: brightness(0) saturate(100%);
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-nav a {
+  text-decoration: none;
+  color: #3c3c3c;
+  font-size: 1rem;
+  font-weight: 300;
+  font-family: 'Lexend', sans-serif;
+  transition: color 0.2s;
+  padding: 5px 0;
+  position: relative;
+}
+
+.footer-nav a::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: #333;
+  border-radius: 2px;
+  transition: width 0.3s ease, left 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.footer-nav a:hover::before {
+  width: 100%;
+}
+
+.footer-nav a:hover {
+  color: #3c3c3c;
+}
+
+.fixed-bottom-right-icon,
+.fixed-bottom-left-logo {
+  display: none !important;
+}
+
+/* 7. Animation */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+/* Hide mobile-only navigation elements by default (desktop & larger screens) */
+.menu-toggle, .mobile-drawer, .drawer-overlay { display: none; }
+
+/* 8. Mobile (<=700px) — redesigned: clean, single column, tap-first */
+@media (max-width: 700px) {
+  html, body{
+    background:#fff;
+    color:#222;
+    font-family:'Lexend','Helvetica Neue',Arial,sans-serif;
+    padding:0;
+    border:0;
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden; /* prevent horizontal scroll */
+  }
+  body.no-scroll{ overflow:hidden; }
+
+  /* Burger menu (same style as homepage) */
+  .menu-toggle {
+    position: fixed;
+    top: .85rem;
+    right: .85rem;
+    width: 34px;
+    height: 34px;
+    border: none;
+  background: rgba(0,0,0,.45); /* subtle dark translucent backdrop */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px; /* soften corners */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    cursor: pointer;
+    z-index: 120;
+    transform: rotate(45deg);
+    transform-origin: center center;
+  box-shadow: 0 2px 6px rgba(0,0,0,.28);
+  transition: background .3s ease, box-shadow .3s ease;
+  }
+  .menu-toggle span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 2px;
+    background: #fff; /* same as homepage */
+    border-radius: 2px;
+    transition: background .3s ease;
+  }
+  .menu-toggle span:first-child { transform: translate(-50%, -50%) rotate(45deg); }
+  .menu-toggle span:last-child { transform: translate(-50%, -50%) rotate(-45deg); }
+  .menu-toggle:focus-visible { outline: 2px solid rgba(0,0,0,.55); outline-offset:4px; }
+  .menu-toggle:hover span, .menu-toggle:focus-visible span { background:#e2e2e2; }
+  .menu-toggle:hover, .menu-toggle:focus-visible { background: rgba(0,0,0,.55); box-shadow:0 3px 10px rgba(0,0,0,.35); }
+
+  .drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.4);
+    z-index: 110;
+  }
+  .mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: min(70%, 320px);
+    background: rgba(15,15,15,.92);
+    backdrop-filter: blur(8px);
+    box-shadow: -4px 0 24px -6px rgba(0,0,0,.5);
+    transform: translateX(100%);
+    transition: transform .45s cubic-bezier(.65,.05,.36,1);
+    z-index: 130;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 6rem;
+    padding-left: 2rem;
+  }
+  .drawer-close {
+    position:absolute;
+    top:1rem;
+    right:1rem;
+    width:40px; /* larger, invisible tap target */
+    height:40px;
+    background:transparent;
+    border:none;
+    border-radius:0;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    transition:opacity .25s ease;
+    opacity:.85;
+  }
+  .drawer-close::before {
+    content:"";
+    width:10px;
+    height:10px;
+    border-top:2px solid #fff;
+    border-right:2px solid #fff;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%) rotate(45deg); /* centered arrow */
+  display:block;
+  }
+  .drawer-close:hover, .drawer-close:focus-visible { opacity:1; }
+  .drawer-close:focus-visible { outline:2px solid rgba(255,255,255,.6); outline-offset:2px; }
+  .mobile-drawer.open { transform: translateX(0); }
+  .mobile-links { display:flex; flex-direction:column; gap:1.75rem; }
+  .mobile-links a {
+    font-family:'Lexend',Arial,sans-serif;
+    font-weight:300;
+    font-size:1.25rem;
+    color:#fff;
+    text-decoration:none;
+    letter-spacing:-0.01em;
+    position:relative;
+  }
+  .mobile-links a:after {
+    content:"";
+    position:absolute;
+    left:0; bottom:-4px;
+    height:2px; width:0;
+    background:linear-gradient(90deg, rgba(255,255,255,.25), #fff);
+    transition:width .35s ease;
+  }
+  .mobile-links a:hover:after, .mobile-links a:focus-visible:after { width:100%; }
+
+  /* Compact sticky header; hide desktop nav */
+  .site-header{
+    position:sticky; top:0; z-index:50;
+    padding:14px 16px;
+    border-bottom:1px solid #eee;
+    background:#fff;
+  }
+  .site-header nav{ display:none; }
+  .logo h1{ font-size:1.25rem; letter-spacing:1.5px; }
+  .logo p{ font-size:.62rem; letter-spacing:2.6px; }
+
+  /* One-column grid with comfy spacing */
+  .projects-grid{
+    display:grid;
+    grid-template-columns:1fr;
+  gap:28px; /* more breathing room between cards */
+    align-items:start;
+    width:100%;
+    max-width:620px;
+  padding:24px 0 48px; /* remove side padding; we'll apply 20px on each item to avoid overflow */
+    margin:0 auto;
+  overflow-x:hidden; /* ensure inner content doesn't force scroll */
+  }
+  .projects-grid > div{
+    padding:0 20px; /* 20px side space per card */
+    width:100%;
+    max-width:none;
+    align-items:stretch;
+  overflow:hidden; /* contain any accidental overflow */
+    box-sizing:border-box; /* include padding in width to prevent horizontal scroll */
+  }
+
+  /* Cards: consistent aspect, rounded, subtle shadow */
+  .project-card{
+    width:100%;
+  height:250px; /* increased by 50px per request */
+    border-radius:0; /* remove rounding on mobile */
+    overflow:hidden;
+    background:#f6f6f6;
+    box-shadow:0 6px 18px rgba(0,0,0,.06);
+    position:relative; /* allow gradient overlay */
+  }
+  .project-card::after{ /* subtle bottom gradient to lift caption legibility */
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to bottom, rgba(0,0,0,0) 55%, rgba(0,0,0,.45) 98%);
+    pointer-events:none;
+  }
+  .project-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    border-radius:0;
+    max-height:none;
+    transform:none !important;              /* cancel desktop zoom tweaks */
+    object-position:center !important;
+    filter:brightness(.97);
+  }
+  /* Extra zoom for 85 Mountain View (second card) on mobile */
+  .projects-grid > div:nth-child(2) .project-card img{
+    transform:scale(1.25) !important; /* slightly more zoom */
+    object-position:center 42% !important; /* adjust vertical framing */
+  }
+  /* Extra zoom for 64 Dawn Parade (third card) on mobile */
+  .projects-grid > div:nth-child(3) .project-card img{
+    transform:scale(1.28) !important;
+    object-position:center 50% !important;
+  }
+
+  /* On-image caption for readability */
+  .card-info{
+    bottom:12px;
+    left:12px;
+    font-size:.78rem;
+    color:#fff;
+    text-shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+
+  /* Title + status inline (no hover on mobile) */
+  .card-label{
+    margin-top:10px;
+  font-size:1.05rem; /* slightly larger for readability */
+  letter-spacing:.02em; /* tighter than desktop but readable */
+  line-height:1.28;
+    color:#111;
+    text-align:left;
+  }
+  .card-label .under-construction{
+    display:inline;
+    position:static;
+    opacity:.65;
+    transform:none;
+    margin-left:8px;
+  font-size:.88rem;
+  letter-spacing:.02em;
+  }
+
+  /* Prevent hover/tap state from re-applying desktop hover animation that shifts text */
+  .projects-grid > div:hover .under-construction,
+  .projects-grid > div:active .under-construction {
+    display:inline !important;
+    position:static !important;
+    transform:none !important;
+    opacity:.65 !important;
+    animation:none !important;
+  }
+
+  /* Disable all animations/transitions on card tap for mobile only */
+  .project-card,
+  .project-card img,
+  .card-label .under-construction {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* Variant stays light with soft gradient */
+  .card-label.violet,
+  .card-label.violet .under-construction{ color:#111; }
+  .violet-card::after{
+    background:linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.28));
+  }
+
+  /* Footer: centered nav, hide side logos */
+  .custom-footer{
+    height:auto;
+    padding:20px 16px;
+    border-top:1px solid #eee;
+    gap:0;
+  }
+  .footer-left-logo,
+  .footer-right-icon{ display:none; }
+  .footer-nav ul{ gap:22px; }
+  .footer-nav a{
+    font-size:.95rem;
+    padding:6px 2px;
+  }
+
+  /* Completely remove footer on mobile per request */
+  .custom-footer { display:none !important; }
+
+  /* Remove old hamburger placeholder if present */
+  header, .menu-icon{ display:none; }
+}

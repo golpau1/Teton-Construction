@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>TETON Construction</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="Contact.css">
+</head>
+<body>
+  <!-- Mobile burger menu (mobile only) -->
+  <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
+    <span></span><span></span>
+  </button>
+  <div class="drawer-overlay" hidden></div>
+  <aside id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
+    <button class="drawer-close" aria-label="Close menu"></button>
+    <nav class="mobile-links" aria-label="Mobile Primary">
+  <a href="../index.html">Home</a>
+      <a href="../Projects/Projects.html">Projects</a>
+      <a href="../Contact/Contact.html">Contact</a>
+    </nav>
+  </aside>
+  <div class="wrap">
+    <!-- Centered logo + contact details -->
+    <section class="center">
+      <div class="stack">
+        <div class="contact-gif" aria-hidden="true">
+          <img src="assets/9uh0mc.gif" alt="" loading="lazy">
+        </div>
+
+        <!-- Contact lines -->
+        <ul class="contacts" aria-label="Contact">
+          <li><a href="mailto:admin@tetonconstruction.com.au">admin@tetonconstruction.com.au</a></li>
+          <li>Mobile: <a href="tel:+61448031504">0448031504</a></li>
+          <li>QBCC License No: 15449963</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Footer replicated from Projects page -->
+    <footer class="site-footer custom-footer" role="contentinfo">
+  <a href="../index.html" aria-label="Go to Home">
+        <img src="../Assets/TetonConstruction_Assets-2.png" alt="Teton Logo" class="footer-left-logo">
+      </a>
+      <nav class="footer-nav" aria-label="Footer">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../Projects/Projects.html">Projects</a></li>
+          <li><a class="active" href="../Contact/Contact.html">Contact</a></li>
+        </ul>
+      </nav>
+  <a href="../index.html" aria-label="Go to Home">
+        <img src="../Assets/fygfghf.png" alt="Footer Logo" class="footer-right-icon">
+      </a>
+    </footer>
+  </div>
+  <script>
+  (function(){
+    const btn=document.querySelector('.menu-toggle');
+    const drawer=document.getElementById('mobileDrawer');
+    const overlay=document.querySelector('.drawer-overlay');
+    const closeBtn=document.querySelector('.drawer-close');
+    const focusableSelectors='a,button';
+    let lastFocused;function open(){lastFocused=document.activeElement;drawer.classList.add('open');overlay.hidden=false;document.body.classList.add('no-scroll');btn.setAttribute('aria-expanded','true');drawer.setAttribute('aria-hidden','false');const first=drawer.querySelector(focusableSelectors);first&&first.focus();trap(true);}function close(){drawer.classList.remove('open');overlay.hidden=true;document.body.classList.remove('no-scroll');btn.setAttribute('aria-expanded','false');drawer.setAttribute('aria-hidden','true');trap(false);lastFocused&&lastFocused.focus();}function toggle(){drawer.classList.contains('open')?close():open();}btn.addEventListener('click',toggle);overlay.addEventListener('click',close);closeBtn&&closeBtn.addEventListener('click',close);window.addEventListener('keydown',e=>{if(e.key==='Escape'&&drawer.classList.contains('open'))close();});function trap(en){if(!en){document.removeEventListener('focus',fh,true);return;}document.addEventListener('focus',fh,true);}function fh(e){if(!drawer.classList.contains('open'))return;if(!drawer.contains(e.target)&&e.target!==btn){const first=drawer.querySelector(focusableSelectors);first&&first.focus();}}})();
+  </script>
+</body>
+</html>

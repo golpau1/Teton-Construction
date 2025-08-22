@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Teton Construction – The Violet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="The Violet.css">
+</head>
+<body>
+
+  <!-- Mobile burger menu (moved to header for inline positioning) -->
+  <div class="drawer-overlay" hidden></div>
+  <aside id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
+    <button class="drawer-close" aria-label="Close menu"></button>
+    <nav class="mobile-links" aria-label="Mobile Primary">
+  <a href="../index.html">Home</a>
+      <a href="../Projects/Projects.html">Projects</a>
+      <a href="../Contact/Contact.html">Contact</a>
+    </nav>
+  </aside>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand" style="display:flex;align-items:center;gap:14px;">
+  <img src="../Assets/85 Mountain View/fygfghf.png" alt="Teton Icon" class="brand-icon" style="height:38px;width:auto;display:inline-block;vertical-align:middle;">
+      </div>
+
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer"><span></span><span></span></button>
+
+      <nav class="main-nav" aria-label="Primary">
+  <a href="../index.html">Home</a>
+        <a class="active" href="../Projects/Projects.html">Projects</a>
+        <a href="../Contact/Contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <main class="page">
+    <div class="grid">
+      <!-- Left: Project images -->
+      <section class="project-media">
+        <div class="frame top-shift">
+          <img src="../Assets/85 Mountain View/The Violet/Architect-renders-1.jpg" alt="The Violet – Render 1">
+        </div>
+        <div class="frame">
+          <img src="../Assets/85 Mountain View/The Violet/Architect-renders-3.jpg" alt="The Violet – Render 2">
+        </div>
+        <div class="frame">
+          <img src="../Assets/85 Mountain View/The Violet/www.jpg" alt="The Violet – Render 3">
+        </div>
+      </section>
+
+      <!-- Mobile-only duplicated description placed directly under images -->
+      <div class="mobile-project-copy" aria-label="Project description (mobile)">
+        <p>A boutique collection of nine thoughtfully designed townhouses, nestled in the quaint and historic neighbourhood of Burleigh Heads.</p>
+        <p>Blending seamlessly with the area's rich heritage, The Violet introduces a modern twist — a contemporary lifestyle precinct that captures the essence of its natural surroundings. Each townhouse is crafted to reflect the balance of convenience and vibrancy, tranquility and serenity, offering residents a harmonious coastal way of life.</p>
+        <p>Set within lush green surrounds, The Violet is a celebration of modern living in a rejuvenated and evolving pocket of Burleigh Heads where heritage meets innovation.</p>
+      </div>
+
+      <!-- Right: Meta + copy -->
+      <aside class="project-meta">
+  <h2>The Violet</h2>
+
+        <div class="meta-list">
+          <div><b>Completion:</b> 2026</div>
+          <div><b>Location:</b> Burleigh Heads</div>
+          <div><b>Architect:</b> CPO Architects</div>
+          <div><b>Interiors:</b> CPO Architects</div>
+        </div>
+
+        <div class="project-copy">
+          <p>A boutique collection of nine thoughtfully designed townhouses, nestled in the quaint and historic neighbourhood of Burleigh Heads.</p>
+          <p>Blending seamlessly with the area's rich heritage, The Violet introduces a modern twist&nbsp;&mdash; a contemporary lifestyle precinct that captures the essence of its natural surroundings. Each townhouse is crafted to reflect the balance of convenience and vibrancy, tranquility and serenity, offering residents a harmonious coastal way of life.</p>
+          <p>Set within lush green surrounds, The Violet is a celebration of modern living in a rejuvenated and evolving pocket of Burleigh Heads where heritage meets innovation.</p>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="site-footer custom-footer">
+  <img src="../Assets/85 Mountain View/TetonConstruction_Assets-2.png" alt="Teton Logo" class="footer-left-logo">
+      <nav class="footer-nav">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a class="active" href="../Projects/Projects.html">Projects</a></li>
+          <li><a href="../Contact/Contact.html">Contact</a></li>
+        </ul>
+      </nav>
+  <img src="../Assets/85 Mountain View/fygfghf.png" alt="Footer Logo" class="footer-right-icon">
+    </footer>
+  </main>
+  <script>
+  (function(){const btn=document.querySelector('.menu-toggle'),drawer=document.getElementById('mobileDrawer'),overlay=document.querySelector('.drawer-overlay'),closeBtn=document.querySelector('.drawer-close');const focusable='a,button';let last;function open(){last=document.activeElement;drawer.classList.add('open');overlay.hidden=false;document.body.classList.add('no-scroll');btn.setAttribute('aria-expanded','true');drawer.setAttribute('aria-hidden','false');const f=drawer.querySelector(focusable);f&&f.focus();trap(true);}function close(){drawer.classList.remove('open');overlay.hidden=true;document.body.classList.remove('no-scroll');btn.setAttribute('aria-expanded','false');drawer.setAttribute('aria-hidden','true');trap(false);last&&last.focus();}function toggle(){drawer.classList.contains('open')?close():open();}btn.addEventListener('click',toggle);overlay.addEventListener('click',close);closeBtn&&closeBtn.addEventListener('click',close);window.addEventListener('keydown',e=>{if(e.key==='Escape'&&drawer.classList.contains('open'))close();});function trap(en){if(!en){document.removeEventListener('focus',fh,true);return;}document.addEventListener('focus',fh,true);}function fh(e){if(!drawer.classList.contains('open'))return;if(!drawer.contains(e.target)&&e.target!==btn){const f=drawer.querySelector(focusable);f&&f.focus();}}})();
+  </script>
+</body>
+</html>

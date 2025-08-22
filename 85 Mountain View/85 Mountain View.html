@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Teton Construction – 85 Mountain View</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="85 Mountain View.css">
+</head>
+<body>
+
+  <!-- Mobile burger menu (moved inside header for inline alignment with icon) -->
+  <div class="drawer-overlay" hidden></div>
+  <aside id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
+    <button class="drawer-close" aria-label="Close menu"></button>
+    <nav class="mobile-links" aria-label="Mobile Primary">
+  <a href="../index.html">Home</a>
+      <a href="../Projects/Projects.html">Projects</a>
+      <a href="../Contact/Contact.html">Contact</a>
+    </nav>
+  </aside>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand" style="display:flex;align-items:center;gap:14px;">
+  <img src="../Assets/85 Mountain View/fygfghf.png" alt="Teton Icon" class="brand-icon" style="height:38px;width:auto;display:inline-block;vertical-align:middle;">
+      </div>
+
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer"><span></span><span></span></button>
+
+      <nav class="main-nav" aria-label="Primary">
+  <a href="../index.html">Home</a>
+        <a class="active" href="../Projects/Projects.html">Projects</a>
+        <a href="../Contact/Contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <main class="page">
+    <div class="grid">
+      <!-- Left: Project images -->
+      <section class="project-media">
+        <div class="frame">
+          <img src="../Assets/85 Mountain View/85 Mountain View/Untitled-1-01.png" alt="85 Mountain View – Render 1">
+        </div>
+        <div class="frame">
+          <img src="../Assets/85 Mountain View/85 Mountain View/Untitled-1-02.png" alt="85 Mountain View – Render 2">
+        </div>
+        <div class="frame">
+          <img src="../Assets/85 Mountain View/85 Mountain View/Untitled-1-03.png" alt="85 Mountain View – Render 3">
+        </div>
+        <div class="frame">
+          <img src="../Assets/85 Mountain View/85 Mountain View/Untitled-1-04.png" alt="85 Mountain View – Render 4">
+        </div>
+        <div class="frame">
+          <img src="../Assets/85 Mountain View/85 Mountain View/Untitled-1-05.png" alt="85 Mountain View – Render 5">
+        </div>
+        <div class="frame">
+          <img src="../Assets/85 Mountain View/85 Mountain View/Untitled-1-06.png" alt="85 Mountain View – Render 6">
+        </div>
+      </section>
+
+      <!-- Right: Meta + copy -->
+      <aside class="project-meta">
+        <h2>85 Mountain View</h2>
+
+        <div class="meta-list">
+          <div><b>Commencing:</b> 2026</div>
+          <div><b>Location:</b> Miami</div>
+          <div><b>Architect:</b> Impact Design</div>
+          <div><b>Interiors:</b> Impact Design</div>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="site-footer custom-footer">
+  <img src="../Assets/85 Mountain View/TetonConstruction_Assets-2.png" alt="Teton Logo" class="footer-left-logo">
+      <nav class="footer-nav">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a class="active" href="../Projects/Projects.html">Projects</a></li>
+          <li><a href="../Contact/Contact.html">Contact</a></li>
+        </ul>
+      </nav>
+  <img src="../Assets/85 Mountain View/fygfghf.png" alt="Footer Logo" class="footer-right-icon">
+    </footer>
+  </main>
+  <script>
+  (function(){const btn=document.querySelector('.menu-toggle'),drawer=document.getElementById('mobileDrawer'),overlay=document.querySelector('.drawer-overlay'),closeBtn=document.querySelector('.drawer-close');const focusable='a,button';let last;function open(){last=document.activeElement;drawer.classList.add('open');overlay.hidden=false;document.body.classList.add('no-scroll');btn.setAttribute('aria-expanded','true');drawer.setAttribute('aria-hidden','false');const f=drawer.querySelector(focusable);f&&f.focus();trap(true);}function close(){drawer.classList.remove('open');overlay.hidden=true;document.body.classList.remove('no-scroll');btn.setAttribute('aria-expanded','false');drawer.setAttribute('aria-hidden','true');trap(false);last&&last.focus();}function toggle(){drawer.classList.contains('open')?close():open();}btn.addEventListener('click',toggle);overlay.addEventListener('click',close);closeBtn&&closeBtn.addEventListener('click',close);window.addEventListener('keydown',e=>{if(e.key==='Escape'&&drawer.classList.contains('open'))close();});function trap(en){if(!en){document.removeEventListener('focus',fh,true);return;}document.addEventListener('focus',fh,true);}function fh(e){if(!drawer.classList.contains('open'))return;if(!drawer.contains(e.target)&&e.target!==btn){const f=drawer.querySelector(focusable);f&&f.focus();}}})();
+  </script>
+</body>
+</html>

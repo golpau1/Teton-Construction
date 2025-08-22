@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teton Construction</title>
+    <link rel="stylesheet" href="Projects.css">
+    <link rel="stylesheet" href="Projects.css" media="only screen and (max-width: 700px)">
+</head>
+<body>
+    <!-- Mobile burger menu (only visible on small screens) -->
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
+        <span></span>
+        <span></span>
+    </button>
+    <div class="drawer-overlay" hidden></div>
+    <aside id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
+    <button class="drawer-close" aria-label="Close menu"></button>
+        <nav class="mobile-links" role="navigation" aria-label="Mobile Primary">
+            <a href="../index.html">Home</a>
+            <a href="Projects.html">Projects</a>
+            <a href="../Contact/Contact.html">Contact</a>
+        </nav>
+    </aside>
+
+    <main class="projects-grid" style="color: #3c3c3c;">
+        <div>
+            <a href="../The Violet/The Violet.html" style="display:block;">
+                <div class="project-card">
+                    <img src="../Assets/The Violet/Architect-renders-3.jpg" alt="The Violet">
+                </div>
+            </a>
+            <div class="card-label">
+                The Violet
+                <span class="under-construction">Under Construction</span>
+            </div>
+        </div>
+        <div>
+            <a href="../85 Mountain View/85 Mountain View.html" style="display:block;">
+                <div class="project-card">
+                    <img src="../Assets/85 Mountain View/85 Mountain View/Untitled-1-03.png" alt="85 Mountain View">
+                </div>
+            </a>
+            <div class="card-label">
+                85 Mountain View
+                <span class="under-construction">DA Development Stage</span>
+            </div>
+        </div>
+        <div>
+            <a href="../64 Dawn Parade/64 Dawn Parade.html" style="display:block;">
+                <div class="project-card">
+                    <img src="../64 Dawn Parade/assets/Impact-Design-Concept-Drawings-33333-min.jpg" alt="64 Dawn Parade">
+                </div>
+            </a>
+            <div class="card-label">
+                64 Dawn Parade
+                <span class="under-construction">DA Development Stage</span>
+            </div>
+        </div>
+        <div>
+            <div class="project-card">
+                <img src="../Assets/85 Mountain View/16.jpg" alt="Unannounced Project 2" style="filter: grayscale(1) brightness(0.45);">
+            </div>
+            <div class="card-label">
+                Unannounced Project
+                <span class="under-construction">TBA</span>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer custom-footer">
+    <img src="../Assets/85 Mountain View/TetonConstruction_Assets-2.png" alt="Teton Logo" class="footer-left-logo">
+        <nav class="footer-nav">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a class="active" href="Projects.html">Projects</a></li>
+                <li><a href="../Contact/Contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    <img src="../Assets/85 Mountain View/fygfghf.png" alt="Footer Logo" class="footer-right-icon">
+    </footer>
+
+    <script>
+    (function(){
+        const btn = document.querySelector('.menu-toggle');
+        const drawer = document.getElementById('mobileDrawer');
+        const overlay = document.querySelector('.drawer-overlay');
+    const closeBtn = document.querySelector('.drawer-close');
+        const focusableSelectors = 'a, button';
+        let lastFocused;
+        function open(){
+            lastFocused = document.activeElement;
+            drawer.classList.add('open');
+            overlay.hidden = false;
+            document.body.classList.add('no-scroll');
+            btn.setAttribute('aria-expanded','true');
+            drawer.setAttribute('aria-hidden','false');
+            const first = drawer.querySelector(focusableSelectors); first && first.focus();
+            trapFocus(true);
+        }
+        function close(){
+            drawer.classList.remove('open');
+            overlay.hidden = true;
+            document.body.classList.remove('no-scroll');
+            btn.setAttribute('aria-expanded','false');
+            drawer.setAttribute('aria-hidden','true');
+            trapFocus(false);
+            lastFocused && lastFocused.focus();
+        }
+        function toggle(){ drawer.classList.contains('open') ? close() : open(); }
+        btn.addEventListener('click', toggle);
+        overlay.addEventListener('click', close);
+    closeBtn && closeBtn.addEventListener('click', close);
+        window.addEventListener('keydown', e=>{ if(e.key==='Escape' && drawer.classList.contains('open')) close(); });
+        function trapFocus(enable){
+            if(!enable){ document.removeEventListener('focus', focusHandler, true); return; }
+            document.addEventListener('focus', focusHandler, true);
+        }
+        function focusHandler(e){
+            if(!drawer.classList.contains('open')) return;
+            if(!drawer.contains(e.target) && e.target !== btn){
+                const first = drawer.querySelector(focusableSelectors); first && first.focus();
+            }
+        }
+    })();
+    </script>
+</body>
+</html>
