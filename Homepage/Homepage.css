@@ -128,16 +128,15 @@ body.no-scroll { overflow: hidden; }
 	box-shadow:0 4px 24px rgba(0,0,0,0.2);
 }
 /* Hero brand stack (single logo now) */
+/* Hero brand centered for all screen sizes */
+.content{position:relative;}
 .hero-brand { display:flex; flex-direction:column; align-items:center; }
+/* Stack container: centered block with logo then links */
+.hero-stack { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:100%; max-width:900px; display:flex; flex-direction:column; align-items:center; gap:2.2rem; padding:0 1rem; box-sizing:border-box; }
+.hero-stack .main-links { margin-top:0; }
 @media (max-width:760px){
-	.hero-logo{ max-width:min(82vw,600px); }
-}
-/* Center hero logo exactly in viewport on mobile */
-@media (max-width:760px){
-	.content{position:relative;min-height:100vh;}
-	.hero-brand{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;}
-		/* Enlarged mobile logo */
-		.hero-logo{max-width:85vw;margin:0;}
+	.content{min-height:100vh;}
+	.hero-logo{max-width:85vw; margin:0;}
 }
 /* Hamburger button */
 .menu-toggle {
@@ -250,7 +249,7 @@ body.no-scroll { overflow: hidden; }
 .mobile-links a:hover:after, .mobile-links a:focus-visible:after { width: 100%; }
 
 /* Hide desktop nav on mobile; show hamburger */
-@media (max-width: 760px) {
+@media (max-width:760px){
 	.main-links { display: none; }
 	.menu-toggle { display: flex; }
 	/* Mobile-only: subtle white container for burger (matching shape of other pages) */
