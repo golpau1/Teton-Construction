@@ -13,8 +13,8 @@
   <div id="preloader">
   <img src="Assets/85 Mountain View/teton-gif.gif" alt="Loading..." style="width:96px;height:auto;display:block;" />
   </div>
-  <video class="video-bg" autoplay muted loop playsinline>
-  <source src="Assets/85 Mountain View/7031309_Close_up_Slow_Motion_3840x2160.mp4" type="video/mp4" />
+  <video class="video-bg" id="bgVideo" muted autoplay loop playsinline webkit-playsinline preload="auto" poster="Assets/85 Mountain View/16.jpg">
+    <source src="Assets/85 Mountain View/7031309_Close_up_Slow_Motion_3840x2160.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
   <img class="video-fallback" src="Assets/video-fallback.jpg" alt="Background" style="display:none;" />
@@ -51,6 +51,28 @@
         setTimeout(function(){ pre.style.display = 'none'; }, 900);
       }, 1500);
     });
+    // Ensure background video keeps playing on mobile (some browsers auto-pause inline autoplay videos)
+    (function(){
+      const v = document.getElementById('bgVideo');
+      if(!v) return;
+      function tryPlay(){
+        if(v.paused || v.readyState < 2){
+          const p = v.play();
+          if(p && p.catch) p.catch(()=>{}); // ignore autoplay promise rejections
+        }
+      }
+      // Resume if unexpectedly paused before end
+      v.addEventListener('pause', ()=>{ if(!document.hidden && v.currentTime < (v.duration||1)-0.25) tryPlay(); });
+      // Standard looping safety (some iOS versions fire ended before loop restarts)
+      v.addEventListener('ended', ()=>{ v.currentTime = 0; tryPlay(); });
+      ['loadeddata','canplay','canplaythrough','visibilitychange'].forEach(evt => {
+        (evt==='visibilitychange'?document:v).addEventListener(evt, ()=>{ if(!document.hidden) tryPlay(); });
+      });
+      // Periodic nudge (low frequency to save battery)
+      setInterval(()=>{ if(!document.hidden) tryPlay(); }, 5000);
+      // Initial kick (in case preloader delayed)
+      tryPlay();
+    })();
     (function(){
       const btn=document.querySelector('.menu-toggle');
       const drawer=document.getElementById('mobileDrawer');
