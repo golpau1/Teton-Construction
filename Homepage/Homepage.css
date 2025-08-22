@@ -144,6 +144,8 @@ body.no-scroll { overflow: hidden; }
 	.content{min-height:100vh;}
 	.hero-logo{max-width:85vw; margin:0;}
 	.hero-logo{filter: brightness(0) invert(1);}
+	/* Nudge logo + links upward for better visual centering */
+	.hero-stack{transform:translateY(-6vh);}
 }
 /* Hamburger button */
 .menu-toggle {
