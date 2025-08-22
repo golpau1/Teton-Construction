@@ -27,7 +27,7 @@ img { max-width: 100%; display: block; height: auto; }
 .site-header { position: sticky; top: 0; z-index: 10; background: var(--bg); border-bottom: 1px solid var(--rule); }
 .header-inner { max-width: var(--content-max); margin: 0 auto; padding: 22px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 	.brand { display: flex; flex-direction: row; align-items: center; gap: 14px; }
-	.brand-icon { filter: brightness(0) saturate(100%); }
+	.brand-icon { filter: brightness(0) saturate(100%) !important; display:block; }
 	.brand h1 { font-family: 'Lexend', sans-serif; font-weight: 700; }
 .brand h1 { margin: 0; font-size: 28px; letter-spacing: .08em; font-weight: 600; }
 .brand small { color: var(--muted); font-size: 12px; letter-spacing: .06em; }
