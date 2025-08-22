@@ -124,19 +124,26 @@ body.no-scroll { overflow: hidden; }
 	max-width:500px;
 	width:100%;
 	height:auto;
-	border-radius:12px;
-	box-shadow:0 4px 24px rgba(0,0,0,0.2);
+	border-radius:0;
+	box-shadow:none;
 }
-/* Hero brand stack (single logo now) */
-/* Hero brand centered for all screen sizes */
-.content{position:relative;}
+/* Hero brand & stack */
 .hero-brand { display:flex; flex-direction:column; align-items:center; }
-/* Stack container: centered block with logo then links */
-.hero-stack { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:100%; max-width:900px; display:flex; flex-direction:column; align-items:center; gap:2.2rem; padding:0 1rem; box-sizing:border-box; }
+.hero-stack { width:auto; max-width:900px; display:flex; flex-direction:column; align-items:center; gap:2.2rem; padding:0; box-sizing:border-box; }
 .hero-stack .main-links { margin-top:0; }
+/* Ensure no unintended backdrop blur or background on logo container */
+.hero-stack, .hero-brand, .hero-logo, .hero-logo-picture, .hero-logo-crop { 
+	background: transparent !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+ }
+/* Cropping wrapper to eliminate any surrounding box */
+.hero-logo-crop { display:inline-block; padding:0; margin:0; background:transparent !important; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; }
+.hero-logo-crop picture, .hero-logo-crop img { display:block; }
 @media (max-width:760px){
 	.content{min-height:100vh;}
 	.hero-logo{max-width:85vw; margin:0;}
+	.hero-logo{filter: brightness(0) invert(1);}
 }
 /* Hamburger button */
 .menu-toggle {
