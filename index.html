@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="Homepage/Homepage.css" />
+  <noscript><style>#preloader { display: none; }</style></noscript>
 </head>
 <body>
   <div id="preloader">
@@ -32,7 +33,7 @@
       <a href="Contact/Contact.html">Contact</a>
     </nav>
   </aside>
-  <div class="content">
+  <main class="content">
     <div class="hero-stack">
       <div class="hero-brand">
         <div class="hero-logo-crop">
@@ -41,13 +42,21 @@
             <img class="hero-logo" src="Assets/41a16fbe-dac6-4d23-b6ea-e9cb99b32397_removalai_preview.png" alt="Teton Construction Logo" />
           </picture>
         </div>
+        <div class="desktop-brand-copy">
+          <h1 class="site-title">Teton Construction</h1>
+          <p class="hero-tagline">Considered construction. Built to endure.</p>
+        </div>
       </div>
       <nav class="main-links" aria-label="Primary links">
-        <a href="Projects/Projects.html" title="View our projects">Projects</a>
+        <a href="Projects/Projects.html" title="View our projects">Projects <span class="link-arrow" aria-hidden="true">&#8599;</span></a>
         <a href="Contact/Contact.html" title="Get in touch">Contact</a>
       </nav>
     </div>
-  </div>
+    <aside class="desktop-details" aria-label="Company details">
+      <p>Gold Coast, Australia</p>
+      <p>Residential <span aria-hidden="true">&middot;</span> Commercial</p>
+    </aside>
+  </main>
   <script>
     // Preloader logic
     // Always show preloader for 2 seconds, then fade out
