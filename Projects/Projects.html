@@ -124,8 +124,19 @@
     </main>
 
     <div class="project-view-switcher" role="group" aria-label="Project view">
-        <button class="view-switch is-active" type="button" data-view="grid" aria-pressed="true">Grid</button>
-        <button class="view-switch" type="button" data-view="archive" aria-pressed="false">Archive</button>
+        <button class="view-switch is-active" type="button" data-view="grid" aria-pressed="true">
+            <svg class="view-switch-icon" viewBox="0 0 12 12" aria-hidden="true">
+                <rect x=".75" y=".75" width="4.25" height="4.25"></rect><rect x="7" y=".75" width="4.25" height="4.25"></rect>
+                <rect x=".75" y="7" width="4.25" height="4.25"></rect><rect x="7" y="7" width="4.25" height="4.25"></rect>
+            </svg>
+            <span>Grid</span>
+        </button>
+        <button class="view-switch" type="button" data-view="archive" aria-pressed="false">
+            <svg class="view-switch-icon" viewBox="0 0 12 12" aria-hidden="true">
+                <path d="M.75 2h2M4.5 2h6.75M.75 6h2M4.5 6h6.75M.75 10h2M4.5 10h6.75"></path>
+            </svg>
+            <span>List</span>
+        </button>
     </div>
 
     <script>
