@@ -21,9 +21,10 @@
     max-width: 100%;
     min-height: 58px;
     margin: 0;
-    padding: 0 32px;
+    padding: 0 0 0 32px;
     gap: 24px;
     box-sizing: border-box;
+    min-width: 0;
   }
 
   .site-header .brand {
@@ -45,10 +46,14 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    flex: 0 0 auto;
+    flex: 0 1 auto;
     gap: 28px;
-    margin-left: auto;
+    margin: 0 0 0 auto;
+    padding: 0 36px 0 0;
+    box-sizing: border-box;
     min-width: 0;
+    max-width: 100%;
+    white-space: nowrap;
     font-family: 'Lexend', Arial, sans-serif;
     font-size: 11px;
     font-weight: 300;
