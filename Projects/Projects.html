@@ -162,8 +162,26 @@
             const meta = document.createElement('span');
             meta.className = 'grid-project-meta';
             meta.textContent = row.dataset.meta || '';
-            info.append(name, meta);
+            const details = document.createElement('span');
+            details.className = 'grid-project-details';
+            details.appendChild(meta);
+            if (projectLink) {
+                const visit = document.createElement('a');
+                visit.className = 'grid-project-visit';
+                visit.href = projectLink;
+                visit.textContent = 'Visit';
+                details.appendChild(visit);
+            }
+            info.append(name, details);
             project.append(media, info);
+            project.addEventListener('mouseenter', () => {
+                grid.classList.add('has-project-hover');
+                project.classList.add('is-hovered');
+            });
+            project.addEventListener('mouseleave', () => {
+                grid.classList.remove('has-project-hover');
+                project.classList.remove('is-hovered');
+            });
             grid.appendChild(project);
         });
 
