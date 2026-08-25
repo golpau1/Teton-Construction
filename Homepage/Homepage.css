@@ -50,13 +50,48 @@ body.no-scroll { overflow: hidden; }
 	z-index: 0;
 	pointer-events: none;
 }
+.site-header {
+	position: relative;
+	z-index: 2;
+	width: 100%;
+	min-height: 58px;
+	background: #fff;
+	border-bottom: 1px solid #e6e6e6;
+}
+.header-inner {
+	width: 100%;
+	max-width: 1280px;
+	min-height: 58px;
+	margin: 0 auto;
+	padding: 0 40px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+	box-sizing: border-box;
+}
+.brand { display: flex; align-items: center; }
+.brand-logo { display: block; width: 116px; height: auto; filter: brightness(0) saturate(100%); }
+.header-nav { display: flex; align-items: center; gap: 28px; }
+.header-nav a {
+	color: #333;
+	font-family: 'Lexend', Arial, sans-serif;
+	font-size: 11px;
+	font-weight: 300;
+	letter-spacing: .15em;
+	text-decoration: none;
+	text-transform: uppercase;
+	opacity: .65;
+	transition: opacity .15s ease;
+}
+.header-nav a:hover, .header-nav .active { opacity: 1; }
 .content {
 	position: relative;
 	z-index: 1;
 	color: white;
 	text-align: center;
 	font-family: 'Lexend', Arial, sans-serif;
-	min-height: 100vh;
+	min-height: calc(100vh - 58px);
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -259,6 +294,8 @@ body.no-scroll { overflow: hidden; }
 
 /* Hide desktop nav on mobile; show hamburger */
 @media (max-width:760px){
+	.site-header { display: none; }
+	.content { min-height: 100vh; }
 	.main-links { display: none; }
 	.menu-toggle { display: flex; }
 	/* Mobile-only: subtle white container for burger (matching shape of other pages) */

@@ -29,7 +29,6 @@ main.projects-grid {
 }
 
 /* 3. Header & Footer */
-.site-header,
 .site-footer {
   display: flex;
   justify-content: space-between;
@@ -38,6 +37,44 @@ main.projects-grid {
   background: #fff;
   flex-shrink: 0;
 }
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  min-height: 58px;
+  background: #fff;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.header-inner {
+  width: 100%;
+  max-width: 1280px;
+  min-height: 58px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand { display: flex; align-items: center; }
+.brand-logo { display: block; width: 116px; height: auto; filter: brightness(0) saturate(100%); }
+.main-nav { display: flex; align-items: center; gap: 28px; }
+.site-header .main-nav a {
+  color: #333;
+  font-family: 'Lexend', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  opacity: .65;
+  transition: opacity .15s ease;
+}
+.site-header .main-nav a:hover,
+.site-header .main-nav .active { opacity: 1; }
 
 .logo h1 {
   font-size: 1.5rem;
@@ -511,12 +548,7 @@ main.projects-grid {
   .mobile-links a:hover:after, .mobile-links a:focus-visible:after { width:100%; }
 
   /* Compact sticky header; hide desktop nav */
-  .site-header{
-    position:sticky; top:0; z-index:50;
-    padding:14px 16px;
-    border-bottom:1px solid #eee;
-    background:#fff;
-  }
+  .site-header{ display:none; }
   .site-header nav{ display:none; }
   .logo h1{ font-size:1.25rem; letter-spacing:1.5px; }
   .logo p{ font-size:.62rem; letter-spacing:2.6px; }
