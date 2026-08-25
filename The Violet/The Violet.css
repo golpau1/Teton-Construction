@@ -40,6 +40,11 @@ img { max-width: 100%; display: block; height: auto; }
 .main-nav a:hover { opacity: 1; }
 .main-nav .active { opacity: 1; color: var(--accent); }
 
+@media (min-width: 701px) {
+  .header-inner { max-width: none; padding-inline: 32px; }
+  .brand-logo { width: 128px; }
+}
+
 /* Brand font overrides */
   /* Title removed in favor of icon-only header */
   .brand h1, .brand small { display:none; }
