@@ -231,7 +231,7 @@ main.projects-grid {
     font-size: 14px;
     text-align: right;
     white-space: nowrap;
-    transition: opacity var(--project-focus-transition);
+    transition: opacity 60ms ease;
   }
 
   .grid-project-details {
@@ -256,7 +256,7 @@ main.projects-grid {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity var(--project-focus-transition), visibility 0s linear 520ms;
+    transition: opacity 60ms ease;
   }
 
   .grid-project-visit::after {
@@ -280,7 +280,7 @@ main.projects-grid {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transition: opacity var(--project-focus-transition);
+    transition: opacity 60ms ease;
   }
 
   .grid-project.is-hovered .grid-project-visit::after {
