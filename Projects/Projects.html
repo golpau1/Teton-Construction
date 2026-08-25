@@ -37,8 +37,10 @@
         </div>
     </header>
 
-    <main class="desktop-project-index" aria-label="Project index">
-        <article class="project-index-row">
+    <main class="desktop-grid-view projects-view" aria-label="Projects grid"></main>
+
+    <main class="desktop-project-index projects-view" aria-label="Projects archive">
+        <article class="project-index-row" data-meta="Burleigh Heads · 2026">
             <h2 class="project-index-title"><a href="../The Violet/The Violet.html">The Violet</a></h2>
             <div class="project-thumbnails">
                 <a href="../The Violet/The Violet.html"><img src="../Assets/The Violet/ij0rtgarliz0srxjf68w.webp" alt="The Violet project view 1"></a>
@@ -47,7 +49,7 @@
             </div>
         </article>
 
-        <article class="project-index-row">
+        <article class="project-index-row" data-meta="Miami · Commencing 2026">
             <h2 class="project-index-title"><a href="../85 Mountain View/85 Mountain View.html">85 Mountain View</a></h2>
             <div class="project-thumbnails">
                 <a href="../85 Mountain View/85 Mountain View.html"><img src="../Assets/85 Mountain View/kl7ve6tx9cnbqlcqotva.webp" alt="85 Mountain View project view 1" loading="lazy" decoding="async"></a>
@@ -121,7 +123,69 @@
         </div>
     </main>
 
+    <div class="project-view-switcher" role="group" aria-label="Project view">
+        <button class="view-switch is-active" type="button" data-view="grid" aria-pressed="true">Grid</button>
+        <button class="view-switch" type="button" data-view="archive" aria-pressed="false">Archive</button>
+    </div>
+
     <script>
+    (function(){
+        const desktopQuery = window.matchMedia('(min-width: 1100px)');
+        const grid = document.querySelector('.desktop-grid-view');
+        const archive = document.querySelector('.desktop-project-index');
+        const rows = Array.from(archive.querySelectorAll('.project-index-row'));
+        const switches = Array.from(document.querySelectorAll('.view-switch'));
+
+        rows.forEach((row) => {
+            const title = row.querySelector('.project-index-title');
+            const titleLink = title.querySelector('a');
+            const image = row.querySelector('.project-thumbnails img');
+            const imageLink = image.closest('a');
+            const project = document.createElement('article');
+            project.className = 'grid-project';
+
+            const media = imageLink ? document.createElement('a') : document.createElement('div');
+            media.className = 'grid-project-media';
+            if (imageLink) media.href = imageLink.getAttribute('href');
+
+            const featuredImage = image.cloneNode();
+            featuredImage.removeAttribute('width');
+            featuredImage.removeAttribute('height');
+            media.appendChild(featuredImage);
+
+            const info = document.createElement('div');
+            info.className = 'grid-project-info';
+            const name = titleLink ? document.createElement('a') : document.createElement('span');
+            name.className = 'grid-project-name';
+            name.textContent = title.textContent.trim();
+            if (titleLink) name.href = titleLink.getAttribute('href');
+            const meta = document.createElement('span');
+            meta.className = 'grid-project-meta';
+            meta.textContent = row.dataset.meta || '';
+            info.append(name, meta);
+            project.append(media, info);
+            grid.appendChild(project);
+        });
+
+        function setView(view) {
+            const showGrid = view === 'grid';
+            grid.classList.toggle('is-active', showGrid);
+            archive.classList.toggle('is-active', !showGrid);
+            grid.setAttribute('aria-hidden', String(!showGrid));
+            archive.setAttribute('aria-hidden', String(showGrid));
+            switches.forEach((button) => {
+                const active = button.dataset.view === view;
+                button.classList.toggle('is-active', active);
+                button.setAttribute('aria-pressed', String(active));
+            });
+            window.scrollTo(0, 0);
+        }
+
+        switches.forEach((button) => button.addEventListener('click', () => setView(button.dataset.view)));
+        if (desktopQuery.matches) setView('grid');
+        desktopQuery.addEventListener('change', (event) => { if (event.matches) setView('grid'); });
+    })();
+
     (function(){
         const btn = document.querySelector('.menu-toggle');
         const drawer = document.getElementById('mobileDrawer');
