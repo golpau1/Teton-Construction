@@ -139,7 +139,7 @@ main.projects-grid {
   .archive-preview img.is-changing { opacity: 0; }
 
   .desktop-grid-view.is-active {
-    --project-focus-transition: 520ms cubic-bezier(.4, 0, .2, 1);
+    --project-image-fade: 450ms cubic-bezier(.4, 0, .2, 1);
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 48px;
@@ -167,7 +167,7 @@ main.projects-grid {
     background: #fff;
     outline: 1px solid transparent;
     outline-offset: -1px;
-    transition: outline-color var(--project-focus-transition);
+    transition: outline-color 0s linear 450ms;
   }
 
   .grid-project-media img {
@@ -175,7 +175,7 @@ main.projects-grid {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity var(--project-focus-transition);
+    transition: opacity var(--project-image-fade);
   }
 
   a.grid-project-media:hover img,
@@ -185,10 +185,11 @@ main.projects-grid {
 
   .desktop-grid-view.has-project-hover .grid-project:not(.is-hovered) .grid-project-media {
     outline-color: rgba(0, 0, 0, .06);
+    transition-delay: 0s;
   }
 
   .desktop-grid-view.has-project-hover .grid-project:not(.is-hovered) .grid-project-media img {
-    opacity: .035;
+    opacity: 0;
   }
 
   .grid-project-info {
