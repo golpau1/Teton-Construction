@@ -231,13 +231,17 @@ main.projects-grid {
     font-size: 14px;
     text-align: right;
     white-space: nowrap;
-    transition: opacity 60ms ease;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 150ms cubic-bezier(.4, 0, .2, 1), transform 150ms cubic-bezier(.4, 0, .2, 1);
   }
 
   .grid-project-details {
     display: grid;
     flex: 0 0 auto;
     justify-items: end;
+    align-items: baseline;
+    min-height: 1.25em;
     margin: 0;
   }
 
@@ -254,9 +258,9 @@ main.projects-grid {
     line-height: inherit;
     text-decoration: none;
     opacity: 0;
-    visibility: hidden;
+    transform: translateY(4px);
     pointer-events: none;
-    transition: opacity 60ms ease;
+    transition: opacity 190ms cubic-bezier(.4, 0, .2, 1), transform 190ms cubic-bezier(.4, 0, .2, 1);
   }
 
   .grid-project-visit::after {
@@ -274,13 +278,13 @@ main.projects-grid {
 
   .grid-project.is-hovered .grid-project-meta {
     opacity: 0;
+    transform: translateY(-4px);
   }
 
   .grid-project.is-hovered .grid-project-visit {
     opacity: 1;
-    visibility: visible;
+    transform: translateY(0);
     pointer-events: auto;
-    transition: opacity 60ms ease;
   }
 
   .grid-project.is-hovered .grid-project-visit::after {

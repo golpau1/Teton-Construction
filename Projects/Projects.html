@@ -170,6 +170,7 @@
                 visit.className = 'grid-project-visit';
                 visit.href = projectLink;
                 visit.textContent = 'Visit';
+                visit.tabIndex = -1;
                 details.appendChild(visit);
             }
             info.append(name, details);
@@ -183,6 +184,8 @@
             grid.classList.toggle('has-project-hover', Boolean(activeProject));
             grid.querySelectorAll('.grid-project').forEach((project) => {
                 project.classList.toggle('is-hovered', project === activeProject);
+                const visit = project.querySelector('.grid-project-visit');
+                if (visit) visit.tabIndex = project === activeProject ? 0 : -1;
             });
         }
 
