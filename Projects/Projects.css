@@ -305,7 +305,7 @@ main.projects-grid {
     gap: 28px;
     transform: translateX(-50%);
     padding: 8px 11px;
-    background: rgba(235, 235, 232, .96);
+    background: #efefef;
     border-radius: 12px;
   }
 
@@ -317,7 +317,7 @@ main.projects-grid {
     padding: 0;
     border: 0;
     background: transparent;
-    color: #92928e;
+    color: #9f9f9f;
     font-family: 'NType82', 'Helvetica Neue', Arial, sans-serif;
     font-size: 13px;
     font-weight: 400;
@@ -339,7 +339,7 @@ main.projects-grid {
   .view-switch:hover,
   .view-switch:focus-visible,
   .view-switch.is-active {
-    color: #111;
+    color: #000;
   }
 }
 
