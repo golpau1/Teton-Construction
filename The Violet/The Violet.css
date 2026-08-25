@@ -27,23 +27,10 @@ img { max-width: 100%; display: block; height: auto; }
 .mobile-project-copy{display:none;}
 
 /* Header */
-.site-header { position: sticky; top: 0; z-index: 10; width: 100%; background: #fff; border-bottom: 1px solid var(--rule); }
-.header-inner { width: 100%; max-width: var(--content-max); min-height: 58px; margin: 0 auto; padding: 0 var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-.brand { display: flex; align-items: center; }
-.brand-logo { display: block; width: 116px; height: auto; filter: brightness(0) saturate(100%); }
   .brand { display: flex; flex-direction: row; align-items: center; gap: 14px; }
   .brand-icon { filter: brightness(0) saturate(100%); }
 .brand h1 { margin: 0; font-size: 28px; letter-spacing: .08em; font-weight: 600; }
 .brand small { color: var(--muted); font-size: 12px; letter-spacing: .06em; }
-.main-nav { display: flex; align-items: center; gap: 28px; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; font-family: 'Lexend', sans-serif; font-weight: 300; }
-.main-nav a { opacity: .65; transition: opacity .15s ease; font-family: inherit; font-weight: inherit; }
-.main-nav a:hover { opacity: 1; }
-.main-nav .active { opacity: 1; color: var(--accent); }
-
-@media (min-width: 701px) {
-  .header-inner { max-width: none; padding-inline: 32px; }
-  .brand-logo { width: 128px; }
-}
 
 /* Brand font overrides */
   /* Title removed in favor of icon-only header */
@@ -124,6 +111,10 @@ img { max-width: 100%; display: block; height: auto; }
 /* Mobile menu (match Projects mobile page) */
 @media (max-width:700px){
   body.no-scroll{overflow:hidden;}
+	.site-header{position:sticky;top:0;z-index:10;width:100%;background:#fff;border-bottom:1px solid var(--rule);}
+	.header-inner{width:100%;max-width:var(--content-max);min-height:58px;margin:0 auto;padding:0 var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:24px;}
+	.brand{display:flex;align-items:center;}
+	.brand-logo{display:block;width:116px;height:auto;filter:brightness(0) saturate(100%);}
   .main-nav{display:none;}
   /* Icon-only brand adjustments */
   .brand{gap:14px;}
