@@ -183,8 +183,12 @@ main.projects-grid {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
     gap: 24px;
-    padding-top: 12px;
+    margin: 0;
+    padding: 12px 0 0;
+    box-sizing: border-box;
     color: #111;
     font-family: 'NType82', 'Helvetica Neue', Arial, sans-serif;
     font-size: 14px;
@@ -193,6 +197,8 @@ main.projects-grid {
   }
 
   .grid-project-name {
+    min-width: 0;
+    margin: 0;
     color: inherit;
     text-decoration: none;
     transition: opacity .2s ease;
@@ -204,6 +210,8 @@ main.projects-grid {
   }
 
   .grid-project-meta {
+    flex: 0 0 auto;
+    margin: 0;
     color: #555;
     font-size: 14px;
     text-align: right;
