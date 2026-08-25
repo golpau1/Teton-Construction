@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="Projects.css" media="only screen and (max-width: 700px)">
     <link rel="stylesheet" href="../Assets/header.css">
 </head>
-<body>
+<body class="projects-loading">
     <!-- Mobile burger menu (only visible on small screens) -->
     <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
         <span></span>
@@ -36,6 +36,10 @@
             </nav>
         </div>
     </header>
+
+    <div class="projects-loader" role="status" aria-label="Loading projects">
+        <img src="../Assets/fygfghf.png" alt="Teton Construction">
+    </div>
 
     <main class="desktop-grid-view projects-view" aria-label="Projects grid"></main>
 
@@ -144,6 +148,7 @@
         const desktopQuery = window.matchMedia('(min-width: 1100px)');
         const grid = document.querySelector('.desktop-grid-view');
         const archive = document.querySelector('.desktop-project-index');
+        const loader = document.querySelector('.projects-loader');
         const rows = Array.from(archive.querySelectorAll('.archive-row'));
         const preview = archive.querySelector('.archive-preview img');
         const switches = Array.from(document.querySelectorAll('.view-switch'));
@@ -160,7 +165,7 @@
             const featuredImage = document.createElement('img');
             featuredImage.src = row.dataset.image;
             featuredImage.alt = `${row.dataset.name} project view`;
-            featuredImage.loading = 'lazy';
+            featuredImage.loading = 'eager';
             featuredImage.decoding = 'async';
             media.appendChild(featuredImage);
 
@@ -257,18 +262,53 @@
             if (entrancePlayed) return;
             entrancePlayed = true;
             grid.classList.add('is-entering');
-            window.setTimeout(() => grid.classList.remove('is-entering'), 1500);
+            window.setTimeout(() => grid.classList.remove('is-entering'), 1350);
+        }
+
+        function waitForGridImages() {
+            const images = Array.from(grid.querySelectorAll('.grid-project-media img'));
+            return Promise.all(images.map((image) => {
+                if (image.complete) return Promise.resolve();
+                return new Promise((resolve) => {
+                    image.addEventListener('load', resolve, { once: true });
+                    image.addEventListener('error', resolve, { once: true });
+                });
+            }));
+        }
+
+        let desktopLoadStarted = false;
+        async function startDesktopExperience() {
+            if (desktopLoadStarted) return;
+            desktopLoadStarted = true;
+            setView('grid');
+            await Promise.all([
+                waitForGridImages(),
+                new Promise((resolve) => window.setTimeout(resolve, 300))
+            ]);
+            if (!desktopQuery.matches) {
+                desktopLoadStarted = false;
+                return;
+            }
+            loader.classList.add('is-hidden');
+            window.setTimeout(() => {
+                loader.hidden = true;
+                loader.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('projects-loading');
+                playGridEntrance();
+            }, 460);
         }
 
         switches.forEach((button) => button.addEventListener('click', () => setView(button.dataset.view)));
         if (desktopQuery.matches) {
-            playGridEntrance();
-            setView('grid');
+            startDesktopExperience();
+        } else {
+            document.body.classList.remove('projects-loading');
         }
         desktopQuery.addEventListener('change', (event) => {
             if (event.matches) {
-                playGridEntrance();
-                setView('grid');
+                startDesktopExperience();
+            } else {
+                document.body.classList.remove('projects-loading');
             }
         });
     })();
