@@ -156,8 +156,12 @@ main.projects-grid {
     min-width: 0;
   }
 
+  .grid-project-inner {
+    width: 100%;
+  }
+
   .desktop-grid-view.is-entering .grid-project-inner {
-    animation: grid-project-reveal 700ms cubic-bezier(.22, 1, .36, 1) both;
+    animation: grid-project-reveal 1100ms cubic-bezier(.16, 1, .3, 1) both;
   }
 
   .desktop-grid-view.is-entering .grid-project:nth-child(2) .grid-project-inner { animation-delay: 100ms; }
@@ -358,7 +362,7 @@ main.projects-grid {
 @keyframes grid-project-reveal {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(100vh);
   }
   to {
     opacity: 1;

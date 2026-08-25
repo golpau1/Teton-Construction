@@ -257,7 +257,7 @@
             if (entrancePlayed) return;
             entrancePlayed = true;
             grid.classList.add('is-entering');
-            window.setTimeout(() => grid.classList.remove('is-entering'), 1100);
+            window.setTimeout(() => grid.classList.remove('is-entering'), 1500);
         }
 
         switches.forEach((button) => button.addEventListener('click', () => setView(button.dataset.view)));
