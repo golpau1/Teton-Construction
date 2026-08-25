@@ -232,7 +232,8 @@ main.projects-grid {
     gap: 18px;
     transform: translateX(-50%);
     padding: 5px 9px;
-    background: rgba(255, 255, 255, .9);
+    background: rgba(68, 68, 66, .94);
+    border-radius: 8px;
   }
 
   .view-switch {
@@ -240,7 +241,7 @@ main.projects-grid {
     padding: 0;
     border: 0;
     background: transparent;
-    color: #aaa;
+    color: #c7c7c4;
     font-family: 'NType82', 'Helvetica Neue', Arial, sans-serif;
     font-size: 13px;
     font-weight: 400;
@@ -252,7 +253,7 @@ main.projects-grid {
   .view-switch:hover,
   .view-switch:focus-visible,
   .view-switch.is-active {
-    color: #111;
+    color: #fff;
   }
 }
 
