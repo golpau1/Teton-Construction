@@ -80,49 +80,6 @@ img { max-width: 100%; display: block; height: auto; }
 .project-copy { font-size: 14px; color: #444; background: #fff; border: none; padding: 0; white-space: pre-wrap; }
 .credit { margin-top: 10px; font-size: 11px; color: #777; }
 
-/* Footer */
-.site-footer { border-top: 1px solid var(--rule); margin-top: 72px; padding: 28px 0; color: #666; font-size: 12px; text-align: center; }
-/* Footer (imported from Projects page for consistency) */
-.custom-footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 150px;
-  width: 100%;
-  background: #fff;
-  padding: 0 48px;
-  box-sizing: border-box;
-  position: relative;
-  z-index: 10;
-  gap: 24px;
-}
-.footer-left-logo {
-  position: absolute;
-  left: 48px;
-  width: 154px;
-  height: 154px;
-  object-fit: contain;
-  opacity: 0.92;
-  transition: opacity 0.2s, transform 0.2s;
-  filter: brightness(0) saturate(100%);
-}
-.footer-right-icon {
-  position: absolute;
-  right: 48px;
-  width: 36px;
-  height: 36px;
-  object-fit: contain;
-  opacity: 0.92;
-  transition: opacity 0.2s, transform 0.2s;
-  filter: brightness(0) saturate(100%);
-}
-.footer-nav { display: flex; justify-content: center; align-items: center; width: 100%; position: relative; z-index: 1; }
-.footer-nav ul { list-style: none; display: flex; gap: 30px; padding: 0; margin: 0; }
-.footer-nav a { text-decoration: none; color: #3c3c3c; font-size: 1rem; font-weight: 300; font-family: 'Lexend', sans-serif; transition: color 0.2s; padding: 5px 0; position: relative; }
-.footer-nav a::before { content: ""; position: absolute; left: 50%; bottom: -2px; width: 0; height: 2px; background: #333; border-radius: 2px; transition: width 0.3s ease, left 0.3s ease; transform: translateX(-50%); }
-.footer-nav a:hover::before { width: 100%; }
-.footer-nav a:hover { color: #3c3c3c; }
-
 /* Responsive */
 @media (max-width: 1080px) { :root { --gutter: 28px; } .grid { grid-template-columns: 1fr 320px; gap: 32px; } }
 @media (max-width: 860px) { .main-nav { gap: 14px; letter-spacing: .14em; } .grid { grid-template-columns: 1fr; } .project-meta { order: -1; } }
@@ -140,8 +97,6 @@ img { max-width: 100%; display: block; height: auto; }
   .main-nav{display:none;}
   /* Smaller title so it doesn't run under the menu button */
   .brand h1{font-size:22px;letter-spacing:.07em;}
-  /* Hide footer on mobile */
-  .custom-footer{display:none !important;}
   /* Mobile layout: keep icon left, allow space for menu button */
   .brand {justify-content:flex-start !important;}
   .brand-icon {display:inline-block !important;}
