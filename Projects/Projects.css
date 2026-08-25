@@ -141,7 +141,8 @@ main.projects-grid {
   .desktop-grid-view.is-active {
     --project-image-fade: 450ms cubic-bezier(.4, 0, .2, 1);
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 43vw));
+    justify-content: space-between;
     column-gap: 48px;
     row-gap: 130px;
     width: 100%;
@@ -202,7 +203,7 @@ main.projects-grid {
     margin: 0;
     padding: 12px 0 0;
     box-sizing: border-box;
-    color: #111;
+    color: #222;
     font-family: 'NType82', 'Helvetica Neue', Arial, sans-serif;
     font-size: 14px;
     font-weight: 400;
@@ -213,6 +214,8 @@ main.projects-grid {
     min-width: 0;
     margin: 0;
     color: inherit;
+    font: inherit;
+    opacity: 1;
     text-decoration: none;
     transition: opacity .2s ease;
   }
@@ -228,8 +231,8 @@ main.projects-grid {
 
   .grid-project-meta {
     margin: 0;
-    color: #555;
-    font-size: 14px;
+    color: inherit;
+    font: inherit;
     text-align: right;
     white-space: nowrap;
     opacity: 1;
