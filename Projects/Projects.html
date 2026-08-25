@@ -174,15 +174,30 @@
             }
             info.append(name, details);
             project.append(media, info);
-            project.addEventListener('mouseenter', () => {
-                grid.classList.add('has-project-hover');
-                project.classList.add('is-hovered');
-            });
-            project.addEventListener('mouseleave', () => {
-                grid.classList.remove('has-project-hover');
-                project.classList.remove('is-hovered');
-            });
             grid.appendChild(project);
+        });
+
+        let hoverClearTimer;
+        function setHoveredProject(activeProject) {
+            window.clearTimeout(hoverClearTimer);
+            grid.classList.toggle('has-project-hover', Boolean(activeProject));
+            grid.querySelectorAll('.grid-project').forEach((project) => {
+                project.classList.toggle('is-hovered', project === activeProject);
+            });
+        }
+
+        grid.querySelectorAll('.grid-project').forEach((project) => {
+            project.addEventListener('mouseenter', () => setHoveredProject(project));
+            project.addEventListener('mouseleave', (event) => {
+                const nextProject = event.relatedTarget instanceof Element
+                    ? event.relatedTarget.closest('.grid-project')
+                    : null;
+                if (nextProject && grid.contains(nextProject)) {
+                    setHoveredProject(nextProject);
+                    return;
+                }
+                hoverClearTimer = window.setTimeout(() => setHoveredProject(null), 90);
+            });
         });
 
         let previewTimer;

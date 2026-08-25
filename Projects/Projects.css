@@ -139,6 +139,7 @@ main.projects-grid {
   .archive-preview img.is-changing { opacity: 0; }
 
   .desktop-grid-view.is-active {
+    --project-focus-transition: 520ms cubic-bezier(.4, 0, .2, 1);
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 48px;
@@ -166,7 +167,7 @@ main.projects-grid {
     background: #fff;
     outline: 1px solid transparent;
     outline-offset: -1px;
-    transition: outline-color .25s ease;
+    transition: outline-color var(--project-focus-transition);
   }
 
   .grid-project-media img {
@@ -174,7 +175,7 @@ main.projects-grid {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity .25s ease;
+    transition: opacity var(--project-focus-transition);
   }
 
   a.grid-project-media:hover img,
@@ -183,7 +184,7 @@ main.projects-grid {
   }
 
   .desktop-grid-view.has-project-hover .grid-project:not(.is-hovered) .grid-project-media {
-    outline-color: #e8e8e5;
+    outline-color: rgba(0, 0, 0, .06);
   }
 
   .desktop-grid-view.has-project-hover .grid-project:not(.is-hovered) .grid-project-media img {
@@ -220,13 +221,17 @@ main.projects-grid {
     opacity: .65;
   }
 
+  .grid-project.is-hovered .grid-project-name {
+    opacity: 1;
+  }
+
   .grid-project-meta {
     margin: 0;
     color: #555;
     font-size: 14px;
     text-align: right;
     white-space: nowrap;
-    transition: opacity .25s ease;
+    transition: opacity var(--project-focus-transition);
   }
 
   .grid-project-details {
@@ -252,7 +257,7 @@ main.projects-grid {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity .25s ease, visibility 0s linear .25s;
+    transition: opacity var(--project-focus-transition), visibility 0s linear 520ms;
   }
 
   .grid-project.is-hovered .grid-project-meta {
@@ -263,7 +268,7 @@ main.projects-grid {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transition: opacity .25s ease;
+    transition: opacity var(--project-focus-transition);
   }
 
   .grid-project:nth-child(4) .grid-project-media img {
