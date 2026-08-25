@@ -185,7 +185,10 @@
                 details.appendChild(visit);
             }
             info.append(name, details);
-            project.append(media, info);
+            const projectInner = document.createElement('div');
+            projectInner.className = 'grid-project-inner';
+            projectInner.append(media, info);
+            project.appendChild(projectInner);
             grid.appendChild(project);
         });
 
@@ -249,9 +252,25 @@
             window.scrollTo(0, 0);
         }
 
+        let entrancePlayed = false;
+        function playGridEntrance() {
+            if (entrancePlayed) return;
+            entrancePlayed = true;
+            grid.classList.add('is-entering');
+            window.setTimeout(() => grid.classList.remove('is-entering'), 1100);
+        }
+
         switches.forEach((button) => button.addEventListener('click', () => setView(button.dataset.view)));
-        if (desktopQuery.matches) setView('grid');
-        desktopQuery.addEventListener('change', (event) => { if (event.matches) setView('grid'); });
+        if (desktopQuery.matches) {
+            playGridEntrance();
+            setView('grid');
+        }
+        desktopQuery.addEventListener('change', (event) => {
+            if (event.matches) {
+                playGridEntrance();
+                setView('grid');
+            }
+        });
     })();
 
     (function(){

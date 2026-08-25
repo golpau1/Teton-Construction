@@ -156,6 +156,14 @@ main.projects-grid {
     min-width: 0;
   }
 
+  .desktop-grid-view.is-entering .grid-project-inner {
+    animation: grid-project-reveal 700ms cubic-bezier(.22, 1, .36, 1) both;
+  }
+
+  .desktop-grid-view.is-entering .grid-project:nth-child(2) .grid-project-inner { animation-delay: 100ms; }
+  .desktop-grid-view.is-entering .grid-project:nth-child(3) .grid-project-inner { animation-delay: 200ms; }
+  .desktop-grid-view.is-entering .grid-project:nth-child(4) .grid-project-inner { animation-delay: 300ms; }
+
   .grid-project:nth-child(even) {
     transform: translateY(70px);
   }
@@ -344,6 +352,25 @@ main.projects-grid {
   .view-switch:focus-visible,
   .view-switch.is-active {
     color: #000;
+  }
+}
+
+@keyframes grid-project-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 1100px) and (prefers-reduced-motion: reduce) {
+  .desktop-grid-view.is-entering .grid-project-inner {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }
 
