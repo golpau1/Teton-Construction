@@ -5,8 +5,10 @@
     top: 0;
     z-index: 50;
     width: 100%;
+    max-width: 100%;
     min-height: 58px;
     padding: 0;
+    box-sizing: border-box;
     background: #fff;
     border-bottom: 1px solid #e6e6e6;
   }
@@ -16,17 +18,19 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    max-width: none;
+    max-width: 100%;
     min-height: 58px;
     margin: 0;
     padding: 0 32px;
     gap: 24px;
+    box-sizing: border-box;
   }
 
   .site-header .brand {
     display: flex;
     flex: 0 0 auto;
     align-items: center;
+    min-width: 0;
   }
 
   .site-header .brand-logo {
@@ -41,8 +45,10 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    flex: 0 0 auto;
     gap: 28px;
     margin-left: auto;
+    min-width: 0;
     font-family: 'Lexend', Arial, sans-serif;
     font-size: 11px;
     font-weight: 300;
