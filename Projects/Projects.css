@@ -13,6 +13,14 @@
 /* 1. Imports */
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300&display=swap');
 
+@font-face {
+  font-family: 'NType82';
+  src: url('../Assets/NType82-Regular.otf') format('opentype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 /* 2. Base Layout */
 body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -133,19 +141,21 @@ main.projects-grid {
   .desktop-grid-view.is-active {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 42px;
-    row-gap: 150px;
+    column-gap: 48px;
+    row-gap: 130px;
     width: 100%;
-    padding: 52px 30px 220px;
+    padding: 44px 26px 200px;
     box-sizing: border-box;
   }
 
   .grid-project {
+    width: 100%;
+    max-width: 100%;
     min-width: 0;
   }
 
   .grid-project:nth-child(even) {
-    transform: translateY(90px);
+    transform: translateY(70px);
   }
 
   .grid-project-media {
@@ -176,8 +186,8 @@ main.projects-grid {
     gap: 24px;
     padding-top: 12px;
     color: #111;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: 15px;
+    font-family: 'NType82', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
     font-weight: 400;
     line-height: 1.25;
   }
@@ -195,8 +205,9 @@ main.projects-grid {
 
   .grid-project-meta {
     color: #555;
-    font-size: 13px;
+    font-size: 14px;
     text-align: right;
+    white-space: nowrap;
   }
 
   .grid-project:nth-child(4) .grid-project-media img {
@@ -222,7 +233,7 @@ main.projects-grid {
     border: 0;
     background: transparent;
     color: #aaa;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'NType82', 'Helvetica Neue', Arial, sans-serif;
     font-size: 13px;
     font-weight: 400;
     line-height: 1.2;
