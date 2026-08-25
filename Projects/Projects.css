@@ -38,15 +38,15 @@ main.projects-grid {
     display: flex;
     flex: 1 0 auto;
     flex-direction: column;
-    gap: 105px;
+    gap: 90px;
     width: 100%;
-    padding: 68px 32px 88px;
+    padding: 56px 30px 72px;
     box-sizing: border-box;
   }
 
   .project-index-row {
     display: grid;
-    grid-template-columns: calc(60% - 16px) minmax(0, 1fr);
+    grid-template-columns: calc(59% - 16px) minmax(0, 1fr);
     column-gap: 32px;
     align-items: start;
     width: 100%;
@@ -56,7 +56,7 @@ main.projects-grid {
     margin: 0;
     color: #111;
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: clamp(36px, 2.15vw, 40px);
+    font-size: 36px;
     font-weight: 300;
     line-height: 1.08;
     letter-spacing: 0;
