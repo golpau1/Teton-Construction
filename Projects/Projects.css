@@ -175,12 +175,12 @@ main.projects-grid {
   .desktop-grid-view.is-active {
     --project-image-fade: 450ms cubic-bezier(.4, 0, .2, 1);
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 43vw));
+    grid-template-columns: repeat(2, minmax(0, 42.75vw));
     justify-content: space-between;
     column-gap: 48px;
-    row-gap: 130px;
+    row-gap: 180px;
     width: 100%;
-    padding: 44px 26px 200px;
+    padding: 180px 26px 240px;
     box-sizing: border-box;
   }
 
@@ -201,7 +201,7 @@ main.projects-grid {
   .desktop-grid-view.is-entering .grid-project:nth-child(even) .grid-project-inner { animation-delay: 110ms; }
 
   .grid-project:nth-child(even) {
-    transform: translateY(70px);
+    transform: translateY(160px);
   }
 
   .grid-project-media {
