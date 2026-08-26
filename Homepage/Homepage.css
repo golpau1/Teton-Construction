@@ -18,6 +18,8 @@ a{color:inherit}
 .hero-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .landing-brand{position:relative;width:clamp(188px,18.1vw,348px);aspect-ratio:5.35/1;margin:0;overflow:visible;pointer-events:none}
 .landing-brand img{position:absolute;top:0;left:0;display:block;width:276%;height:auto;max-width:none;mix-blend-mode:screen;transform:translate(-32.5%,-41.8%)}
+.landing-brand-glow{z-index:0;opacity:.1;filter:blur(7px);clip-path:polygon(0 0,65% 0,65% 44%,69% 44%,69% 100%,0 100%)}
+.landing-brand-mark{z-index:1}
 .hero-nav{display:flex;align-items:center;justify-content:center;gap:clamp(24px,2vw,32px);margin-top:clamp(36px,3vw,48px);transform:translateX(10px)}
 .hero-nav a{position:relative;display:inline-flex;align-items:center;gap:8px;padding:0;color:rgba(255,255,255,.75);font-family:'NType82','Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:1;text-decoration:none;white-space:nowrap;transition:color 220ms ease}
 .hero-nav a::after{content:'';position:absolute;right:0;bottom:-5px;left:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform 220ms ease}
