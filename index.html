@@ -9,14 +9,6 @@
 </head>
 <body class="home-page">
   <div id="preloader"><img src="Assets/teton-gif.gif" alt="Loading"></div>
-  <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer"><span></span><span></span></button>
-  <div class="drawer-overlay" hidden></div>
-  <aside id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
-    <button class="drawer-close" aria-label="Close menu"></button>
-    <nav class="mobile-links" aria-label="Mobile Primary">
-      <a href="index.html" aria-current="page">Home</a><a href="Projects/Projects.html">Projects</a><a href="Contact/Contact.html">Contact</a>
-    </nav>
-  </aside>
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="index.html" aria-label="Teton Construction home"><img src="Assets/TetonConstruction_Assets-2.png" alt="Teton Construction" class="brand-logo"></a>
@@ -28,7 +20,10 @@
       <video id="landingVideo" muted autoplay loop playsinline webkit-playsinline preload="auto" poster="Assets/16.jpg"><source src="Assets/7031309_Close_up_Slow_Motion_3840x2160 (1).mp4" type="video/mp4"></video>
       <div class="landing-ocean-overlay" aria-hidden="true"></div>
       <h1 class="landing-brand" id="landing-brand-title"><img src="Assets/TETON%20LOGO.png" alt="TETON Construction"></h1>
-      <a class="hero-projects-link" href="Projects/Projects.html"><span>Projects</span><span class="hero-projects-arrow" aria-hidden="true">→</span></a>
+      <nav class="hero-nav" aria-label="Homepage navigation">
+        <a href="Projects/Projects.html"><span>Projects</span><span class="hero-nav-arrow" aria-hidden="true">→</span></a>
+        <a href="Contact/Contact.html"><span>Contact</span><span class="hero-nav-arrow" aria-hidden="true">→</span></a>
+      </nav>
     </section>
   </main>
   <script>
@@ -57,16 +52,6 @@
       video.addEventListener('ended', function(){ video.currentTime = 0; playVideo(); });
       document.addEventListener('visibilitychange', playVideo);
       playVideo();
-    })();
-    (function(){
-      const button = document.querySelector('.menu-toggle');
-      const drawer = document.getElementById('mobileDrawer');
-      const overlay = document.querySelector('.drawer-overlay');
-      const closeButton = document.querySelector('.drawer-close');
-      let lastFocused;
-      function open(){ lastFocused=document.activeElement;drawer.classList.add('open');overlay.hidden=false;button.setAttribute('aria-expanded','true');drawer.setAttribute('aria-hidden','false');const first=drawer.querySelector('a, button');if(first)first.focus(); }
-      function close(){ drawer.classList.remove('open');overlay.hidden=true;button.setAttribute('aria-expanded','false');drawer.setAttribute('aria-hidden','true');if(lastFocused)lastFocused.focus(); }
-      button.addEventListener('click',function(){drawer.classList.contains('open')?close():open();});overlay.addEventListener('click',close);closeButton.addEventListener('click',close);window.addEventListener('keydown',function(event){if(event.key==='Escape')close();});
     })();
   </script>
 </body>
