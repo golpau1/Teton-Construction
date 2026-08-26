@@ -90,15 +90,15 @@ main.projects-grid {
   .archive-heading {
     margin: 0 0 38px;
     color: #111;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'NType82', 'Helvetica Neue', Arial, sans-serif;
     font-size: 34px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.05;
   }
 
   .archive-layout {
     display: grid;
-    grid-template-columns: minmax(0, 3fr) minmax(250px, 1fr);
+    grid-template-columns: minmax(0, 71fr) minmax(280px, 29fr);
     column-gap: 30px;
     align-items: start;
     width: 100%;
@@ -106,7 +106,7 @@ main.projects-grid {
 
   .archive-table {
     width: 100%;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'NType82', 'Helvetica Neue', Arial, sans-serif;
   }
 
   .archive-table-head,
@@ -118,7 +118,7 @@ main.projects-grid {
   }
 
   .archive-table-head {
-    min-height: 30px;
+    min-height: 28px;
     color: #aaa;
     border-bottom: 1px solid #d9d9d9;
     font-size: 11px;
@@ -127,11 +127,11 @@ main.projects-grid {
   }
 
   .archive-row {
-    min-height: 51px;
+    min-height: 45px;
     color: #222;
     border-bottom: 1px solid #dedede;
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.2;
     text-decoration: none;
     cursor: default;
