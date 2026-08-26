@@ -44,6 +44,7 @@ main.projects-grid {
 
 @media (min-width: 1100px) {
   body.projects-loading { overflow: hidden; }
+  body.projects-grid-active { overflow: hidden; }
 
   body.projects-loading .site-header { visibility: hidden; }
 
@@ -174,14 +175,35 @@ main.projects-grid {
 
   .desktop-grid-view.is-active {
     --project-image-fade: 450ms cubic-bezier(.4, 0, .2, 1);
+    display: block;
+    width: 100%;
+    height: calc(100svh - 58px);
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+  }
+
+  .desktop-grid-view.is-active::-webkit-scrollbar { display: none; }
+
+  .desktop-grid-view.is-entering { overflow-y: hidden; }
+
+  .grid-slide {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 42.75vw));
     justify-content: space-between;
     column-gap: 48px;
-    row-gap: 180px;
+    align-items: start;
     width: 100%;
-    padding: 180px 26px 240px;
+    min-height: calc(100svh - 58px);
+    padding: 120px 26px 40px;
     box-sizing: border-box;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
   .grid-project {
@@ -339,7 +361,7 @@ main.projects-grid {
     transform: scaleX(1);
   }
 
-  .grid-project:nth-child(4) .grid-project-media img {
+  .grid-project[data-project-index="3"] .grid-project-media img {
     filter: grayscale(1) brightness(.45);
   }
 

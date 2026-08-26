@@ -153,10 +153,11 @@
         const preview = archive.querySelector('.archive-preview img');
         const switches = Array.from(document.querySelectorAll('.view-switch'));
 
-        rows.forEach((row) => {
+        rows.forEach((row, index) => {
             const projectLink = row.getAttribute('href');
             const project = document.createElement('article');
             project.className = 'grid-project';
+            project.dataset.projectIndex = String(index);
 
             const media = projectLink ? document.createElement('a') : document.createElement('div');
             media.className = 'grid-project-media';
@@ -194,7 +195,14 @@
             projectInner.className = 'grid-project-inner';
             projectInner.append(media, info);
             project.appendChild(projectInner);
-            grid.appendChild(project);
+            let slide = grid.lastElementChild;
+            if (index % 2 === 0) {
+                slide = document.createElement('section');
+                slide.className = 'grid-slide';
+                slide.setAttribute('aria-label', `Projects ${index + 1} and ${Math.min(index + 2, rows.length)}`);
+                grid.appendChild(slide);
+            }
+            slide.appendChild(project);
         });
 
         let hoverClearTimer;
@@ -247,6 +255,7 @@
             const showGrid = view === 'grid';
             grid.classList.toggle('is-active', showGrid);
             archive.classList.toggle('is-active', !showGrid);
+            document.body.classList.toggle('projects-grid-active', showGrid && desktopQuery.matches);
             grid.setAttribute('aria-hidden', String(!showGrid));
             archive.setAttribute('aria-hidden', String(showGrid));
             switches.forEach((button) => {
@@ -254,6 +263,7 @@
                 button.classList.toggle('is-active', active);
                 button.setAttribute('aria-pressed', String(active));
             });
+            if (showGrid) grid.scrollTo({ top: 0, behavior: 'auto' });
             window.scrollTo(0, 0);
         }
 
@@ -278,7 +288,10 @@
 
         let desktopLoadStarted = false;
         async function startDesktopExperience() {
-            if (desktopLoadStarted) return;
+            if (desktopLoadStarted) {
+                setView('grid');
+                return;
+            }
             desktopLoadStarted = true;
             setView('grid');
             await Promise.all([
@@ -309,6 +322,7 @@
                 startDesktopExperience();
             } else {
                 document.body.classList.remove('projects-loading');
+                document.body.classList.remove('projects-grid-active');
             }
         });
     })();
