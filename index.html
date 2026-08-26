@@ -70,6 +70,7 @@
         var pre = document.getElementById('preloader');
         pre.classList.add('hide');
         document.body.style.overflow = '';
+        window.dispatchEvent(new Event('home:ready'));
         setTimeout(function(){ pre.style.display = 'none'; }, 900);
       }, 1500);
     });
@@ -94,6 +95,95 @@
       setInterval(()=>{ if(!document.hidden) tryPlay(); }, 5000);
       // Initial kick (in case preloader delayed)
       tryPlay();
+    })();
+    (function(){
+      const desktop = window.matchMedia('(min-width: 761px)');
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const root = document.documentElement;
+      const hero = document.querySelector('.hero-stack');
+      const video = document.querySelector('.video-bg');
+      if (!hero || !video) return;
+
+      let current = window.scrollY;
+      let target = current;
+      let enabled = false;
+      let raf = 0;
+
+      const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+      function maxScroll() {
+        return Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      }
+
+      function render() {
+        const progress = maxScroll() ? clamp(current / maxScroll(), 0, 1) : 0;
+        const exitProgress = clamp((progress - .48) / .52, 0, 1);
+        root.style.setProperty('--home-hero-y', `${progress * window.innerHeight * -.58}px`);
+        root.style.setProperty('--home-hero-opacity', String(1 - exitProgress * .82));
+        root.style.setProperty('--home-video-y', `${progress * -36}px`);
+        root.style.setProperty('--home-video-scale', String(1.015 + progress * .025));
+        root.style.setProperty('--home-overlay-opacity', String(1 - progress * .2));
+      }
+
+      function tick() {
+        if (!enabled) return;
+        const difference = target - current;
+        current += difference * .085;
+        if (Math.abs(difference) < .1) current = target;
+        window.scrollTo(0, current);
+        render();
+        raf = requestAnimationFrame(tick);
+      }
+
+      function onWheel(event) {
+        if (!enabled || event.ctrlKey) return;
+        event.preventDefault();
+        const multiplier = event.deltaMode === 1 ? 18 : event.deltaMode === 2 ? window.innerHeight : 1;
+        target = clamp(target + event.deltaY * multiplier, 0, maxScroll());
+      }
+
+      function onNativeScroll() {
+        if (!enabled) return;
+        if (Math.abs(window.scrollY - current) > 2) {
+          current = window.scrollY;
+          target = current;
+          render();
+        }
+      }
+
+      function start() {
+        if (enabled || !desktop.matches || reducedMotion.matches) return;
+        enabled = true;
+        root.classList.add('home-smooth-scroll');
+        current = target = window.scrollY;
+        render();
+        window.addEventListener('wheel', onWheel, { passive: false });
+        window.addEventListener('scroll', onNativeScroll, { passive: true });
+        raf = requestAnimationFrame(tick);
+      }
+
+      function stop() {
+        if (!enabled) return;
+        enabled = false;
+        cancelAnimationFrame(raf);
+        window.removeEventListener('wheel', onWheel);
+        window.removeEventListener('scroll', onNativeScroll);
+        root.classList.remove('home-smooth-scroll');
+        root.style.removeProperty('--home-hero-y');
+        root.style.removeProperty('--home-hero-opacity');
+        root.style.removeProperty('--home-video-y');
+        root.style.removeProperty('--home-video-scale');
+        root.style.removeProperty('--home-overlay-opacity');
+      }
+
+      function sync() {
+        if (desktop.matches && !reducedMotion.matches) start();
+        else stop();
+      }
+
+      window.addEventListener('home:ready', sync, { once: true });
+      desktop.addEventListener('change', sync);
+      reducedMotion.addEventListener('change', sync);
     })();
     (function(){
       const btn=document.querySelector('.menu-toggle');
