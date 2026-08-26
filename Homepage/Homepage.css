@@ -306,21 +306,49 @@ body.no-scroll { overflow: hidden; }
 		font-family: 'NType82', 'Helvetica Neue', Arial, sans-serif;
 	}
 
+	.home-page .site-header {
+		position: fixed;
+		transition: background-color 420ms cubic-bezier(.16, 1, .3, 1);
+	}
+
+	.home-page .site-header.is-over-hero {
+		background: transparent;
+	}
+
+	.home-page .site-header.is-over-hero::after {
+		background: rgba(255, 255, 255, .3);
+	}
+
+	.home-page .site-header.is-over-hero .brand-logo {
+		filter: brightness(0) invert(1);
+	}
+
+	.home-page .site-header.is-over-hero .main-nav a,
+	.home-page .site-header.is-over-hero .main-nav a + a::before {
+		color: rgba(255, 255, 255, .76);
+	}
+
+	.home-page .site-header.is-over-hero .main-nav a:hover,
+	.home-page .site-header.is-over-hero .main-nav a:focus-visible,
+	.home-page .site-header.is-over-hero .main-nav .active {
+		color: #fff;
+	}
+
 	[data-parallax] {
 		transform: translate3d(0, var(--parallax-y, 0px), 0);
 		will-change: transform;
 	}
 
 	.home-opening {
-		height: calc(100svh - 58px);
-		padding: 42px 30px 70px;
+		height: 100svh;
+		padding: 0;
 		box-sizing: border-box;
 		overflow: hidden;
 	}
 
 	.home-hero-media {
-		height: calc(100% + 68px);
-		margin-top: -34px;
+		height: calc(100% + 80px);
+		margin-top: -40px;
 		overflow: hidden;
 		background: #d5d5d0;
 	}
@@ -338,11 +366,14 @@ body.no-scroll { overflow: hidden; }
 	.home-statement {
 		position: relative;
 		z-index: 2;
-		min-height: 120svh;
-		margin-top: -8svh;
-		padding: 30svh 28px 16svh;
+		min-height: 82svh;
+		margin-top: 0;
+		padding: 18svh 28px 20svh;
 		box-sizing: border-box;
 		background: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.home-statement h1,
@@ -355,9 +386,16 @@ body.no-scroll { overflow: hidden; }
 		letter-spacing: -.055em;
 	}
 
+	.home-statement h1 {
+		width: 68vw;
+		text-align: center;
+		font-size: clamp(96px, 10.2vw, 194px);
+		line-height: .88;
+	}
+
 	.home-architecture-frame {
-		height: 112svh;
-		padding: 6svh 30px 16svh;
+		height: 100svh;
+		padding: 0 26px;
 		box-sizing: border-box;
 		overflow: hidden;
 	}
@@ -370,48 +408,78 @@ body.no-scroll { overflow: hidden; }
 	}
 
 	.home-copy-section {
-		min-height: 88svh;
-		padding: 20svh 30px;
+		min-height: 118svh;
+		padding: 26svh 28px 24svh;
 		box-sizing: border-box;
 	}
 
 	.home-copy-section p {
-		width: min(620px, 48vw);
-		margin: 0 0 38px auto;
-		font-size: 17px;
+		width: auto;
+		margin: 0;
+		font-size: 14px;
 		font-weight: 400;
 		line-height: 1.55;
 	}
 
-	.home-copy-section .home-copy-lead {
-		font-size: clamp(26px, 2.4vw, 46px);
-		line-height: 1.12;
+	.home-studio-copy {
+		display: grid;
+		grid-template-columns: minmax(0, 27vw) minmax(0, 58vw);
+		grid-template-rows: auto;
+		justify-content: space-between;
+		align-items: start;
+	}
+
+	.home-studio-copy > p:last-child {
+		grid-column: 1;
+		grid-row: 1;
+		width: min(310px, 24vw);
+	}
+
+	.home-studio-copy .home-copy-lead {
+		grid-column: 2;
+		grid-row: 1;
+		width: 100%;
+		font-size: clamp(42px, 4.25vw, 82px);
+		line-height: 1.04;
 		letter-spacing: -.025em;
 	}
 
 	.home-services {
-		min-height: 190svh;
-		padding: 18svh 30px 20svh;
+		min-height: 205svh;
+		padding: 10svh 28px 18svh;
 		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.home-services-heading {
+		order: 2;
 		position: sticky;
-		top: 20svh;
-		margin-bottom: 38svh;
+		top: 18svh;
+		margin: 0;
+	}
+
+	.home-services-heading h2 {
+		width: calc(100vw - 56px);
+		font-size: clamp(108px, 13.4vw, 255px);
+		line-height: .82;
 	}
 
 	.home-services-list {
-		width: min(600px, 44vw);
-		margin: 0 0 0 auto;
+		order: 1;
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		column-gap: clamp(30px, 5vw, 96px);
+		width: 100%;
+		margin: 0 0 44svh;
 		padding: 0;
 		list-style: none;
-		font-size: 15px;
+		font-size: 13px;
 	}
 
 	.home-services-list li {
-		padding: 18px 0 16px;
-		border-bottom: 1px solid rgba(0, 0, 0, .16);
+		padding: 0;
+		border: 0;
 	}
 
 	.home-selected-projects {
@@ -498,6 +566,14 @@ body.no-scroll { overflow: hidden; }
 	.home-philosophy {
 		min-height: 100svh;
 		padding-top: 30svh;
+	}
+
+	.home-philosophy .home-copy-lead {
+		width: min(760px, 60vw);
+		margin-left: auto;
+		font-size: clamp(26px, 2.4vw, 46px);
+		line-height: 1.12;
+		letter-spacing: -.025em;
 	}
 
 	.home-contact-end {

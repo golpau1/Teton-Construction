@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="Homepage/Homepage.css" />
   <link rel="stylesheet" href="Assets/header.css" />
 </head>
-<body>
+<body class="home-page">
   <div id="preloader">
   <img src="Assets/teton-gif.gif" alt="Loading..." style="width:96px;height:auto;display:block;" />
   </div>
@@ -34,7 +34,7 @@
       <a href="Contact/Contact.html">Contact</a>
     </nav>
   </aside>
-  <header class="site-header">
+  <header class="site-header is-over-hero">
     <div class="header-inner">
       <a class="brand" href="index.html" aria-label="Teton Construction home">
         <img src="Assets/TetonConstruction_Assets-2.png" alt="Teton Construction" class="brand-logo">
@@ -205,6 +205,18 @@
       });
       desktop.addEventListener('change', ()=> videos.forEach(tryPlay));
       setInterval(()=>{ if(!document.hidden) videos.forEach(tryPlay); }, 5000);
+    })();
+    (function(){
+      const header = document.querySelector('.site-header');
+      const hero = document.querySelector('.home-opening');
+      const desktop = window.matchMedia('(min-width: 1100px)');
+      if (!header || !hero) return;
+      function updateHeaderTone(){
+        header.classList.toggle('is-over-hero', desktop.matches && window.scrollY < hero.offsetHeight - 58);
+      }
+      updateHeaderTone();
+      window.addEventListener('scroll', updateHeaderTone, { passive: true });
+      desktop.addEventListener('change', updateHeaderTone);
     })();
     (function(){
       const desktop = window.matchMedia('(min-width: 1100px)');
