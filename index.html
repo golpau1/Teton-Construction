@@ -1,362 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Teton Construction</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="Assets/The Violet/syxybpulzpa9jz2qmp53.webp" fetchpriority="high">
-  <link rel="stylesheet" href="Homepage/Homepage.css" />
-  <link rel="stylesheet" href="Assets/header.css" />
+  <link rel="stylesheet" href="Homepage/Homepage.css">
+  <link rel="stylesheet" href="Assets/header.css">
 </head>
 <body class="home-page">
-  <div id="preloader">
-  <img src="Assets/teton-gif.gif" alt="Loading..." style="width:96px;height:auto;display:block;" />
-  </div>
-  <video class="video-bg" id="bgVideo" data-autoplay-video muted autoplay loop playsinline webkit-playsinline preload="auto" poster="Assets/16.jpg">
-  <source src="Assets/7031309_Close_up_Slow_Motion_3840x2160 (1).mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-  <img class="video-fallback" src="Assets/16.jpg" alt="Architectural background" style="display:none;" />
-  <div class="video-overlay"></div>
-  <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
-    <span></span>
-    <span></span>
-  </button>
+  <div id="preloader"><img src="Assets/teton-gif.gif" alt="Loading"></div>
+  <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer"><span></span><span></span></button>
   <div class="drawer-overlay" hidden></div>
   <aside id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
     <button class="drawer-close" aria-label="Close menu"></button>
-    <nav class="mobile-links" role="navigation" aria-label="Mobile Primary">
-      <a href="index.html" aria-current="page">Home</a>
-      <a href="Projects/Projects.html">Projects</a>
-      <a href="Contact/Contact.html">Contact</a>
+    <nav class="mobile-links" aria-label="Mobile Primary">
+      <a href="index.html" aria-current="page">Home</a><a href="Projects/Projects.html">Projects</a><a href="Contact/Contact.html">Contact</a>
     </nav>
   </aside>
-  <header class="site-header is-over-hero">
+  <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="index.html" aria-label="Teton Construction home">
-        <img src="Assets/TetonConstruction_Assets-2.png" alt="Teton Construction" class="brand-logo">
-      </a>
-      <nav class="main-nav" aria-label="Primary">
-        <a class="active" href="index.html">Home</a>
-        <a href="Projects/Projects.html">Projects</a>
-        <a href="Contact/Contact.html">Contact</a>
-      </nav>
+      <a class="brand" href="index.html" aria-label="Teton Construction home"><img src="Assets/TetonConstruction_Assets-2.png" alt="Teton Construction" class="brand-logo"></a>
+      <nav class="main-nav" aria-label="Primary"><a class="active" href="index.html">Home</a><a href="Projects/Projects.html">Projects</a><a href="Contact/Contact.html">Contact</a></nav>
     </div>
   </header>
-  <main class="home-desktop-sequence">
-    <section class="home-opening" aria-label="TETON introduction">
-      <div class="home-hero-media" data-parallax="-34">
-        <video class="home-hero-video" id="homeHeroVideo" data-autoplay-video muted autoplay loop playsinline webkit-playsinline preload="auto" poster="Assets/16.jpg" aria-label="Ocean movement">
-          <source src="Assets/7031309_Close_up_Slow_Motion_3840x2160 (1).mp4" type="video/mp4">
-        </video>
-      </div>
-      <img class="home-hero-wordmark" src="Assets/teton-construction-hero-logo.png" alt="TETON Construction" width="5400" height="1300" decoding="async">
-    </section>
-
-    <section class="home-statement home-intro-statement">
-      <h1 class="home-intro-title" data-parallax="-42">
-        <span class="home-intro-line-mask"><span class="home-intro-line">Systematic Clarity</span></span>
-        <span class="home-intro-line-mask"><span class="home-intro-line">&amp; Creativity</span></span>
-      </h1>
-    </section>
-
-    <section class="home-architecture-frame">
-      <div class="home-architecture-media" data-parallax="-26">
-        <img id="homeArchitectureImage" src="Assets/The Violet/syxybpulzpa9jz2qmp53.webp" alt="The Violet architectural visualisation" width="4783" height="2632" fetchpriority="high" decoding="async">
+  <main class="landing-page">
+    <section class="landing-main" aria-labelledby="landing-brand-title">
+      <h1 class="landing-brand" id="landing-brand-title"><span class="landing-brand-main">TETON</span><span class="landing-brand-sub">Construction</span></h1>
+      <div class="landing-message">
+        <p>Teton Construction delivers thoughtful, high-quality residential construction with a focus on craftsmanship, clarity, and lasting results.</p>
+        <div class="landing-meta"><span>Gold Coast, Queensland</span><span>Licensed Residential Builder</span></div>
       </div>
     </section>
-
-    <section class="home-copy-section home-studio-copy">
-      <p class="home-copy-lead">TETON Construction is a design-led construction company focused on considered residential architecture and carefully executed building.</p>
-      <p>From early planning through construction and completion, we work closely across every stage of the process to create spaces that are clear, functional and enduring.</p>
-    </section>
-
-    <section class="home-services">
-      <div class="home-services-heading">
-        <h2>From Concept<br>to Construction</h2>
-      </div>
-      <ul class="home-services-list" aria-label="Services">
-        <li>Residential Construction</li>
-        <li>Design Coordination</li>
-        <li>Project Management</li>
-        <li>Development</li>
-        <li>Construction Delivery</li>
-      </ul>
-    </section>
-
-    <section class="home-selected-projects">
-      <header class="home-section-intro">
-        <h2>Selected Projects</h2>
-        <p>A selection of current and completed TETON projects.</p>
-      </header>
-      <div class="home-featured-projects">
-        <article class="home-featured-project" data-parallax="-18">
-          <a href="The Violet/The Violet.html" class="home-project-image" aria-label="View The Violet">
-            <img src="Assets/The Violet/ij0rtgarliz0srxjf68w.webp" alt="The Violet architectural visualisation" width="4828" height="2707" loading="lazy" decoding="async">
-          </a>
-          <div class="home-project-caption"><span>The Violet</span><span>Burleigh Heads</span></div>
-        </article>
-        <article class="home-featured-project home-featured-project-offset" data-parallax="-28">
-          <a href="85 Mountain View/85 Mountain View.html" class="home-project-image" aria-label="View 85 Mountain View">
-            <img src="Assets/85 Mountain View/hbj2qvbwaz551qcowmh6.webp" alt="85 Mountain View architectural visualisation" width="4961" height="3508" loading="lazy" decoding="async">
-          </a>
-          <div class="home-project-caption"><span>85 Mountain View</span><span>Miami</span></div>
-        </article>
-        <article class="home-featured-project" data-parallax="-18">
-          <a href="64 Dawn Parade/64 Dawn Parade.html" class="home-project-image" aria-label="View 64 Dawn Parade">
-            <img src="64 Dawn Parade/assets/hb7qryl3xsh50hfojf5m.webp" alt="64 Dawn Parade concept visualisation" width="4961" height="3508" loading="lazy" decoding="async">
-          </a>
-          <div class="home-project-caption"><span>64 Dawn Parade</span><span>Mermaid Waters</span></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="home-pinned-sequence">
-      <div class="home-pinned-heading"><h2>From Sketch<br>to Structure</h2></div>
-      <div class="home-sketch-layer home-sketch-layer-one" data-parallax="-70"><img src="Assets/64 Dawn Parade/Impact-Design-Concept-Drawings-33333.jpg" alt="Architectural concept perspective one" width="4961" height="3508" loading="lazy" decoding="async"></div>
-      <div class="home-sketch-layer home-sketch-layer-two" data-parallax="-105"><img src="Assets/64 Dawn Parade/Impact-Design-Concept-Drawings-2.jpg" alt="Architectural concept perspective two" width="4961" height="3508" loading="lazy" decoding="async"></div>
-      <div class="home-sketch-layer home-sketch-layer-three" data-parallax="-58"><img src="Assets/64 Dawn Parade/Impact-Design-Concept-Drawings-3.jpg" alt="Architectural concept perspective three" width="4961" height="3508" loading="lazy" decoding="async"></div>
-    </section>
-
-    <section class="home-copy-section home-philosophy">
-      <p class="home-copy-lead">Every project begins with a clear understanding of site, purpose and material. Our role is to carry that clarity through design coordination, construction and completion.</p>
-    </section>
-
-    <section class="home-contact-end">
-      <h2>Start a Project</h2>
-      <div class="home-contact-meta">
-        <span>Gold Coast, Australia</span>
-        <a href="Contact/Contact.html">Contact</a>
-      </div>
+    <section class="landing-ocean" aria-label="Ocean">
+      <video id="landingVideo" muted autoplay loop playsinline webkit-playsinline preload="auto" poster="Assets/16.jpg"><source src="Assets/7031309_Close_up_Slow_Motion_3840x2160 (1).mp4" type="video/mp4"></video>
+      <div class="landing-ocean-overlay" aria-hidden="true"></div>
     </section>
   </main>
-  <div class="content">
-    <div class="hero-stack">
-      <div class="hero-brand">
-        <div class="hero-logo-crop">
-          <picture class="hero-logo-picture">
-            <source srcset="Assets/TetonConstruction_Assets-2.png" media="(max-width:760px)">
-            <img class="hero-logo" src="Assets/41a16fbe-dac6-4d23-b6ea-e9cb99b32397_removalai_preview.png" alt="Teton Construction Logo" />
-          </picture>
-        </div>
-      </div>
-      <nav class="main-links" aria-label="Primary links">
-        <a href="Projects/Projects.html" title="View our projects">Projects</a>
-        <a href="Contact/Contact.html" title="Get in touch">Contact</a>
-      </nav>
-    </div>
-  </div>
   <script>
-    // Keep the loader until the first desktop visuals are ready, with a safety timeout.
     document.body.style.overflow = 'hidden';
     window.addEventListener('DOMContentLoaded', function() {
-      const desktop = window.matchMedia('(min-width: 1100px)').matches;
-      const criticalVideo = document.getElementById(desktop ? 'homeHeroVideo' : 'bgVideo');
-      const criticalImage = desktop ? document.getElementById('homeArchitectureImage') : null;
-      const waitForVideo = (video) => new Promise((resolve) => {
+      const video = document.getElementById('landingVideo');
+      const mediaReady = new Promise((resolve) => {
         if (!video || video.readyState >= 2) return resolve();
         video.addEventListener('loadeddata', resolve, { once: true });
         video.addEventListener('error', resolve, { once: true });
       });
-      const waitForImage = (image) => new Promise((resolve) => {
-        if (!image || image.complete) return resolve();
-        image.addEventListener('load', resolve, { once: true });
-        image.addEventListener('error', resolve, { once: true });
-      });
-      const criticalReady = Promise.all([waitForVideo(criticalVideo), waitForImage(criticalImage)]);
+      const minimumDisplay = new Promise((resolve) => setTimeout(resolve, 1100));
       const safetyTimeout = new Promise((resolve) => setTimeout(resolve, 5000));
-      const minimumDisplay = new Promise((resolve) => setTimeout(resolve, 1500));
-
-      Promise.all([minimumDisplay, Promise.race([criticalReady, safetyTimeout])]).then(function() {
-        var pre = document.getElementById('preloader');
-        pre.classList.add('hide');
-        document.body.style.overflow = '';
-        window.dispatchEvent(new Event('home:ready'));
-        setTimeout(function(){ pre.style.display = 'none'; }, 900);
+      Promise.all([minimumDisplay, Promise.race([mediaReady, safetyTimeout])]).then(function() {
+        const preloader = document.getElementById('preloader');
+        preloader.classList.add('hide');
+        document.body.classList.add('landing-ready');
+        setTimeout(function(){ preloader.hidden = true; }, 700);
       });
     });
-    // Ensure both homepage videos keep playing when their responsive layout is active.
     (function(){
-      const videos = Array.from(document.querySelectorAll('[data-autoplay-video]'));
-      const desktop = window.matchMedia('(min-width: 1100px)');
-      if(!videos.length) return;
-      function isActive(v){
-        return v.id === 'homeHeroVideo' ? desktop.matches : !desktop.matches;
-      }
-      function tryPlay(v){
-        if(!isActive(v)) {
-          if(!v.paused) v.pause();
-          return;
-        }
-        if(v.paused || v.readyState < 2){
-          const p = v.play();
-          if(p && p.catch) p.catch(()=>{});
-        }
-      }
-      videos.forEach((v) => {
-        v.addEventListener('pause', ()=>{ if(!document.hidden && v.currentTime < (v.duration||1)-0.25) tryPlay(v); });
-        v.addEventListener('ended', ()=>{ v.currentTime = 0; tryPlay(v); });
-        ['loadeddata','canplay','canplaythrough'].forEach((eventName) => {
-          v.addEventListener(eventName, ()=>{ if(!document.hidden) tryPlay(v); });
-        });
-        tryPlay(v);
-      });
-      document.addEventListener('visibilitychange', ()=>{
-        if(!document.hidden) videos.forEach(tryPlay);
-      });
-      desktop.addEventListener('change', ()=> videos.forEach(tryPlay));
-      setInterval(()=>{ if(!document.hidden) videos.forEach(tryPlay); }, 5000);
+      const video = document.getElementById('landingVideo');
+      if (!video) return;
+      function playVideo(){ if (!document.hidden) { const promise = video.play(); if (promise && promise.catch) promise.catch(function(){}); } }
+      video.addEventListener('pause', playVideo);
+      video.addEventListener('ended', function(){ video.currentTime = 0; playVideo(); });
+      document.addEventListener('visibilitychange', playVideo);
+      playVideo();
     })();
     (function(){
-      const wordmark = document.querySelector('.home-hero-wordmark');
-      if (!wordmark) return;
-      window.addEventListener('home:ready', () => wordmark.classList.add('is-visible'), { once: true });
-    })();
-    (function(){
-      const title = document.querySelector('.home-intro-title');
-      if (!title) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        title.classList.add('is-revealed');
-        return;
-      }
-      const observer = new IntersectionObserver((entries) => {
-        if (!entries[0].isIntersecting) return;
-        title.classList.add('is-revealed');
-        observer.disconnect();
-      }, { threshold: .24, rootMargin: '0px 0px -8% 0px' });
-      observer.observe(title);
-    })();
-    (function(){
-      const header = document.querySelector('.site-header');
-      const hero = document.querySelector('.home-opening');
-      const desktop = window.matchMedia('(min-width: 1100px)');
-      if (!header || !hero) return;
-      function updateHeaderTone(){
-        header.classList.toggle('is-over-hero', desktop.matches && window.scrollY < hero.offsetHeight - 58);
-      }
-      updateHeaderTone();
-      window.addEventListener('scroll', updateHeaderTone, { passive: true });
-      desktop.addEventListener('change', updateHeaderTone);
-    })();
-    (function(){
-      const desktop = window.matchMedia('(min-width: 1100px)');
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-      const root = document.documentElement;
-      const sequence = document.querySelector('.home-desktop-sequence');
-      const movingElements = Array.from(document.querySelectorAll('[data-parallax]'));
-      if (!sequence) return;
-
-      let current = window.scrollY;
-      let target = current;
-      let enabled = false;
-      let raf = 0;
-      let measurements = [];
-
-      const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-
-      function maxScroll() {
-        return Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-      }
-
-      function measure() {
-        measurements = movingElements.map((element) => {
-          element.style.setProperty('--parallax-y', '0px');
-          const rect = element.getBoundingClientRect();
-          return {
-            element,
-            centre: rect.top + window.scrollY + rect.height / 2,
-            distance: Number(element.dataset.parallax) || 0
-          };
-        });
-      }
-
-      function render() {
-        const viewportCentre = current + window.innerHeight / 2;
-        const influence = window.innerHeight * 1.15;
-        measurements.forEach(({ element, centre, distance }) => {
-          const progress = clamp((viewportCentre - centre) / influence, -1, 1);
-          element.style.setProperty('--parallax-y', `${progress * distance}px`);
-        });
-      }
-
-      function tick() {
-        if (!enabled) return;
-        const difference = target - current;
-        current += difference * .085;
-        if (Math.abs(difference) < .1) current = target;
-        window.scrollTo(0, current);
-        render();
-        raf = requestAnimationFrame(tick);
-      }
-
-      function onWheel(event) {
-        if (!enabled || event.ctrlKey) return;
-        event.preventDefault();
-        const multiplier = event.deltaMode === 1 ? 18 : event.deltaMode === 2 ? window.innerHeight : 1;
-        target = clamp(target + event.deltaY * multiplier, 0, maxScroll());
-      }
-
-      function onNativeScroll() {
-        if (!enabled) return;
-        if (Math.abs(window.scrollY - current) > 2) {
-          current = window.scrollY;
-          target = current;
-          render();
-        }
-      }
-
-      function start() {
-        if (enabled || !desktop.matches || reducedMotion.matches) return;
-        enabled = true;
-        root.classList.add('home-smooth-scroll');
-        current = target = window.scrollY;
-        measure();
-        render();
-        if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
-        window.addEventListener('wheel', onWheel, { passive: false });
-        window.addEventListener('scroll', onNativeScroll, { passive: true });
-        window.addEventListener('resize', measure);
-        sequence.querySelectorAll('img').forEach((image) => image.addEventListener('load', measure, { once: true }));
-        raf = requestAnimationFrame(tick);
-      }
-
-      function stop() {
-        if (!enabled) return;
-        enabled = false;
-        cancelAnimationFrame(raf);
-        window.removeEventListener('wheel', onWheel);
-        window.removeEventListener('scroll', onNativeScroll);
-        window.removeEventListener('resize', measure);
-        root.classList.remove('home-smooth-scroll');
-        movingElements.forEach((element) => element.style.removeProperty('--parallax-y'));
-      }
-
-      function sync() {
-        if (desktop.matches && !reducedMotion.matches) start();
-        else stop();
-      }
-
-      window.addEventListener('home:ready', sync, { once: true });
-      desktop.addEventListener('change', sync);
-      reducedMotion.addEventListener('change', sync);
-    })();
-    (function(){
-      const btn=document.querySelector('.menu-toggle');
-      const drawer=document.getElementById('mobileDrawer');
-      const overlay=document.querySelector('.drawer-overlay');
-      const closeBtn=drawer.querySelector('.drawer-close');
-      const focusable='a, button';
-      let last;
-      function open(){
-        last=document.activeElement;drawer.classList.add('open');overlay.hidden=false;document.body.classList.add('no-scroll');btn.setAttribute('aria-expanded','true');drawer.setAttribute('aria-hidden','false');const first=drawer.querySelector(focusable);first&&first.focus();trap(true);}
-      function close(){
-        drawer.classList.remove('open');overlay.hidden=true;document.body.classList.remove('no-scroll');btn.setAttribute('aria-expanded','false');drawer.setAttribute('aria-hidden','true');trap(false);last&&last.focus();}
-      function toggle(){drawer.classList.contains('open')?close():open();}
-      btn.addEventListener('click',toggle);overlay.addEventListener('click',close);closeBtn&&closeBtn.addEventListener('click',close);window.addEventListener('keydown',e=>{if(e.key==='Escape'&&drawer.classList.contains('open'))close();});
-      function trap(en){if(!en){document.removeEventListener('focus',fh,true);return;}document.addEventListener('focus',fh,true);}function fh(e){if(!drawer.classList.contains('open'))return;if(!drawer.contains(e.target)&&e.target!==btn){const first=drawer.querySelector(focusable);first&&first.focus();}}
+      const button = document.querySelector('.menu-toggle');
+      const drawer = document.getElementById('mobileDrawer');
+      const overlay = document.querySelector('.drawer-overlay');
+      const closeButton = document.querySelector('.drawer-close');
+      let lastFocused;
+      function open(){ lastFocused=document.activeElement;drawer.classList.add('open');overlay.hidden=false;button.setAttribute('aria-expanded','true');drawer.setAttribute('aria-hidden','false');const first=drawer.querySelector('a, button');if(first)first.focus(); }
+      function close(){ drawer.classList.remove('open');overlay.hidden=true;button.setAttribute('aria-expanded','false');drawer.setAttribute('aria-hidden','true');if(lastFocused)lastFocused.focus(); }
+      button.addEventListener('click',function(){drawer.classList.contains('open')?close():open();});overlay.addEventListener('click',close);closeButton.addEventListener('click',close);window.addEventListener('keydown',function(event){if(event.key==='Escape')close();});
     })();
   </script>
 </body>
