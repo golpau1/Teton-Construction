@@ -340,6 +340,7 @@ body.no-scroll { overflow: hidden; }
 	}
 
 	.home-opening {
+		position: relative;
 		height: 100svh;
 		padding: 0;
 		box-sizing: border-box;
@@ -361,6 +362,27 @@ body.no-scroll { overflow: hidden; }
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+	}
+
+	.home-hero-wordmark {
+		position: absolute;
+		left: 32px;
+		bottom: 36px;
+		z-index: 2;
+		display: block;
+		width: clamp(320px, 30vw, 620px);
+		height: auto;
+		opacity: 0;
+		transform: translate3d(0, 26px, 0);
+		transition:
+			transform 820ms cubic-bezier(.16, 1, .3, 1),
+			opacity 720ms cubic-bezier(.16, 1, .3, 1);
+		pointer-events: none;
+	}
+
+	.home-hero-wordmark.is-visible {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
 	}
 
 	.home-statement {
@@ -622,6 +644,7 @@ body.no-scroll { overflow: hidden; }
 		text-decoration: none;
 		border-bottom: 1px solid currentColor;
 	}
+
 }
 @media (min-width:1400px) { .hero-logo { max-width:700px; } }
 @media (min-width: 700px) {
@@ -648,5 +671,11 @@ body.no-scroll { overflow: hidden; }
 		transform: none;
 		transition: none;
 		will-change: auto;
+	}
+
+	.home-hero-wordmark {
+		opacity: 1;
+		transform: none;
+		transition: none;
 	}
 }

@@ -53,6 +53,7 @@
           <source src="Assets/7031309_Close_up_Slow_Motion_3840x2160 (1).mp4" type="video/mp4">
         </video>
       </div>
+      <img class="home-hero-wordmark" src="Assets/41a16fbe-dac6-4d23-b6ea-e9cb99b32397_removalai_preview.png" alt="TETON Construction" width="600" height="127" decoding="async">
     </section>
 
     <section class="home-statement home-intro-statement">
@@ -208,6 +209,11 @@
       });
       desktop.addEventListener('change', ()=> videos.forEach(tryPlay));
       setInterval(()=>{ if(!document.hidden) videos.forEach(tryPlay); }, 5000);
+    })();
+    (function(){
+      const wordmark = document.querySelector('.home-hero-wordmark');
+      if (!wordmark) return;
+      window.addEventListener('home:ready', () => wordmark.classList.add('is-visible'), { once: true });
     })();
     (function(){
       const title = document.querySelector('.home-intro-title');
