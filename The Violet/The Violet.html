@@ -40,48 +40,39 @@
     </div>
   </header>
 
-  <!-- Page Content -->
-  <main class="page">
-    <div class="grid">
-      <!-- Left: Project images -->
-      <section class="project-media">
-        <div class="frame top-shift">
-          <img src="../Assets/The Violet/ij0rtgarliz0srxjf68w.webp" alt="The Violet – Exterior Angle 1" loading="lazy" decoding="async">
-        </div>
-        <div class="frame">
-          <img src="../Assets/The Violet/izyosmidostwzivhojw5.webp" alt="The Violet – Exterior Angle 2" loading="lazy" decoding="async">
-        </div>
-        <div class="frame">
-          <img src="../Assets/The Violet/syxybpulzpa9jz2qmp53.webp" alt="The Violet – Exterior Angle 3" loading="lazy" decoding="async">
-        </div>
-      </section>
+  <main class="violet-page">
+    <section class="violet-hero" aria-labelledby="violet-title">
+      <img src="../Assets/The Violet/ij0rtgarliz0srxjf68w.webp" alt="The Violet exterior" fetchpriority="high" decoding="async">
+      <h1 id="violet-title">Violet</h1>
+      <a class="scroll-cue" href="#project-intro">Scroll to explore</a>
+    </section>
 
-      <!-- Mobile-only duplicated description placed directly under images -->
-      <div class="mobile-project-copy" aria-label="Project description (mobile)">
-        <p>A boutique collection of nine thoughtfully designed townhouses, nestled in the quaint and historic neighbourhood of Burleigh Heads.</p>
-        <p>Blending seamlessly with the area's rich heritage, The Violet introduces a modern twist — a contemporary lifestyle precinct that captures the essence of its natural surroundings. Each townhouse is crafted to reflect the balance of convenience and vibrancy, tranquility and serenity, offering residents a harmonious coastal way of life.</p>
-        <p>Set within lush green surrounds, The Violet is a celebration of modern living in a rejuvenated and evolving pocket of Burleigh Heads where heritage meets innovation.</p>
-      </div>
-
-      <!-- Right: Meta + copy -->
-      <aside class="project-meta">
-  <h2>The Violet</h2>
-
-        <div class="meta-list">
-          <div><b>Completion:</b> 2026</div>
-          <div><b>Location:</b> Burleigh Heads</div>
-          <div><b>Architect:</b> CPO Architects</div>
-          <div><b>Interiors:</b> CPO Architects</div>
-        </div>
-
-        <div class="project-copy">
+    <section class="project-intro" id="project-intro" aria-label="The Violet project information">
+      <div class="project-intro-inner">
+        <div class="project-description">
           <p>A boutique collection of nine thoughtfully designed townhouses, nestled in the quaint and historic neighbourhood of Burleigh Heads.</p>
           <p>Blending seamlessly with the area's rich heritage, The Violet introduces a modern twist&nbsp;&mdash; a contemporary lifestyle precinct that captures the essence of its natural surroundings. Each townhouse is crafted to reflect the balance of convenience and vibrancy, tranquility and serenity, offering residents a harmonious coastal way of life.</p>
           <p>Set within lush green surrounds, The Violet is a celebration of modern living in a rejuvenated and evolving pocket of Burleigh Heads where heritage meets innovation.</p>
         </div>
-      </aside>
-    </div>
 
+        <dl class="project-specs">
+          <div><dt>Completion</dt><dd>2026</dd></div>
+          <div><dt>Location</dt><dd>Burleigh Heads</dd></div>
+          <div><dt>Architect</dt><dd>CPO Architects</dd></div>
+          <div><dt>Interiors</dt><dd>CPO Architects</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="editorial-gallery" aria-label="The Violet image gallery">
+      <aside class="gallery-sidebar"><h2>Violet</h2></aside>
+      <div class="gallery-images">
+        <div class="portrait-pair">
+          <figure><img src="../Assets/The Violet/izyosmidostwzivhojw5.webp" alt="The Violet exterior angle two" loading="lazy" decoding="async"></figure>
+          <figure><img src="../Assets/The Violet/syxybpulzpa9jz2qmp53.webp" alt="The Violet exterior angle three" loading="lazy" decoding="async"></figure>
+        </div>
+      </div>
+    </section>
   </main>
   <script>
   (function(){const btn=document.querySelector('.menu-toggle'),drawer=document.getElementById('mobileDrawer'),overlay=document.querySelector('.drawer-overlay'),closeBtn=document.querySelector('.drawer-close');const focusable='a,button';let last;function open(){last=document.activeElement;drawer.classList.add('open');overlay.hidden=false;document.body.classList.add('no-scroll');btn.setAttribute('aria-expanded','true');drawer.setAttribute('aria-hidden','false');const f=drawer.querySelector(focusable);f&&f.focus();trap(true);}function close(){drawer.classList.remove('open');overlay.hidden=true;document.body.classList.remove('no-scroll');btn.setAttribute('aria-expanded','false');drawer.setAttribute('aria-hidden','true');trap(false);last&&last.focus();}function toggle(){drawer.classList.contains('open')?close():open();}btn.addEventListener('click',toggle);overlay.addEventListener('click',close);closeBtn&&closeBtn.addEventListener('click',close);window.addEventListener('keydown',e=>{if(e.key==='Escape'&&drawer.classList.contains('open'))close();});function trap(en){if(!en){document.removeEventListener('focus',fh,true);return;}document.addEventListener('focus',fh,true);}function fh(e){if(!drawer.classList.contains('open'))return;if(!drawer.contains(e.target)&&e.target!==btn){const f=drawer.querySelector(focusable);f&&f.focus();}}})();
