@@ -8,10 +8,10 @@
 }
 
 @font-face {
-  font-family: 'Satoshi';
-  src: url('Satoshi-Medium.otf') format('opentype');
+  font-family: 'Poppins';
+  src: url('Poppins-Regular.otf') format('opentype');
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   font-display: swap;
 }
 
@@ -93,9 +93,9 @@
     min-width: 0;
     max-width: 100%;
     white-space: nowrap;
-    font-family: 'Satoshi', Helvetica, Arial, sans-serif;
+    font-family: 'Poppins', Helvetica, Arial, sans-serif;
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 400;
     font-style: normal;
     letter-spacing: -.01em;
     text-transform: none;
