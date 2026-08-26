@@ -150,42 +150,46 @@ html { scroll-behavior: smooth; }
 .project-intro {
   background: #fff;
   padding: clamp(110px, 15vw, 220px) clamp(30px, 6vw, 112px);
+  font-family: 'NType82', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
 }
 .project-intro-inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
-  gap: clamp(80px, 11vw, 190px);
+  grid-template-columns: minmax(0, 1.65fr) minmax(340px, .95fr);
+  gap: clamp(90px, 11vw, 190px);
   align-items: start;
   width: min(1500px, 100%);
   margin: 0 auto;
 }
 .project-description {
-  max-width: 690px;
+  max-width: 650px;
   color: #202020;
-  font-size: clamp(21px, 1.75vw, 31px);
-  font-weight: 300;
-  line-height: 1.42;
-  letter-spacing: -.025em;
+  font-size: clamp(18px, 1.18vw, 20px);
+  font-weight: 400;
+  line-height: 1.48;
+  letter-spacing: -.012em;
 }
-.project-description p { margin: 0 0 1.15em; }
+.project-description p { margin: 0 0 1.4em; }
 .project-description p:last-child { margin-bottom: 0; }
 
 .project-specs { margin: 0; border-top: 1px solid #d8d8d8; }
 .project-specs > div {
   display: grid;
-  grid-template-columns: minmax(110px, .75fr) 1.25fr;
-  gap: 24px;
+  grid-template-columns: minmax(92px, .65fr) minmax(0, 1.35fr);
+  gap: clamp(40px, 5vw, 82px);
   align-items: baseline;
-  padding: 19px 0 18px;
+  padding: 16px 0 15px;
   border-bottom: 1px solid #d8d8d8;
 }
 .project-specs dt,
 .project-specs dd {
   margin: 0;
-  font-size: 13px;
+  font-family: inherit;
+  font-size: clamp(13px, .85vw, 14px);
+  font-weight: 400;
   line-height: 1.4;
 }
-.project-specs dt { color: #999; }
+.project-specs dt { color: #9a9a9a; }
 .project-specs dd { color: #252525; }
 
 .editorial-gallery {
@@ -243,7 +247,7 @@ html { scroll-behavior: smooth; }
     grid-template-columns: 1fr;
     gap: 66px;
   }
-  .project-description { max-width: 760px; font-size: clamp(19px, 3.4vw, 27px); }
+  .project-description { max-width: 700px; font-size: clamp(18px, 2.7vw, 20px); }
   .editorial-gallery {
     display: block;
     padding: 0 clamp(20px, 5vw, 42px) 90px;
@@ -262,7 +266,10 @@ html { scroll-behavior: smooth; }
 
 @media (max-width: 700px) {
   .violet-hero { height: calc(100svh - 58px); }
-  .project-specs > div { grid-template-columns: 105px minmax(0, 1fr); }
+  .project-specs > div {
+    grid-template-columns: 96px minmax(0, 1fr);
+    gap: 28px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
