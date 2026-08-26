@@ -12,8 +12,8 @@ a{color:inherit}
 #preloader[hidden]{display:none}
 .home-page .site-header{display:none}
 .home-page .site-header::after{background:rgba(255,255,255,.15)}
-.home-page .site-header .brand{position:relative;width:160px;height:28px;overflow:hidden}
-.home-page .site-header .brand-logo{position:absolute;top:0;left:0;width:235px;height:auto;max-width:none;filter:none;mix-blend-mode:screen;transform:translate(-38px,-64px)}
+.home-page .site-header .brand{position:relative;width:320px;height:40px;overflow:hidden}
+.home-page .site-header .brand-logo{position:absolute;top:0;left:0;width:470px;height:auto;max-width:none;filter:none;mix-blend-mode:screen;transform:translate(-76px,-137px)}
 .home-page .site-header .main-nav a{color:rgba(255,255,255,.72)}
 .home-page .site-header .main-nav a + a::before{color:rgba(255,255,255,.62)}
 .home-page .site-header .main-nav a:hover,.home-page .site-header .main-nav a:focus-visible,.home-page .site-header .main-nav .active{color:#fff}
