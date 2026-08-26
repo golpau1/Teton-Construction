@@ -7,6 +7,33 @@
   font-display: swap;
 }
 
+/* Shared logo geometry — identical on every page; only the colour asset changes. */
+.site-header .brand {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  width: 208px;
+  height: 26px;
+  min-width: 208px;
+  overflow: hidden;
+}
+
+.site-header .brand-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 306px;
+  height: auto;
+  max-width: none;
+  filter: none;
+  transform: translate(-49px, -89px);
+}
+
+.site-header .brand-logo--light { mix-blend-mode: screen; }
+.site-header .brand-logo--dark { mix-blend-mode: multiply; }
+
 @media (min-width: 701px) {
   .site-header {
     position: sticky;
@@ -44,21 +71,6 @@
     gap: 24px;
     box-sizing: border-box;
     min-width: 0;
-  }
-
-  .site-header .brand {
-    display: flex;
-    flex: 0 0 auto;
-    align-items: center;
-    min-width: 0;
-  }
-
-  .site-header .brand-logo {
-    display: block;
-    width: 128px;
-    height: auto;
-    max-width: none;
-    filter: brightness(0) saturate(100%);
   }
 
   .site-header .main-nav {
