@@ -30,7 +30,40 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overflow: hidden;
 }
+
+.combined-view {
+  position: relative;
+  flex: 1 1 auto;
+  width: 100%;
+  height: calc(100svh - 58px);
+  overflow: hidden;
+}
+
+.combined-track {
+  width: 100%;
+  height: 200%;
+  transform: translateY(0);
+  transition: transform 620ms cubic-bezier(.16, 1, .3, 1);
+  will-change: transform;
+}
+
+.combined-panel {
+  position: relative;
+  width: 100%;
+  height: 50%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #fff;
+}
+
+.projects-panel { overflow: hidden; }
+.contact-shadow-host { display: block; min-height: 100%; }
+body.is-contact-view .combined-track { transform: translateY(-50%); }
+body.is-contact-view .project-view-switcher { opacity: 0; pointer-events: none; }
 
 main.projects-grid {
   flex: 1 0 auto;
@@ -357,6 +390,7 @@ main.projects-grid {
     padding: 8px 11px;
     background: #efefef;
     border-radius: 12px;
+    transition: opacity 180ms ease;
   }
 
   .view-switch {
@@ -604,6 +638,9 @@ main.projects-grid {
 
 /* 8. Mobile (<=700px) — redesigned: clean, single column, tap-first */
 @media (max-width: 700px) {
+  .combined-view { height: 100svh; }
+  .projects-panel { overflow-y: auto; }
+
   html, body{
     background:#fff;
     color:#222;
@@ -854,4 +891,8 @@ main.projects-grid {
 
   /* Remove old hamburger placeholder if present */
   header, .menu-icon{ display:none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .combined-track { transition-duration: 1ms; }
 }
