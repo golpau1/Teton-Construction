@@ -7,6 +7,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Satoshi';
+  src: url('Satoshi-Medium.otf') format('opentype');
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
 /* Shared logo geometry — identical on every page; only the colour asset changes. */
 .site-header .brand {
   position: relative;
@@ -85,9 +93,9 @@
     min-width: 0;
     max-width: 100%;
     white-space: nowrap;
-    font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Satoshi', Helvetica, Arial, sans-serif;
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 500;
     font-style: normal;
     letter-spacing: -.01em;
     text-transform: none;
