@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="Assets/The Violet/syxybpulzpa9jz2qmp53.webp" fetchpriority="high">
   <link rel="stylesheet" href="Homepage/Homepage.css" />
   <link rel="stylesheet" href="Assets/header.css" />
 </head>
@@ -14,11 +15,11 @@
   <div id="preloader">
   <img src="Assets/teton-gif.gif" alt="Loading..." style="width:96px;height:auto;display:block;" />
   </div>
-  <video class="video-bg" id="bgVideo" muted autoplay loop playsinline webkit-playsinline preload="auto" poster="Assets/85 Mountain View/16.jpg">
+  <video class="video-bg" id="bgVideo" data-autoplay-video muted autoplay loop playsinline webkit-playsinline preload="auto" poster="Assets/16.jpg">
   <source src="Assets/7031309_Close_up_Slow_Motion_3840x2160 (1).mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
-  <img class="video-fallback" src="Assets/video-fallback.jpg" alt="Background" style="display:none;" />
+  <img class="video-fallback" src="Assets/16.jpg" alt="Architectural background" style="display:none;" />
   <div class="video-overlay"></div>
   <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
     <span></span>
@@ -47,7 +48,11 @@
   </header>
   <main class="home-desktop-sequence">
     <section class="home-opening" aria-label="TETON introduction">
-      <div class="home-placeholder home-hero-placeholder" data-parallax="-34" role="img" aria-label="Architectural hero image placeholder"></div>
+      <div class="home-hero-media" data-parallax="-34">
+        <video class="home-hero-video" id="homeHeroVideo" data-autoplay-video muted autoplay loop playsinline webkit-playsinline preload="auto" poster="Assets/16.jpg" aria-label="Ocean movement">
+          <source src="Assets/7031309_Close_up_Slow_Motion_3840x2160 (1).mp4" type="video/mp4">
+        </video>
+      </div>
     </section>
 
     <section class="home-statement home-intro-statement">
@@ -55,7 +60,9 @@
     </section>
 
     <section class="home-architecture-frame">
-      <div class="home-placeholder home-architecture-placeholder" data-parallax="-26" role="img" aria-label="Architectural image placeholder"></div>
+      <div class="home-architecture-media" data-parallax="-26">
+        <img id="homeArchitectureImage" src="Assets/The Violet/syxybpulzpa9jz2qmp53.webp" alt="The Violet architectural visualisation" width="4783" height="2632" fetchpriority="high" decoding="async">
+      </div>
     </section>
 
     <section class="home-copy-section home-studio-copy">
@@ -84,19 +91,19 @@
       <div class="home-featured-projects">
         <article class="home-featured-project" data-parallax="-18">
           <a href="The Violet/The Violet.html" class="home-project-image" aria-label="View The Violet">
-            <span class="home-placeholder project-placeholder-01"></span>
+            <img src="Assets/The Violet/ij0rtgarliz0srxjf68w.webp" alt="The Violet architectural visualisation" width="4828" height="2707" loading="lazy" decoding="async">
           </a>
           <div class="home-project-caption"><span>The Violet</span><span>Burleigh Heads</span></div>
         </article>
         <article class="home-featured-project home-featured-project-offset" data-parallax="-28">
           <a href="85 Mountain View/85 Mountain View.html" class="home-project-image" aria-label="View 85 Mountain View">
-            <span class="home-placeholder project-placeholder-02"></span>
+            <img src="Assets/85 Mountain View/hbj2qvbwaz551qcowmh6.webp" alt="85 Mountain View architectural visualisation" width="4961" height="3508" loading="lazy" decoding="async">
           </a>
           <div class="home-project-caption"><span>85 Mountain View</span><span>Miami</span></div>
         </article>
         <article class="home-featured-project" data-parallax="-18">
           <a href="64 Dawn Parade/64 Dawn Parade.html" class="home-project-image" aria-label="View 64 Dawn Parade">
-            <span class="home-placeholder project-placeholder-03"></span>
+            <img src="64 Dawn Parade/assets/hb7qryl3xsh50hfojf5m.webp" alt="64 Dawn Parade concept visualisation" width="4961" height="3508" loading="lazy" decoding="async">
           </a>
           <div class="home-project-caption"><span>64 Dawn Parade</span><span>Mermaid Waters</span></div>
         </article>
@@ -105,9 +112,9 @@
 
     <section class="home-pinned-sequence">
       <div class="home-pinned-heading"><h2>From Sketch<br>to Structure</h2></div>
-      <div class="home-sketch-layer home-sketch-layer-one" data-parallax="-70"><span class="home-placeholder sketch-placeholder-01"></span></div>
-      <div class="home-sketch-layer home-sketch-layer-two" data-parallax="-105"><span class="home-placeholder sketch-placeholder-02"></span></div>
-      <div class="home-sketch-layer home-sketch-layer-three" data-parallax="-58"><span class="home-placeholder sketch-placeholder-03"></span></div>
+      <div class="home-sketch-layer home-sketch-layer-one" data-parallax="-70"><img src="Assets/64 Dawn Parade/Impact-Design-Concept-Drawings-33333.jpg" alt="Architectural concept perspective one" width="4961" height="3508" loading="lazy" decoding="async"></div>
+      <div class="home-sketch-layer home-sketch-layer-two" data-parallax="-105"><img src="Assets/64 Dawn Parade/Impact-Design-Concept-Drawings-2.jpg" alt="Architectural concept perspective two" width="4961" height="3508" loading="lazy" decoding="async"></div>
+      <div class="home-sketch-layer home-sketch-layer-three" data-parallax="-58"><img src="Assets/64 Dawn Parade/Impact-Design-Concept-Drawings-3.jpg" alt="Architectural concept perspective three" width="4961" height="3508" loading="lazy" decoding="async"></div>
     </section>
 
     <section class="home-copy-section home-philosophy">
@@ -139,39 +146,65 @@
     </div>
   </div>
   <script>
-    // Preloader logic
-    // Always show preloader for 2 seconds, then fade out
+    // Keep the loader until the first desktop visuals are ready, with a safety timeout.
     document.body.style.overflow = 'hidden';
     window.addEventListener('DOMContentLoaded', function() {
-      setTimeout(function() {
+      const desktop = window.matchMedia('(min-width: 1100px)').matches;
+      const criticalVideo = document.getElementById(desktop ? 'homeHeroVideo' : 'bgVideo');
+      const criticalImage = desktop ? document.getElementById('homeArchitectureImage') : null;
+      const waitForVideo = (video) => new Promise((resolve) => {
+        if (!video || video.readyState >= 2) return resolve();
+        video.addEventListener('loadeddata', resolve, { once: true });
+        video.addEventListener('error', resolve, { once: true });
+      });
+      const waitForImage = (image) => new Promise((resolve) => {
+        if (!image || image.complete) return resolve();
+        image.addEventListener('load', resolve, { once: true });
+        image.addEventListener('error', resolve, { once: true });
+      });
+      const criticalReady = Promise.all([waitForVideo(criticalVideo), waitForImage(criticalImage)]);
+      const safetyTimeout = new Promise((resolve) => setTimeout(resolve, 5000));
+      const minimumDisplay = new Promise((resolve) => setTimeout(resolve, 1500));
+
+      Promise.all([minimumDisplay, Promise.race([criticalReady, safetyTimeout])]).then(function() {
         var pre = document.getElementById('preloader');
         pre.classList.add('hide');
         document.body.style.overflow = '';
         window.dispatchEvent(new Event('home:ready'));
         setTimeout(function(){ pre.style.display = 'none'; }, 900);
-      }, 1500);
+      });
     });
-    // Ensure background video keeps playing on mobile (some browsers auto-pause inline autoplay videos)
+    // Ensure both homepage videos keep playing when their responsive layout is active.
     (function(){
-      const v = document.getElementById('bgVideo');
-      if(!v) return;
-      function tryPlay(){
+      const videos = Array.from(document.querySelectorAll('[data-autoplay-video]'));
+      const desktop = window.matchMedia('(min-width: 1100px)');
+      if(!videos.length) return;
+      function isActive(v){
+        return v.id === 'homeHeroVideo' ? desktop.matches : !desktop.matches;
+      }
+      function tryPlay(v){
+        if(!isActive(v)) {
+          if(!v.paused) v.pause();
+          return;
+        }
         if(v.paused || v.readyState < 2){
           const p = v.play();
-          if(p && p.catch) p.catch(()=>{}); // ignore autoplay promise rejections
+          if(p && p.catch) p.catch(()=>{});
         }
       }
-      // Resume if unexpectedly paused before end
-      v.addEventListener('pause', ()=>{ if(!document.hidden && v.currentTime < (v.duration||1)-0.25) tryPlay(); });
-      // Standard looping safety (some iOS versions fire ended before loop restarts)
-      v.addEventListener('ended', ()=>{ v.currentTime = 0; tryPlay(); });
-      ['loadeddata','canplay','canplaythrough','visibilitychange'].forEach(evt => {
-        (evt==='visibilitychange'?document:v).addEventListener(evt, ()=>{ if(!document.hidden) tryPlay(); });
+      videos.forEach((v) => {
+        v.addEventListener('pause', ()=>{ if(!document.hidden && v.currentTime < (v.duration||1)-0.25) tryPlay(v); });
+        v.addEventListener('ended', ()=>{ v.currentTime = 0; tryPlay(v); });
+        ['loadeddata','canplay','canplaythrough'].forEach((eventName) => {
+          v.addEventListener(eventName, ()=>{ if(!document.hidden) tryPlay(v); });
+        });
+        tryPlay(v);
       });
-      // Periodic nudge (low frequency to save battery)
-      setInterval(()=>{ if(!document.hidden) tryPlay(); }, 5000);
-      // Initial kick (in case preloader delayed)
-      tryPlay();
+      document.addEventListener('visibilitychange', ()=>{
+        if(!document.hidden) videos.forEach(tryPlay);
+      });
+      desktop.addEventListener('change', ()=> videos.forEach(tryPlay));
+      setInterval(()=>{ if(!document.hidden) videos.forEach(tryPlay); }, 5000);
     })();
     (function(){
       const desktop = window.matchMedia('(min-width: 1100px)');
@@ -251,6 +284,7 @@
         window.addEventListener('wheel', onWheel, { passive: false });
         window.addEventListener('scroll', onNativeScroll, { passive: true });
         window.addEventListener('resize', measure);
+        sequence.querySelectorAll('img').forEach((image) => image.addEventListener('load', measure, { once: true }));
         raf = requestAnimationFrame(tick);
       }
 

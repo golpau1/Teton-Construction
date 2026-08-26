@@ -306,13 +306,6 @@ body.no-scroll { overflow: hidden; }
 		font-family: 'NType82', 'Helvetica Neue', Arial, sans-serif;
 	}
 
-	.home-placeholder {
-		display: block;
-		width: 100%;
-		height: 100%;
-		background: #d8d8d4;
-	}
-
 	[data-parallax] {
 		transform: translate3d(0, var(--parallax-y, 0px), 0);
 		will-change: transform;
@@ -325,10 +318,21 @@ body.no-scroll { overflow: hidden; }
 		overflow: hidden;
 	}
 
-	.home-hero-placeholder {
+	.home-hero-media {
 		height: calc(100% + 68px);
 		margin-top: -34px;
-		background: linear-gradient(145deg, #d5d5d0 0%, #bfc1bd 52%, #deded9 100%);
+		overflow: hidden;
+		background: #d5d5d0;
+	}
+
+	.home-hero-video,
+	.home-architecture-media img,
+	.home-project-image img,
+	.home-sketch-layer img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 
 	.home-statement {
@@ -358,10 +362,11 @@ body.no-scroll { overflow: hidden; }
 		overflow: hidden;
 	}
 
-	.home-architecture-placeholder {
+	.home-architecture-media {
 		height: calc(100% + 52px);
 		margin-top: -26px;
-		background: linear-gradient(120deg, #c5c7c4, #e3e3df 63%, #b9bbb7);
+		overflow: hidden;
+		background: #d8d8d4;
 	}
 
 	.home-copy-section {
@@ -456,10 +461,6 @@ body.no-scroll { overflow: hidden; }
 		overflow: hidden;
 	}
 
-	.project-placeholder-01 { background: #c9cac6; }
-	.project-placeholder-02 { background: #dededa; }
-	.project-placeholder-03 { background: #bfc1bd; }
-
 	.home-project-caption {
 		display: flex;
 		justify-content: space-between;
@@ -487,15 +488,13 @@ body.no-scroll { overflow: hidden; }
 	.home-sketch-layer {
 		position: absolute;
 		z-index: 1;
+		overflow: hidden;
+		background: #e0e0dc;
 	}
 
 	.home-sketch-layer-one { top: 28svh; right: 7vw; width: 31vw; height: 54svh; }
 	.home-sketch-layer-two { top: 105svh; left: 8vw; width: 38vw; height: 48svh; }
 	.home-sketch-layer-three { top: 176svh; right: 15vw; width: 29vw; height: 42svh; }
-	.sketch-placeholder-01 { background: #d6d6d2; }
-	.sketch-placeholder-02 { background: #c4c5c1; }
-	.sketch-placeholder-03 { background: #e0e0dc; }
-
 	.home-philosophy {
 		min-height: 100svh;
 		padding-top: 30svh;
