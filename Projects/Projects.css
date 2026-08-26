@@ -263,6 +263,15 @@ main.projects-grid {
     opacity: 0;
   }
 
+  .grid-project[data-project-index="1"] .grid-project-media img {
+    transform: scale(1.03);
+  }
+
+  .grid-project[data-project-index="1"] .grid-project-media:hover img,
+  .grid-project[data-project-index="1"] .grid-project-media:focus-visible img {
+    transform: scale(1.06);
+  }
+
   .grid-project-info {
     display: flex;
     align-items: baseline;
