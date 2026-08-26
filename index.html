@@ -56,7 +56,10 @@
     </section>
 
     <section class="home-statement home-intro-statement">
-      <h1 data-parallax="-42">Systematic Clarity<br>&amp; Creativity</h1>
+      <h1 class="home-intro-title" data-parallax="-42">
+        <span class="home-intro-line-mask"><span class="home-intro-line">Systematic Clarity</span></span>
+        <span class="home-intro-line-mask"><span class="home-intro-line">&amp; Creativity</span></span>
+      </h1>
     </section>
 
     <section class="home-architecture-frame">
@@ -205,6 +208,20 @@
       });
       desktop.addEventListener('change', ()=> videos.forEach(tryPlay));
       setInterval(()=>{ if(!document.hidden) videos.forEach(tryPlay); }, 5000);
+    })();
+    (function(){
+      const title = document.querySelector('.home-intro-title');
+      if (!title) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        title.classList.add('is-revealed');
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        if (!entries[0].isIntersecting) return;
+        title.classList.add('is-revealed');
+        observer.disconnect();
+      }, { threshold: .24, rootMargin: '0px 0px -8% 0px' });
+      observer.observe(title);
     })();
     (function(){
       const header = document.querySelector('.site-header');
