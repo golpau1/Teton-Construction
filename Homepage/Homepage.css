@@ -11,7 +11,7 @@ a{color:inherit}
 #preloader.hide{opacity:0;pointer-events:none}
 #preloader[hidden]{display:none}
 .home-page .site-header{display:none}
-.home-page .site-header::after{background:rgba(255,255,255,.15)}
+.home-page .site-header::after{display:none}
 .home-page .site-header .main-nav a{color:rgba(255,255,255,.72)}
 .home-page .site-header .main-nav a + a::before{color:rgba(255,255,255,.62)}
 .home-page .site-header .main-nav a:hover,.home-page .site-header .main-nav a:focus-visible,.home-page .site-header .main-nav .active{color:#fff}
