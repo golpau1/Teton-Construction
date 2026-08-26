@@ -67,14 +67,28 @@
     <section class="editorial-gallery" aria-label="The Violet image gallery">
       <aside class="gallery-sidebar"><h2>Violet</h2></aside>
       <div class="gallery-images">
-        <div class="portrait-pair">
-          <figure><img src="../Assets/The Violet/izyosmidostwzivhojw5.webp" alt="The Violet exterior angle two" loading="lazy" decoding="async"></figure>
-          <figure><img src="../Assets/The Violet/syxybpulzpa9jz2qmp53.webp" alt="The Violet exterior angle three" loading="lazy" decoding="async"></figure>
+        <div class="orientation-gallery">
+          <figure><img src="../Assets/The Violet/izyosmidostwzivhojw5.webp" alt="The Violet exterior angle two" width="4747" height="2656" loading="lazy" decoding="async"></figure>
+          <figure><img src="../Assets/The Violet/syxybpulzpa9jz2qmp53.webp" alt="The Violet exterior angle three" width="4783" height="2632" loading="lazy" decoding="async"></figure>
         </div>
       </div>
     </section>
   </main>
   <script>
+  (function(){
+    const galleryImages = document.querySelectorAll('.orientation-gallery img');
+    galleryImages.forEach((image) => {
+      const setOrientation = () => {
+        const width = image.naturalWidth || Number(image.getAttribute('width'));
+        const height = image.naturalHeight || Number(image.getAttribute('height'));
+        const figure = image.closest('figure');
+        figure.classList.toggle('is-portrait', height > width);
+        figure.classList.toggle('is-landscape', width >= height);
+      };
+      setOrientation();
+      if (!image.complete) image.addEventListener('load', setOrientation, { once: true });
+    });
+  })();
   (function(){const btn=document.querySelector('.menu-toggle'),drawer=document.getElementById('mobileDrawer'),overlay=document.querySelector('.drawer-overlay'),closeBtn=document.querySelector('.drawer-close');const focusable='a,button';let last;function open(){last=document.activeElement;drawer.classList.add('open');overlay.hidden=false;document.body.classList.add('no-scroll');btn.setAttribute('aria-expanded','true');drawer.setAttribute('aria-hidden','false');const f=drawer.querySelector(focusable);f&&f.focus();trap(true);}function close(){drawer.classList.remove('open');overlay.hidden=true;document.body.classList.remove('no-scroll');btn.setAttribute('aria-expanded','false');drawer.setAttribute('aria-hidden','true');trap(false);last&&last.focus();}function toggle(){drawer.classList.contains('open')?close():open();}btn.addEventListener('click',toggle);overlay.addEventListener('click',close);closeBtn&&closeBtn.addEventListener('click',close);window.addEventListener('keydown',e=>{if(e.key==='Escape'&&drawer.classList.contains('open'))close();});function trap(en){if(!en){document.removeEventListener('focus',fh,true);return;}document.addEventListener('focus',fh,true);}function fh(e){if(!drawer.classList.contains('open'))return;if(!drawer.contains(e.target)&&e.target!==btn){const f=drawer.querySelector(focusable);f&&f.focus();}}})();
   </script>
 </body>

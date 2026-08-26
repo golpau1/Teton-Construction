@@ -210,22 +210,21 @@ html { scroll-behavior: smooth; }
   letter-spacing: -.04em;
 }
 .gallery-images { min-width: 0; }
-.portrait-pair {
+.orientation-gallery {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(18px, 2vw, 34px);
 }
-.portrait-pair figure {
-  aspect-ratio: 3 / 4;
+.orientation-gallery figure {
+  grid-column: 1 / -1;
   margin: 0;
-  overflow: hidden;
-  background: #f2f2f2;
 }
-.portrait-pair img {
+.orientation-gallery figure.is-portrait { grid-column: auto; }
+.orientation-gallery figure.is-landscape { grid-column: 1 / -1; }
+.orientation-gallery img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  height: auto;
+  object-fit: contain;
 }
 
 @media (max-width: 860px) {
@@ -255,9 +254,10 @@ html { scroll-behavior: smooth; }
     padding: 0;
     font-size: 28px;
   }
-  .portrait-pair { grid-template-columns: 1fr; gap: 22px; }
-  .portrait-pair figure { aspect-ratio: auto; }
-  .portrait-pair img { height: auto; object-fit: contain; }
+  .orientation-gallery { grid-template-columns: 1fr; gap: 22px; }
+  .orientation-gallery figure,
+  .orientation-gallery figure.is-portrait,
+  .orientation-gallery figure.is-landscape { grid-column: 1; }
 }
 
 @media (max-width: 700px) {
