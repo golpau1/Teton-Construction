@@ -366,11 +366,11 @@ body.no-scroll { overflow: hidden; }
 
 	.home-hero-wordmark {
 		position: absolute;
-		left: 32px;
-		bottom: 36px;
+		left: clamp(24px, 1.55vw, 30px);
+		bottom: clamp(26px, 1.8vw, 35px);
 		z-index: 2;
 		display: block;
-		width: clamp(320px, 30vw, 620px);
+		width: clamp(360px, 34vw, 660px);
 		height: auto;
 		opacity: 0;
 		transform: translate3d(0, 26px, 0);
