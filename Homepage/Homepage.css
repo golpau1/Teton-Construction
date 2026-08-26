@@ -34,6 +34,7 @@ body, html {
 	overflow: hidden;
 }
 body.no-scroll { overflow: hidden; }
+.home-desktop-sequence { display: none; }
 .video-bg {
 	position: fixed;
 	top: 0;
@@ -279,44 +280,247 @@ body.no-scroll { overflow: hidden; }
 /* Show desktop nav; hide hamburger, drawer on larger screens */
 @media (min-width: 761px) {
 	.menu-toggle, .mobile-drawer, .drawer-overlay { display: none; }
+}
 
-	html.home-smooth-scroll,
-	html.home-smooth-scroll body {
+@media (min-width: 1100px) {
+	html,
+	body {
 		height: auto;
 		overflow-x: hidden;
 		overflow-y: auto;
 	}
 
-	.home-smooth-scroll .content {
+	.video-bg,
+	.video-overlay,
+	.video-fallback,
+	.content { display: none; }
+
+	.home-desktop-sequence {
 		display: block;
-		height: 210svh;
-		min-height: 0;
-		padding: 0 1rem;
-	}
-
-	.home-smooth-scroll .hero-stack {
-		position: sticky;
-		top: 58px;
-		z-index: 2;
+		position: relative;
+		z-index: 1;
 		width: 100%;
-		height: calc(100svh - 58px);
-		max-width: none;
-		margin: 0 auto;
-		display: flex;
-		justify-content: center;
-		transform: translate3d(0, var(--home-hero-y, 0px), 0);
-		opacity: var(--home-hero-opacity, 1);
-		will-change: transform, opacity;
+		overflow: clip;
+		background: #fff;
+		color: #111;
+		font-family: 'NType82', 'Helvetica Neue', Arial, sans-serif;
 	}
 
-	.home-smooth-scroll .video-bg {
-		transform: translate3d(0, var(--home-video-y, 0px), 0) scale(var(--home-video-scale, 1));
+	.home-placeholder {
+		display: block;
+		width: 100%;
+		height: 100%;
+		background: #d8d8d4;
+	}
+
+	[data-parallax] {
+		transform: translate3d(0, var(--parallax-y, 0px), 0);
 		will-change: transform;
 	}
 
-	.home-smooth-scroll .video-overlay {
-		opacity: var(--home-overlay-opacity, 1);
-		will-change: opacity;
+	.home-opening {
+		height: calc(100svh - 58px);
+		padding: 42px 30px 70px;
+		box-sizing: border-box;
+		overflow: hidden;
+	}
+
+	.home-hero-placeholder {
+		height: calc(100% + 68px);
+		margin-top: -34px;
+		background: linear-gradient(145deg, #d5d5d0 0%, #bfc1bd 52%, #deded9 100%);
+	}
+
+	.home-statement {
+		position: relative;
+		z-index: 2;
+		min-height: 120svh;
+		margin-top: -8svh;
+		padding: 30svh 28px 16svh;
+		box-sizing: border-box;
+		background: #fff;
+	}
+
+	.home-statement h1,
+	.home-services h2,
+	.home-pinned-heading h2 {
+		margin: 0;
+		font-size: clamp(86px, 11.5vw, 220px);
+		font-weight: 400;
+		line-height: .84;
+		letter-spacing: -.055em;
+	}
+
+	.home-architecture-frame {
+		height: 112svh;
+		padding: 6svh 30px 16svh;
+		box-sizing: border-box;
+		overflow: hidden;
+	}
+
+	.home-architecture-placeholder {
+		height: calc(100% + 52px);
+		margin-top: -26px;
+		background: linear-gradient(120deg, #c5c7c4, #e3e3df 63%, #b9bbb7);
+	}
+
+	.home-copy-section {
+		min-height: 88svh;
+		padding: 20svh 30px;
+		box-sizing: border-box;
+	}
+
+	.home-copy-section p {
+		width: min(620px, 48vw);
+		margin: 0 0 38px auto;
+		font-size: 17px;
+		font-weight: 400;
+		line-height: 1.55;
+	}
+
+	.home-copy-section .home-copy-lead {
+		font-size: clamp(26px, 2.4vw, 46px);
+		line-height: 1.12;
+		letter-spacing: -.025em;
+	}
+
+	.home-services {
+		min-height: 190svh;
+		padding: 18svh 30px 20svh;
+		box-sizing: border-box;
+	}
+
+	.home-services-heading {
+		position: sticky;
+		top: 20svh;
+		margin-bottom: 38svh;
+	}
+
+	.home-services-list {
+		width: min(600px, 44vw);
+		margin: 0 0 0 auto;
+		padding: 0;
+		list-style: none;
+		font-size: 15px;
+	}
+
+	.home-services-list li {
+		padding: 18px 0 16px;
+		border-bottom: 1px solid rgba(0, 0, 0, .16);
+	}
+
+	.home-selected-projects {
+		padding: 16svh 30px 24svh;
+	}
+
+	.home-section-intro {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		margin-bottom: 18svh;
+	}
+
+	.home-section-intro h2,
+	.home-contact-end h2 {
+		margin: 0;
+		font-size: clamp(44px, 5.6vw, 106px);
+		font-weight: 400;
+		line-height: .95;
+		letter-spacing: -.04em;
+	}
+
+	.home-section-intro p {
+		width: 260px;
+		margin: 0;
+		font-size: 14px;
+		line-height: 1.4;
+	}
+
+	.home-featured-projects {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		column-gap: clamp(48px, 8vw, 150px);
+		row-gap: 24svh;
+	}
+
+	.home-featured-project {
+		align-self: start;
+	}
+
+	.home-featured-project-offset { margin-top: 18svh; }
+
+	.home-project-image {
+		display: block;
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		overflow: hidden;
+	}
+
+	.project-placeholder-01 { background: #c9cac6; }
+	.project-placeholder-02 { background: #dededa; }
+	.project-placeholder-03 { background: #bfc1bd; }
+
+	.home-project-caption {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 20px;
+		margin-top: 12px;
+		font-size: 14px;
+		line-height: 1.2;
+	}
+
+	.home-pinned-sequence {
+		position: relative;
+		min-height: 250svh;
+		padding: 0 30px;
+		box-sizing: border-box;
+	}
+
+	.home-pinned-heading {
+		position: sticky;
+		top: 22svh;
+		z-index: 3;
+		pointer-events: none;
+	}
+
+	.home-sketch-layer {
+		position: absolute;
+		z-index: 1;
+	}
+
+	.home-sketch-layer-one { top: 28svh; right: 7vw; width: 31vw; height: 54svh; }
+	.home-sketch-layer-two { top: 105svh; left: 8vw; width: 38vw; height: 48svh; }
+	.home-sketch-layer-three { top: 176svh; right: 15vw; width: 29vw; height: 42svh; }
+	.sketch-placeholder-01 { background: #d6d6d2; }
+	.sketch-placeholder-02 { background: #c4c5c1; }
+	.sketch-placeholder-03 { background: #e0e0dc; }
+
+	.home-philosophy {
+		min-height: 100svh;
+		padding-top: 30svh;
+	}
+
+	.home-contact-end {
+		min-height: 78svh;
+		padding: 18svh 30px 34px;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.home-contact-meta {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		font-size: 14px;
+	}
+
+	.home-contact-meta a {
+		color: inherit;
+		text-decoration: none;
+		border-bottom: 1px solid currentColor;
 	}
 }
 @media (min-width:1400px) { .hero-logo { max-width:700px; } }
@@ -334,8 +538,7 @@ body.no-scroll { overflow: hidden; }
 		animation: none;
 	}
 
-	.home-smooth-scroll .hero-stack,
-	.home-smooth-scroll .video-bg {
+	[data-parallax] {
 		transform: none;
 		will-change: auto;
 	}

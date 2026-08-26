@@ -45,6 +45,83 @@
       </nav>
     </div>
   </header>
+  <main class="home-desktop-sequence">
+    <section class="home-opening" aria-label="TETON introduction">
+      <div class="home-placeholder home-hero-placeholder" data-parallax="-34" role="img" aria-label="Architectural hero image placeholder"></div>
+    </section>
+
+    <section class="home-statement home-intro-statement">
+      <h1 data-parallax="-42">Systematic Clarity<br>&amp; Creativity</h1>
+    </section>
+
+    <section class="home-architecture-frame">
+      <div class="home-placeholder home-architecture-placeholder" data-parallax="-26" role="img" aria-label="Architectural image placeholder"></div>
+    </section>
+
+    <section class="home-copy-section home-studio-copy">
+      <p class="home-copy-lead">TETON Construction is a design-led construction company focused on considered residential architecture and carefully executed building.</p>
+      <p>From early planning through construction and completion, we work closely across every stage of the process to create spaces that are clear, functional and enduring.</p>
+    </section>
+
+    <section class="home-services">
+      <div class="home-services-heading">
+        <h2>From Concept<br>to Construction</h2>
+      </div>
+      <ul class="home-services-list" aria-label="Services">
+        <li>Residential Construction</li>
+        <li>Design Coordination</li>
+        <li>Project Management</li>
+        <li>Development</li>
+        <li>Construction Delivery</li>
+      </ul>
+    </section>
+
+    <section class="home-selected-projects">
+      <header class="home-section-intro">
+        <h2>Selected Projects</h2>
+        <p>A selection of current and completed TETON projects.</p>
+      </header>
+      <div class="home-featured-projects">
+        <article class="home-featured-project" data-parallax="-18">
+          <a href="The Violet/The Violet.html" class="home-project-image" aria-label="View The Violet">
+            <span class="home-placeholder project-placeholder-01"></span>
+          </a>
+          <div class="home-project-caption"><span>The Violet</span><span>Burleigh Heads</span></div>
+        </article>
+        <article class="home-featured-project home-featured-project-offset" data-parallax="-28">
+          <a href="85 Mountain View/85 Mountain View.html" class="home-project-image" aria-label="View 85 Mountain View">
+            <span class="home-placeholder project-placeholder-02"></span>
+          </a>
+          <div class="home-project-caption"><span>85 Mountain View</span><span>Miami</span></div>
+        </article>
+        <article class="home-featured-project" data-parallax="-18">
+          <a href="64 Dawn Parade/64 Dawn Parade.html" class="home-project-image" aria-label="View 64 Dawn Parade">
+            <span class="home-placeholder project-placeholder-03"></span>
+          </a>
+          <div class="home-project-caption"><span>64 Dawn Parade</span><span>Mermaid Waters</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="home-pinned-sequence">
+      <div class="home-pinned-heading"><h2>From Sketch<br>to Structure</h2></div>
+      <div class="home-sketch-layer home-sketch-layer-one" data-parallax="-70"><span class="home-placeholder sketch-placeholder-01"></span></div>
+      <div class="home-sketch-layer home-sketch-layer-two" data-parallax="-105"><span class="home-placeholder sketch-placeholder-02"></span></div>
+      <div class="home-sketch-layer home-sketch-layer-three" data-parallax="-58"><span class="home-placeholder sketch-placeholder-03"></span></div>
+    </section>
+
+    <section class="home-copy-section home-philosophy">
+      <p class="home-copy-lead">Every project begins with a clear understanding of site, purpose and material. Our role is to carry that clarity through design coordination, construction and completion.</p>
+    </section>
+
+    <section class="home-contact-end">
+      <h2>Start a Project</h2>
+      <div class="home-contact-meta">
+        <span>Gold Coast, Australia</span>
+        <a href="Contact/Contact.html">Contact</a>
+      </div>
+    </section>
+  </main>
   <div class="content">
     <div class="hero-stack">
       <div class="hero-brand">
@@ -97,17 +174,18 @@
       tryPlay();
     })();
     (function(){
-      const desktop = window.matchMedia('(min-width: 761px)');
+      const desktop = window.matchMedia('(min-width: 1100px)');
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       const root = document.documentElement;
-      const hero = document.querySelector('.hero-stack');
-      const video = document.querySelector('.video-bg');
-      if (!hero || !video) return;
+      const sequence = document.querySelector('.home-desktop-sequence');
+      const movingElements = Array.from(document.querySelectorAll('[data-parallax]'));
+      if (!sequence) return;
 
       let current = window.scrollY;
       let target = current;
       let enabled = false;
       let raf = 0;
+      let measurements = [];
 
       const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
@@ -115,14 +193,25 @@
         return Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
       }
 
+      function measure() {
+        measurements = movingElements.map((element) => {
+          element.style.setProperty('--parallax-y', '0px');
+          const rect = element.getBoundingClientRect();
+          return {
+            element,
+            centre: rect.top + window.scrollY + rect.height / 2,
+            distance: Number(element.dataset.parallax) || 0
+          };
+        });
+      }
+
       function render() {
-        const progress = maxScroll() ? clamp(current / maxScroll(), 0, 1) : 0;
-        const exitProgress = clamp((progress - .48) / .52, 0, 1);
-        root.style.setProperty('--home-hero-y', `${progress * window.innerHeight * -.58}px`);
-        root.style.setProperty('--home-hero-opacity', String(1 - exitProgress * .82));
-        root.style.setProperty('--home-video-y', `${progress * -36}px`);
-        root.style.setProperty('--home-video-scale', String(1.015 + progress * .025));
-        root.style.setProperty('--home-overlay-opacity', String(1 - progress * .2));
+        const viewportCentre = current + window.innerHeight / 2;
+        const influence = window.innerHeight * 1.15;
+        measurements.forEach(({ element, centre, distance }) => {
+          const progress = clamp((viewportCentre - centre) / influence, -1, 1);
+          element.style.setProperty('--parallax-y', `${progress * distance}px`);
+        });
       }
 
       function tick() {
@@ -156,9 +245,12 @@
         enabled = true;
         root.classList.add('home-smooth-scroll');
         current = target = window.scrollY;
+        measure();
         render();
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
         window.addEventListener('wheel', onWheel, { passive: false });
         window.addEventListener('scroll', onNativeScroll, { passive: true });
+        window.addEventListener('resize', measure);
         raf = requestAnimationFrame(tick);
       }
 
@@ -168,12 +260,9 @@
         cancelAnimationFrame(raf);
         window.removeEventListener('wheel', onWheel);
         window.removeEventListener('scroll', onNativeScroll);
+        window.removeEventListener('resize', measure);
         root.classList.remove('home-smooth-scroll');
-        root.style.removeProperty('--home-hero-y');
-        root.style.removeProperty('--home-hero-opacity');
-        root.style.removeProperty('--home-video-y');
-        root.style.removeProperty('--home-video-scale');
-        root.style.removeProperty('--home-overlay-opacity');
+        movingElements.forEach((element) => element.style.removeProperty('--parallax-y'));
       }
 
       function sync() {
