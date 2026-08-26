@@ -6,9 +6,11 @@
   <title>Teton Construction</title>
   <link rel="stylesheet" href="Homepage/Homepage.css">
   <link rel="stylesheet" href="Assets/header.css">
+  <link rel="stylesheet" href="Assets/preloader.css">
+  <script src="Assets/preloader.js" defer></script>
 </head>
-<body class="home-page">
-  <div id="preloader"><img src="Assets/teton-gif.gif" alt="Loading"></div>
+<body class="home-page site-loading">
+  <div class="site-preloader" role="status" aria-label="Loading page"><img src="Assets/teton-gif.gif" alt="Teton Construction loading"></div>
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="index.html" aria-label="Teton Construction home"><img src="Assets/teton-header-white.png" alt="Teton Construction" class="brand-logo brand-logo--light"></a>
@@ -29,22 +31,8 @@
     </section>
   </main>
   <script>
-    document.body.style.overflow = 'hidden';
-    window.addEventListener('DOMContentLoaded', function() {
-      const video = document.getElementById('landingVideo');
-      const mediaReady = new Promise((resolve) => {
-        if (!video || video.readyState >= 2) return resolve();
-        video.addEventListener('loadeddata', resolve, { once: true });
-        video.addEventListener('error', resolve, { once: true });
-      });
-      const minimumDisplay = new Promise((resolve) => setTimeout(resolve, 1100));
-      const safetyTimeout = new Promise((resolve) => setTimeout(resolve, 5000));
-      Promise.all([minimumDisplay, Promise.race([mediaReady, safetyTimeout])]).then(function() {
-        const preloader = document.getElementById('preloader');
-        preloader.classList.add('hide');
-        document.body.classList.add('landing-ready');
-        setTimeout(function(){ preloader.hidden = true; }, 700);
-      });
+    window.addEventListener('sitepreloader:complete', function() {
+      document.body.classList.add('landing-ready');
     });
     (function(){
       const video = document.getElementById('landingVideo');

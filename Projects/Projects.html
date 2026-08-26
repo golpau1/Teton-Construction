@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="Projects.css">
     <link rel="stylesheet" href="Projects.css" media="only screen and (max-width: 700px)">
     <link rel="stylesheet" href="../Assets/header.css">
+    <link rel="stylesheet" href="../Assets/preloader.css">
+    <script src="../Assets/preloader.js" defer></script>
 </head>
-<body class="projects-loading">
+<body class="site-loading">
+    <div class="site-preloader" role="status" aria-label="Loading page"><img src="../Assets/teton-gif.gif" alt="Teton Construction loading"></div>
     <!-- Mobile burger menu (only visible on small screens) -->
     <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
         <span></span>
@@ -36,10 +39,6 @@
             </nav>
         </div>
     </header>
-
-    <div class="projects-loader" role="status" aria-label="Loading projects">
-        <img src="../Assets/teton-gif.gif" alt="Teton Construction loading">
-    </div>
 
     <main class="desktop-grid-view projects-view" aria-label="Projects grid"></main>
 
@@ -148,7 +147,6 @@
         const desktopQuery = window.matchMedia('(min-width: 1100px)');
         const grid = document.querySelector('.desktop-grid-view');
         const archive = document.querySelector('.desktop-project-index');
-        const loader = document.querySelector('.projects-loader');
         const rows = Array.from(archive.querySelectorAll('.archive-row'));
         const preview = archive.querySelector('.archive-preview img');
         const switches = Array.from(document.querySelectorAll('.view-switch'));
@@ -302,26 +300,18 @@
                 desktopLoadStarted = false;
                 return;
             }
-            loader.classList.add('is-hidden');
-            window.setTimeout(() => {
-                loader.hidden = true;
-                loader.setAttribute('aria-hidden', 'true');
-                document.body.classList.remove('projects-loading');
-                playGridEntrance();
-            }, 460);
+            if (window.sitePreloaderFinished) await window.sitePreloaderFinished;
+            playGridEntrance();
         }
 
         switches.forEach((button) => button.addEventListener('click', () => setView(button.dataset.view)));
         if (desktopQuery.matches) {
             startDesktopExperience();
-        } else {
-            document.body.classList.remove('projects-loading');
         }
         desktopQuery.addEventListener('change', (event) => {
             if (event.matches) {
                 startDesktopExperience();
             } else {
-                document.body.classList.remove('projects-loading');
                 document.body.classList.remove('projects-grid-active');
             }
         });
