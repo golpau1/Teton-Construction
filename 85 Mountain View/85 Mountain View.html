@@ -43,7 +43,7 @@
   <main class="mountain-editorial">
     <section class="mountain-opening" aria-labelledby="mountain-title">
       <figure class="mountain-figure opening-figure">
-        <img src="../Assets/85 Mountain View/85-mountain-view-01.jpg" alt="85 Mountain View architectural render one" width="4611" height="3047" fetchpriority="high" decoding="async">
+        <img src="../Assets/85 Mountain View/85-mountain-view-02.jpg" alt="85 Mountain View architectural render one" width="4611" height="3047" fetchpriority="high" decoding="async">
         <figcaption>Fig. 01</figcaption>
       </figure>
 
@@ -62,7 +62,7 @@
     <section class="mountain-sequence" aria-label="85 Mountain View image gallery">
       <div class="mountain-gallery-grid">
         <div class="mountain-gallery-row">
-          <figure><img src="../Assets/85 Mountain View/85-mountain-view-02.jpg" alt="85 Mountain View architectural render two" width="4611" height="3047" loading="lazy" decoding="async"><figcaption>Fig. 02</figcaption></figure>
+          <figure><img src="../Assets/85 Mountain View/85-mountain-view-01.jpg" alt="85 Mountain View architectural render two" width="4611" height="3047" loading="lazy" decoding="async"><figcaption>Fig. 02</figcaption></figure>
           <figure><img src="../Assets/85 Mountain View/85-mountain-view-03.jpg" alt="85 Mountain View architectural render three" width="4611" height="3047" loading="lazy" decoding="async"><figcaption>Fig. 03</figcaption></figure>
         </div>
         <figure class="mountain-gallery-wide"><img src="../Assets/85 Mountain View/85-mountain-view-04.jpg" alt="85 Mountain View architectural render four" width="4611" height="3047" loading="lazy" decoding="async"><figcaption>Fig. 04</figcaption></figure>
@@ -72,6 +72,19 @@
         </div>
       </div>
     </section>
+
+    <nav class="project-nav" aria-label="Project">
+      <div class="project-nav-inner">
+        <a class="project-nav-back" href="../Projects/Projects.html#projects">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5l-7 7 7 7"/><path d="M4.5 12h15"/></svg>
+          <span>Back to Projects</span>
+        </a>
+        <a class="project-nav-next" rel="next" href="../64 Dawn Parade/64 Dawn Parade.html" aria-label="Next project — 64 Dawn Parade">
+          <span>Next Project</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </nav>
   </main>
   <script>
   (function(){const btn=document.querySelector('.menu-toggle'),drawer=document.getElementById('mobileDrawer'),overlay=document.querySelector('.drawer-overlay'),closeBtn=document.querySelector('.drawer-close');const focusable='a,button';let last;function open(){last=document.activeElement;drawer.classList.add('open');overlay.hidden=false;document.body.classList.add('no-scroll');btn.setAttribute('aria-expanded','true');drawer.setAttribute('aria-hidden','false');const f=drawer.querySelector(focusable);f&&f.focus();trap(true);}function close(){drawer.classList.remove('open');overlay.hidden=true;document.body.classList.remove('no-scroll');btn.setAttribute('aria-expanded','false');drawer.setAttribute('aria-hidden','true');trap(false);last&&last.focus();}function toggle(){drawer.classList.contains('open')?close():open();}btn.addEventListener('click',toggle);overlay.addEventListener('click',close);closeBtn&&closeBtn.addEventListener('click',close);window.addEventListener('keydown',e=>{if(e.key==='Escape'&&drawer.classList.contains('open'))close();});function trap(en){if(!en){document.removeEventListener('focus',fh,true);return;}document.addEventListener('focus',fh,true);}function fh(e){if(!drawer.classList.contains('open'))return;if(!drawer.contains(e.target)&&e.target!==btn){const f=drawer.querySelector(focusable);f&&f.focus();}}})();
