@@ -40,38 +40,6 @@
     </div>
   </header>
 
-  <nav class="project-nav" aria-label="Project">
-    <div class="project-nav-inner">
-      <a class="project-nav-back" href="../Projects/Projects.html#projects">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5l-7 7 7 7"/><path d="M4.5 12h15"/></svg>
-        <span>Back to Projects</span>
-      </a>
-
-      <div class="project-switch">
-        <span class="project-switch-label">Project</span>
-        <div class="project-switch-controls">
-          <a class="project-switch-arrow" rel="prev" href="../64 Dawn Parade/64 Dawn Parade.html" aria-label="Previous project — 64 Dawn Parade">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
-          </a>
-          <details class="project-switch-menu">
-            <summary>
-              <span>The Violet</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-            </summary>
-            <div class="project-switch-panel">
-              <a href="../The Violet/The Violet.html" aria-current="page">The Violet</a>
-              <a href="../85 Mountain View/85 Mountain View.html">85 Mountain View</a>
-              <a href="../64 Dawn Parade/64 Dawn Parade.html">64 Dawn Parade</a>
-            </div>
-          </details>
-          <a class="project-switch-arrow" rel="next" href="../85 Mountain View/85 Mountain View.html" aria-label="Next project — 85 Mountain View">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </nav>
-
   <main class="violet-editorial">
     <section class="violet-opening" aria-labelledby="violet-title">
       <figure class="editorial-figure opening-figure"><img src="../Assets/The Violet/violet-living-room.jpg" alt="The Violet living room" width="1600" height="1069" fetchpriority="high" decoding="async"><figcaption>Fig. 07</figcaption></figure>
@@ -122,6 +90,19 @@
         </div>
       </section>
     </section>
+
+    <nav class="project-nav" aria-label="Project">
+      <div class="project-nav-inner">
+        <a class="project-nav-back" href="../Projects/Projects.html#projects">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5l-7 7 7 7"/><path d="M4.5 12h15"/></svg>
+          <span>Back to Projects</span>
+        </a>
+        <a class="project-nav-next" rel="next" href="../85 Mountain View/85 Mountain View.html" aria-label="Next project — 85 Mountain View">
+          <span>Next Project</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </nav>
   </main>
   <script>
   (function(){
@@ -137,12 +118,6 @@
       setOrientation();
       if (!image.complete) image.addEventListener('load', setOrientation, { once: true });
     });
-  })();
-  (function(){
-    const menu=document.querySelector('.project-switch-menu');
-    if(!menu)return;
-    document.addEventListener('click',e=>{if(menu.open&&!menu.contains(e.target))menu.open=false;});
-    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.open){menu.open=false;menu.querySelector('summary').focus();}});
   })();
   (function(){const btn=document.querySelector('.menu-toggle'),drawer=document.getElementById('mobileDrawer'),overlay=document.querySelector('.drawer-overlay'),closeBtn=document.querySelector('.drawer-close');const focusable='a,button';let last;function open(){last=document.activeElement;drawer.classList.add('open');overlay.hidden=false;document.body.classList.add('no-scroll');btn.setAttribute('aria-expanded','true');drawer.setAttribute('aria-hidden','false');const f=drawer.querySelector(focusable);f&&f.focus();trap(true);}function close(){drawer.classList.remove('open');overlay.hidden=true;document.body.classList.remove('no-scroll');btn.setAttribute('aria-expanded','false');drawer.setAttribute('aria-hidden','true');trap(false);last&&last.focus();}function toggle(){drawer.classList.contains('open')?close():open();}btn.addEventListener('click',toggle);overlay.addEventListener('click',close);closeBtn&&closeBtn.addEventListener('click',close);window.addEventListener('keydown',e=>{if(e.key==='Escape'&&drawer.classList.contains('open'))close();});function trap(en){if(!en){document.removeEventListener('focus',fh,true);return;}document.addEventListener('focus',fh,true);}function fh(e){if(!drawer.classList.contains('open'))return;if(!drawer.contains(e.target)&&e.target!==btn){const f=drawer.querySelector(focusable);f&&f.focus();}}})();
   </script>
