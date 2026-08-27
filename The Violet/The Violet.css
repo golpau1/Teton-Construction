@@ -311,6 +311,15 @@ html { scroll-behavior: smooth; }
   font-weight: 800;
   white-space: nowrap;
 }
+.editorial-wordmark {
+  line-height: 0;
+}
+.editorial-wordmark img {
+  display: block;
+  width: clamp(146px, 10.5vw, 185px);
+  height: auto;
+  max-width: 100%;
+}
 .editorial-location {
   margin: 0 0 clamp(24px, 2.4vw, 34px);
   color: rgba(32, 32, 30, .56);
@@ -452,6 +461,7 @@ html { scroll-behavior: smooth; }
   .violet-editorial { padding: 68px 0 94px; }
   .editorial-intro { width: calc(100% - 40px); margin-bottom: 68px; }
   .editorial-intro h1 { font-size: 26px; }
+  .editorial-wordmark img { width: 165px; }
   .editorial-location { margin-bottom: 22px; font-size: 15px; }
   .editorial-lead { margin-top: 22px; font-size: 13px; }
   .editorial-specs { margin-top: 0; }
