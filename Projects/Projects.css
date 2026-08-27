@@ -1065,6 +1065,42 @@ main.projects-grid {
   }
 }
 
+/* Swap right-aligned location for Visit without changing the caption geometry. */
+@media (max-width: 1099px) {
+  .project-card-details {
+    display: grid;
+    flex: 0 0 auto;
+    justify-items: end;
+    align-items: baseline;
+  }
+
+  .project-card-details .project-location,
+  .project-card-details .project-card-visit {
+    position: static;
+    inset: auto;
+    grid-area: 1 / 1;
+    display: block;
+    color: #777;
+    font-family: 'NType82', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.3;
+    text-align: right;
+    text-shadow: none;
+    transform: none;
+    pointer-events: none;
+    transition: opacity 180ms ease;
+  }
+
+  .project-card-details .project-location { opacity: 1; }
+  .project-card-details .project-card-visit { opacity: 0; }
+
+  .projects-grid > div:hover .project-location,
+  .projects-grid > div:focus-within .project-location { opacity: 0; }
+
+  .projects-grid > div:hover .project-card-visit,
+  .projects-grid > div:focus-within .project-card-visit { opacity: 1; }
+}
+
 @media (min-width: 1100px) {
   .desktop-grid-view.is-active {
     height: calc(100svh - 58px);
@@ -1202,23 +1238,29 @@ main.projects-grid {
   }
 
   .grid-project-details { min-height: 0; justify-items: end; }
-  .grid-project-meta { display: block; text-align: right; }
+  .grid-project-meta,
   .grid-project-visit {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    display: grid;
-    place-items: center;
-    color: #fff;
-    text-shadow: 0 1px 8px rgba(0, 0, 0, .35);
-    opacity: 0;
-    transform: translateY(4px);
+    position: static;
+    inset: auto;
+    grid-area: 1 / 1;
+    display: block;
+    justify-self: end;
+    color: #777;
+    font-size: 12px;
+    line-height: 1.3;
+    text-align: right;
+    text-shadow: none;
+    transform: none;
     pointer-events: none;
+    transition: opacity 180ms ease;
   }
 
+  .grid-project-meta { opacity: 1; }
+  .grid-project-visit { opacity: 0; }
+  .grid-project.is-hovered .grid-project-meta { opacity: 0; transform: none; }
   .grid-project.is-hovered .grid-project-visit {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
     pointer-events: none;
   }
 }

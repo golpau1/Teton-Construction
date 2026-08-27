@@ -86,36 +86,33 @@
             <a href="../The Violet/The Violet.html" style="display:block;">
                 <div class="project-card">
                     <img src="../Assets/The Violet/ij0rtgarliz0srxjf68w.webp" alt="The Violet">
-                    <span class="project-card-visit">Visit</span>
                 </div>
             </a>
             <div class="card-label">
                 <span class="project-title">The Violet</span>
-                <span class="project-location">Burleigh Heads</span>
+                <span class="project-card-details"><span class="project-location">Burleigh Heads</span><span class="project-card-visit">Visit</span></span>
             </div>
         </div>
         <div>
             <a href="../85 Mountain View/85 Mountain View.html" style="display:block;">
                 <div class="project-card">
                     <img src="../Assets/85 Mountain View/eojki3g9gf4ojvyagf7f.webp" alt="85 Mountain View" loading="lazy" decoding="async">
-                    <span class="project-card-visit">Visit</span>
                 </div>
             </a>
             <div class="card-label">
                 <span class="project-title">85 Mountain View</span>
-                <span class="project-location">Miami</span>
+                <span class="project-card-details"><span class="project-location">Miami</span><span class="project-card-visit">Visit</span></span>
             </div>
         </div>
         <div>
             <a href="../64 Dawn Parade/64 Dawn Parade.html" style="display:block;">
                 <div class="project-card">
                     <img src="../64 Dawn Parade/assets/hb7qryl3xsh50hfojf5m.webp" alt="64 Dawn Parade" loading="lazy" decoding="async">
-                    <span class="project-card-visit">Visit</span>
                 </div>
             </a>
             <div class="card-label">
                 <span class="project-title">64 Dawn Parade</span>
-                <span class="project-location"></span>
+                <span class="project-card-details"><span class="project-location"></span><span class="project-card-visit">Visit</span></span>
             </div>
         </div>
         <div>
@@ -124,7 +121,7 @@
             </div>
             <div class="card-label">
                 <span class="project-title">Unannounced Project</span>
-                <span class="project-location"></span>
+                <span class="project-card-details"><span class="project-location"></span></span>
             </div>
         </div>
     </main>
@@ -232,7 +229,7 @@
                 const visit = document.createElement('span');
                 visit.className = 'grid-project-visit';
                 visit.textContent = 'Visit';
-                media.appendChild(visit);
+                details.appendChild(visit);
             }
             info.append(name, details);
             const projectInner = document.createElement('div');
