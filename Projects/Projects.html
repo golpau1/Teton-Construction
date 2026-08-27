@@ -89,7 +89,9 @@
                 </div>
             </a>
             <div class="card-label">
-                The Violet
+                <span class="project-title">The Violet</span>
+                <span class="project-location">Burleigh Heads</span>
+                <span class="project-year">2026</span>
                 <span class="under-construction">Under Construction</span>
             </div>
         </div>
@@ -100,7 +102,9 @@
                 </div>
             </a>
             <div class="card-label">
-                85 Mountain View
+                <span class="project-title">85 Mountain View</span>
+                <span class="project-location">Miami</span>
+                <span class="project-year">Commencing 2026</span>
                 <span class="under-construction">DA Development Stage</span>
             </div>
         </div>
@@ -111,7 +115,9 @@
                 </div>
             </a>
             <div class="card-label">
-                64 Dawn Parade
+                <span class="project-title">64 Dawn Parade</span>
+                <span class="project-location"></span>
+                <span class="project-year"></span>
                 <span class="under-construction">DA Development Stage</span>
             </div>
         </div>
@@ -120,7 +126,9 @@
                 <img src="../Assets/16.jpg" alt="Unannounced Project" style="filter: grayscale(1) brightness(0.45);">
             </div>
             <div class="card-label">
-                Unannounced Project
+                <span class="project-title">Unannounced Project</span>
+                <span class="project-location"></span>
+                <span class="project-year"></span>
                 <span class="under-construction">TBA</span>
             </div>
         </div>
@@ -215,11 +223,18 @@
             name.className = 'grid-project-name';
             name.textContent = row.dataset.name;
             if (projectLink) name.href = projectLink;
-            const meta = document.createElement('span');
-            meta.className = 'grid-project-meta';
-            meta.textContent = row.dataset.meta || '';
+            const cells = row.querySelectorAll('[role="cell"]');
+            const location = document.createElement('span');
+            location.className = 'grid-project-location';
+            location.textContent = cells[1]?.textContent.trim() || row.dataset.meta || '';
+            const year = document.createElement('span');
+            year.className = 'grid-project-year';
+            year.textContent = cells[2]?.textContent.trim() || '';
             const details = document.createElement('span');
             details.className = 'grid-project-details';
+            const meta = document.createElement('span');
+            meta.className = 'grid-project-meta';
+            meta.append(location, year);
             details.appendChild(meta);
             if (projectLink) {
                 const visit = document.createElement('a');
