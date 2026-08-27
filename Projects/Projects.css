@@ -22,15 +22,24 @@
 }
 
 /* 2. Base Layout */
+html {
+  background: #fff;
+}
+
 body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   margin: 0;
-  background: #FFFDF7;
+  background: #fff;
   color: #333;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   overflow: hidden;
+}
+
+/* Match the page canvas while retaining the shared header's layout and divider. */
+.site-header {
+  background: #fff;
 }
 
 .combined-view {
@@ -57,7 +66,7 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
-  background: #FFFDF7;
+  background: #fff;
 }
 
 .projects-panel { overflow: hidden; }
@@ -642,7 +651,7 @@ main.projects-grid {
   .projects-panel { overflow-y: auto; }
 
   html, body{
-    background:#FFFDF7;
+    background:#fff;
     color:#222;
     font-family:'Lexend','Helvetica Neue',Arial,sans-serif;
     padding:0;
