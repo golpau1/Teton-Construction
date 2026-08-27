@@ -303,7 +303,7 @@ html { scroll-behavior: smooth; }
   margin: 0 auto clamp(90px, 8vw, 128px);
 }
 .editorial-intro h1 {
-  margin: 0 0 8px;
+  margin: 0 0 14px;
   font-family: 'Monument Extended', 'NType82', 'Helvetica Neue', Arial, sans-serif;
   font-size: clamp(26px, 1.9vw, 32px);
   line-height: 1;
@@ -312,7 +312,7 @@ html { scroll-behavior: smooth; }
   white-space: nowrap;
 }
 .editorial-location {
-  margin: 0 0 clamp(34px, 3.4vw, 52px);
+  margin: 0 0 clamp(44px, 4vw, 62px);
   color: rgba(32, 32, 30, .72);
   font-size: clamp(22px, 1.8vw, 26px);
   line-height: 1.15;
@@ -421,8 +421,8 @@ html { scroll-behavior: smooth; }
     width: min(560px, calc(100% - 48px));
     margin-bottom: 82px;
   }
-  .editorial-intro h1 { margin-bottom: 7px; }
-  .editorial-location { margin-bottom: 32px; }
+  .editorial-intro h1 { margin-bottom: 12px; }
+  .editorial-location { margin-bottom: 40px; }
   .editorial-lead { font-size: clamp(14px, 2.2vw, 16px); }
   .editorial-specs { margin-top: 0; }
   .editorial-figure,
@@ -452,7 +452,7 @@ html { scroll-behavior: smooth; }
   .violet-editorial { padding: 68px 0 94px; }
   .editorial-intro { width: calc(100% - 40px); margin-bottom: 68px; }
   .editorial-intro h1 { font-size: 30px; }
-  .editorial-location { margin-bottom: 28px; font-size: 21px; }
+  .editorial-location { margin-bottom: 36px; font-size: 21px; }
   .editorial-lead { margin-top: 30px; font-size: 14px; }
   .editorial-specs { margin-top: 0; }
   .editorial-specs > div { grid-template-columns: 92px minmax(0, 1fr); gap: 24px; }
@@ -515,15 +515,15 @@ html { scroll-behavior: smooth; }
 .gallery-wide:last-child { margin-bottom: 0 !important; }
 
 .drawings-renders {
-  width: min(74vw, 1200px);
+  width: min(60vw, 960px);
   margin: 0 auto;
-  padding-top: clamp(54px, 5vw, 78px);
+  padding-top: clamp(72px, 6.5vw, 100px);
   border-top: 1px solid rgba(32, 32, 30, .16);
 }
 .drawings-renders h2 {
-  margin: 0 0 clamp(34px, 3.6vw, 54px);
+  margin: 0 0 clamp(40px, 4vw, 58px);
   font: inherit;
-  font-size: clamp(22px, 2vw, 30px);
+  font-size: clamp(19px, 1.6vw, 25px);
   line-height: 1.1;
   font-weight: 400;
   letter-spacing: -.025em;
