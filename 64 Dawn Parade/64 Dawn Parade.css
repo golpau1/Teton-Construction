@@ -1,7 +1,7 @@
 /* 64 Dawn Parade Page Styles (duplicated from 85 Mountain View) */
 
 :root {
-	--bg: #ffffff; /* pure white background per request */
+	--bg: #FFFDF7; /* page background */
 	--ink: #191919;
 	--muted: #8a8a8a;
 	--rule: #e6e6e6;
@@ -57,9 +57,9 @@ img { max-width: 100%; display: block; height: auto; }
 
 /* Meta */
 .project-meta h2 { margin: 0 0 18px 0; font-size: 18px; letter-spacing: .08em; text-transform: uppercase; font-weight: 300; font-family: 'Lexend', sans-serif; }
-.meta-list { margin: 0 0 18px 0; padding: 0; background: #fff; border: none; font-size: 12px; line-height: 1.9; }
+.meta-list { margin: 0 0 18px 0; padding: 0; background: #FFFDF7; border: none; font-size: 12px; line-height: 1.9; }
 .meta-list b { width: 110px; }
-.project-copy { font-size: 14px; color: #444; background: #fff; border: none; padding: 0; white-space: pre-wrap; }
+.project-copy { font-size: 14px; color: #444; background: #FFFDF7; border: none; padding: 0; white-space: pre-wrap; }
 .credit { margin-top: 10px; font-size: 11px; color: #777; }
 
 /* Responsive */
