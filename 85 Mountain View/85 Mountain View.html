@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="85 Mountain View.css">
 <link rel="stylesheet" href="../Assets/header.css">
 </head>
-<body>
+<body class="mountain-view-project-page">
 
   <!-- Mobile burger menu (moved inside header for inline alignment with icon) -->
   <div class="drawer-overlay" hidden></div>
@@ -40,44 +40,38 @@
     </div>
   </header>
 
-  <!-- Page Content -->
-  <main class="page">
-    <div class="grid">
-      <!-- Left: Project images -->
-      <section class="project-media">
-        <div class="frame">
-          <img src="../Assets/85 Mountain View/85-mountain-view-01.jpg" alt="85 Mountain View – Render 1" loading="lazy" decoding="async">
-        </div>
-        <div class="frame">
-          <img src="../Assets/85 Mountain View/85-mountain-view-02.jpg" alt="85 Mountain View – Render 2" loading="lazy" decoding="async">
-        </div>
-        <div class="frame">
-          <img src="../Assets/85 Mountain View/85-mountain-view-03.jpg" alt="85 Mountain View – Render 3" loading="lazy" decoding="async">
-        </div>
-        <div class="frame">
-          <img src="../Assets/85 Mountain View/85-mountain-view-04.jpg" alt="85 Mountain View – Render 4" loading="lazy" decoding="async">
-        </div>
-        <div class="frame">
-          <img src="../Assets/85 Mountain View/85-mountain-view-05.jpg" alt="85 Mountain View – Render 5" loading="lazy" decoding="async">
-        </div>
-        <div class="frame">
-          <img src="../Assets/85 Mountain View/85-mountain-view-06.jpg" alt="85 Mountain View – Render 6" loading="lazy" decoding="async">
-        </div>
-      </section>
+  <main class="mountain-editorial">
+    <section class="mountain-opening" aria-labelledby="mountain-title">
+      <figure class="mountain-figure opening-figure">
+        <img src="../Assets/85 Mountain View/85-mountain-view-01.jpg" alt="85 Mountain View architectural render one" width="4611" height="3047" fetchpriority="high" decoding="async">
+        <figcaption>Fig. 01</figcaption>
+      </figure>
 
-      <!-- Right: Meta + copy -->
-      <aside class="project-meta">
-        <h2>85 Mountain View</h2>
+      <div class="mountain-intro">
+        <h1 id="mountain-title">85 Mountain View</h1>
+        <p class="mountain-location">Miami</p>
+        <dl class="mountain-specs">
+          <div><dt>Commencing</dt><dd>2026</dd></div>
+          <div><dt>Location</dt><dd>Miami</dd></div>
+          <div><dt>Architect</dt><dd>Impact Design</dd></div>
+          <div><dt>Interiors</dt><dd>Impact Design</dd></div>
+        </dl>
+      </div>
+    </section>
 
-        <div class="meta-list">
-          <div><b>Commencing:</b> 2026</div>
-          <div><b>Location:</b> Miami</div>
-          <div><b>Architect:</b> Impact Design</div>
-          <div><b>Interiors:</b> Impact Design</div>
+    <section class="mountain-sequence" aria-label="85 Mountain View image gallery">
+      <div class="mountain-gallery-grid">
+        <div class="mountain-gallery-row">
+          <figure><img src="../Assets/85 Mountain View/85-mountain-view-02.jpg" alt="85 Mountain View architectural render two" width="4611" height="3047" loading="lazy" decoding="async"><figcaption>Fig. 02</figcaption></figure>
+          <figure><img src="../Assets/85 Mountain View/85-mountain-view-03.jpg" alt="85 Mountain View architectural render three" width="4611" height="3047" loading="lazy" decoding="async"><figcaption>Fig. 03</figcaption></figure>
         </div>
-      </aside>
-    </div>
-
+        <figure class="mountain-gallery-wide"><img src="../Assets/85 Mountain View/85-mountain-view-04.jpg" alt="85 Mountain View architectural render four" width="4611" height="3047" loading="lazy" decoding="async"><figcaption>Fig. 04</figcaption></figure>
+        <div class="mountain-gallery-row">
+          <figure><img src="../Assets/85 Mountain View/85-mountain-view-05.jpg" alt="85 Mountain View architectural render five" width="4611" height="3047" loading="lazy" decoding="async"><figcaption>Fig. 05</figcaption></figure>
+          <figure><img src="../Assets/85 Mountain View/85-mountain-view-06.jpg" alt="85 Mountain View architectural render six" width="4611" height="3047" loading="lazy" decoding="async"><figcaption>Fig. 06</figcaption></figure>
+        </div>
+      </div>
+    </section>
   </main>
   <script>
   (function(){const btn=document.querySelector('.menu-toggle'),drawer=document.getElementById('mobileDrawer'),overlay=document.querySelector('.drawer-overlay'),closeBtn=document.querySelector('.drawer-close');const focusable='a,button';let last;function open(){last=document.activeElement;drawer.classList.add('open');overlay.hidden=false;document.body.classList.add('no-scroll');btn.setAttribute('aria-expanded','true');drawer.setAttribute('aria-hidden','false');const f=drawer.querySelector(focusable);f&&f.focus();trap(true);}function close(){drawer.classList.remove('open');overlay.hidden=true;document.body.classList.remove('no-scroll');btn.setAttribute('aria-expanded','false');drawer.setAttribute('aria-hidden','true');trap(false);last&&last.focus();}function toggle(){drawer.classList.contains('open')?close():open();}btn.addEventListener('click',toggle);overlay.addEventListener('click',close);closeBtn&&closeBtn.addEventListener('click',close);window.addEventListener('keydown',e=>{if(e.key==='Escape'&&drawer.classList.contains('open'))close();});function trap(en){if(!en){document.removeEventListener('focus',fh,true);return;}document.addEventListener('focus',fh,true);}function fh(e){if(!drawer.classList.contains('open'))return;if(!drawer.contains(e.target)&&e.target!==btn){const f=drawer.querySelector(focusable);f&&f.focus();}}})();
