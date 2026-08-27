@@ -282,7 +282,7 @@ html { scroll-behavior: smooth; }
 /* Restrained Violet editorial sequence */
 .violet-editorial {
   width: 100%;
-  padding: clamp(110px, 11vw, 190px) 0 clamp(120px, 14vw, 240px);
+  padding: clamp(82px, 8vw, 126px) 0 clamp(100px, 10vw, 150px);
   overflow: hidden;
   background: #fff;
   color: #202020;
@@ -291,33 +291,33 @@ html { scroll-behavior: smooth; }
 }
 
 .editorial-intro {
-  width: min(920px, calc(100% - 80px));
-  margin: 0 auto clamp(150px, 17vw, 280px);
+  width: min(560px, calc(100% - 64px));
+  margin: 0 auto clamp(28px, 2.5vw, 38px);
 }
 .editorial-intro h1 {
-  margin: 0 0 48px;
+  margin: 0 0 30px;
   font: inherit;
-  font-size: clamp(36px, 3vw, 42px);
+  font-size: clamp(36px, 2.8vw, 40px);
   line-height: 1;
   letter-spacing: -.035em;
 }
 .editorial-lead {
-  width: min(650px, 100%);
+  width: 100%;
   margin: 0;
-  font-size: clamp(22px, 1.7vw, 25px);
-  line-height: 1.42;
+  font-size: clamp(22px, 1.55vw, 24px);
+  line-height: 1.4;
   letter-spacing: -.018em;
 }
 .editorial-specs {
-  width: min(560px, 100%);
-  margin: clamp(72px, 8vw, 116px) 0 0 auto;
+  width: 100%;
+  margin: 44px 0 0;
   border-top: 1px solid #dedede;
 }
 .editorial-specs > div {
   display: grid;
   grid-template-columns: 130px minmax(0, 1fr);
   gap: 50px;
-  padding: 14px 0 13px;
+  padding: 12px 0 11px;
   border-bottom: 1px solid #dedede;
 }
 .editorial-specs dt,
@@ -329,12 +329,24 @@ html { scroll-behavior: smooth; }
 .editorial-specs dt { color: #9a9a9a; }
 .editorial-specs dd { color: #292929; }
 
+.editorial-body {
+  width: 100%;
+  margin-top: 40px;
+}
+.editorial-body p {
+  margin: 0 0 18px;
+  font-size: clamp(13px, .92vw, 15px);
+  line-height: 1.58;
+  letter-spacing: -.004em;
+}
+.editorial-body p:last-child { margin-bottom: 0; }
+
 .editorial-sequence { width: 100%; }
 .editorial-figure {
-  width: min(64vw, 1000px);
-  margin: 0 auto clamp(112px, 11vw, 190px);
+  width: min(460px, calc(100% - 64px));
+  margin: 0 auto clamp(72px, 6vw, 92px);
 }
-.editorial-figure.is-portrait { width: min(37vw, 520px); }
+.editorial-figure.is-portrait { width: min(400px, calc(100% - 64px)); }
 .editorial-figure img {
   display: block;
   width: 100%;
@@ -342,61 +354,46 @@ html { scroll-behavior: smooth; }
   object-fit: contain;
 }
 .editorial-figure figcaption {
-  margin-top: 9px;
+  margin-top: 6px;
   color: #8e8e8e;
-  font-size: clamp(9px, .62vw, 10px);
+  font-size: clamp(8px, .58vw, 10px);
   line-height: 1.2;
   letter-spacing: .06em;
   text-transform: uppercase;
 }
-.editorial-copy {
-  width: min(540px, calc(100% - 80px));
-  margin: 0 auto clamp(118px, 13vw, 210px);
-}
-.editorial-copy p {
-  margin: 0;
-  font-size: clamp(14px, 1vw, 16px);
-  line-height: 1.58;
-  letter-spacing: -.006em;
-}
 .editorial-sequence > :last-child { margin-bottom: 0; }
 
 @media (max-width: 860px) {
-  .violet-editorial { padding: 84px 0 120px; }
+  .violet-editorial { padding: 76px 0 110px; }
   .editorial-intro {
-    width: min(680px, calc(100% - 48px));
-    margin-bottom: 120px;
+    width: min(560px, calc(100% - 48px));
+    margin-bottom: 34px;
   }
-  .editorial-intro h1 { margin-bottom: 36px; }
-  .editorial-lead { font-size: clamp(20px, 4.3vw, 23px); }
-  .editorial-specs { margin-top: 64px; }
+  .editorial-intro h1 { margin-bottom: 28px; }
+  .editorial-lead { font-size: clamp(20px, 3.4vw, 23px); }
+  .editorial-specs { margin-top: 42px; }
   .editorial-figure,
   .editorial-figure.is-portrait {
-    width: calc(100% - 48px);
-    max-width: 720px;
-    margin-bottom: 92px;
+    width: calc(100% - 64px);
+    max-width: 600px;
+    margin-bottom: 76px;
   }
   .editorial-figure.is-portrait {
-    width: min(72vw, 480px);
-  }
-  .editorial-copy {
-    width: min(540px, calc(100% - 48px));
-    margin-bottom: 104px;
+    width: min(68vw, 430px);
   }
 }
 
 @media (max-width: 520px) {
   .violet-editorial { padding: 68px 0 94px; }
-  .editorial-intro { width: calc(100% - 40px); margin-bottom: 96px; }
+  .editorial-intro { width: calc(100% - 40px); margin-bottom: 30px; }
   .editorial-intro h1 { font-size: 34px; }
   .editorial-lead { font-size: 19px; }
-  .editorial-specs { margin-top: 54px; }
+  .editorial-specs { margin-top: 38px; }
   .editorial-specs > div { grid-template-columns: 92px minmax(0, 1fr); gap: 24px; }
   .editorial-figure,
   .editorial-figure.is-portrait {
     width: calc(100% - 40px);
-    margin-bottom: 76px;
+    margin-bottom: 64px;
   }
   .editorial-figure.is-portrait { width: min(78vw, 380px); }
-  .editorial-copy { width: calc(100% - 40px); margin-bottom: 86px; }
 }
