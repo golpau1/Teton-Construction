@@ -445,8 +445,8 @@ html { scroll-behavior: smooth; }
 
 /* Completed photography grid after Fig. 03 */
 .violet-gallery-grid {
-  width: min(74vw, 1200px);
-  margin: clamp(20px, 3vw, 48px) auto clamp(128px, 11vw, 176px);
+  width: min(70vw, 1120px);
+  margin: clamp(10px, 1.5vw, 24px) auto clamp(110px, 9vw, 150px);
 }
 .violet-gallery-grid figure,
 .drawings-renders figure {
@@ -472,15 +472,15 @@ html { scroll-behavior: smooth; }
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: start;
-  gap: clamp(18px, 1.8vw, 28px);
-  margin-bottom: clamp(48px, 5vw, 76px);
+  gap: clamp(8px, .8vw, 13px);
+  margin-bottom: clamp(10px, 1vw, 16px);
 }
 .gallery-row--portraits {
-  width: min(76%, 820px);
+  width: 100%;
   margin-right: auto;
   margin-left: auto;
 }
-.gallery-wide { margin-bottom: clamp(48px, 5vw, 76px) !important; }
+.gallery-wide { margin-bottom: clamp(10px, 1vw, 16px) !important; }
 .gallery-wide:last-child { margin-bottom: 0 !important; }
 
 .drawings-renders {
@@ -507,9 +507,9 @@ html { scroll-behavior: smooth; }
 @media (max-width: 860px) {
   .violet-gallery-grid,
   .drawings-renders { width: calc(100% - 48px); }
-  .gallery-row { gap: 16px; margin-bottom: 52px; }
-  .gallery-row--portraits { width: 82%; }
-  .gallery-wide { margin-bottom: 52px !important; }
+  .gallery-row { gap: 10px; margin-bottom: 12px; }
+  .gallery-row--portraits { width: 100%; }
+  .gallery-wide { margin-bottom: 12px !important; }
   .drawings-renders-grid { gap: 12px; }
 }
 
@@ -518,9 +518,9 @@ html { scroll-behavior: smooth; }
   .gallery-row,
   .drawings-renders-grid {
     grid-template-columns: 1fr;
-    gap: 46px;
+    gap: 12px;
   }
-  .gallery-row--portraits { width: 82%; }
+  .gallery-row--portraits { width: 100%; }
   .gallery-row:not(.gallery-row--portraits) { width: 100%; }
   .drawings-renders-grid { gap: 32px; }
 }
