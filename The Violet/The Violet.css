@@ -329,28 +329,16 @@ html { scroll-behavior: smooth; }
 .editorial-specs dt { color: #9a9a9a; }
 .editorial-specs dd { color: #292929; }
 
-.editorial-body {
-  width: 100%;
-  margin-top: 40px;
-}
-.editorial-body p {
-  margin: 0 0 18px;
-  font-size: clamp(13px, .92vw, 15px);
-  line-height: 1.58;
-  letter-spacing: -.004em;
-}
-.editorial-body p:last-child { margin-bottom: 0; }
-
 .editorial-sequence { width: 100%; }
 .editorial-figure {
-  width: min(460px, calc(100% - 64px));
+  width: min(520px, calc(100% - 64px));
   margin: 0 auto clamp(72px, 6vw, 92px);
 }
 .editorial-figure.opening-figure {
   width: min(68vw, 1100px);
   margin-bottom: clamp(100px, 8vw, 130px);
 }
-.editorial-figure.is-portrait { width: min(400px, calc(100% - 64px)); }
+.editorial-figure.is-portrait { width: min(450px, calc(100% - 64px)); }
 .editorial-figure img {
   display: block;
   width: 100%;
@@ -364,6 +352,26 @@ html { scroll-behavior: smooth; }
   line-height: 1.2;
   letter-spacing: .06em;
   text-transform: uppercase;
+}
+.editorial-figure.has-copy-after { margin-bottom: clamp(36px, 3.2vw, 48px); }
+.editorial-copy {
+  width: min(520px, calc(100% - 64px));
+  margin: 0 auto clamp(82px, 7vw, 108px);
+}
+.editorial-copy p {
+  margin: 0;
+  font-size: clamp(14px, 1vw, 16px);
+  line-height: 1.48;
+  letter-spacing: -.005em;
+  text-align: left;
+}
+.editorial-copy.copy-inset {
+  width: min(470px, calc(100% - 64px));
+  transform: translateX(28px);
+}
+.editorial-copy.copy-offset {
+  width: min(490px, calc(100% - 64px));
+  transform: translateX(-22px);
 }
 .editorial-sequence > :last-child { margin-bottom: 0; }
 
@@ -390,6 +398,13 @@ html { scroll-behavior: smooth; }
     max-width: 720px;
     margin-bottom: 90px;
   }
+  .editorial-copy,
+  .editorial-copy.copy-inset,
+  .editorial-copy.copy-offset {
+    width: min(520px, calc(100% - 64px));
+    margin-bottom: 82px;
+    transform: none;
+  }
 }
 
 @media (max-width: 520px) {
@@ -408,5 +423,11 @@ html { scroll-behavior: smooth; }
   .editorial-figure.opening-figure {
     width: calc(100% - 40px);
     margin-bottom: 76px;
+  }
+  .editorial-copy,
+  .editorial-copy.copy-inset,
+  .editorial-copy.copy-offset {
+    width: calc(100% - 40px);
+    margin-bottom: 72px;
   }
 }
