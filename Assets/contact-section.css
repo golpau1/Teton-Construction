@@ -135,6 +135,10 @@ a:hover{text-decoration:underline}
     letter-spacing:-.045em;
   }
 
+  .contact-intro{
+    position:relative;
+  }
+
   .contact-intro p{
     width:min(340px, 82%);
     margin:34px 0 0;
@@ -144,9 +148,11 @@ a:hover{text-decoration:underline}
   }
 
   .contact-identity{
-    position:relative;
+    position:absolute;
+    top:calc(clamp(132px, 16svh, 168px) + clamp(132px, 16svh, 168px) - 52px);
+    left:0;
     width:118px;
-    margin-top:clamp(90px, 15svh, 160px);
+    margin-top:0;
     overflow:hidden;
   }
 
