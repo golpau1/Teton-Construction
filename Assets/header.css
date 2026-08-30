@@ -39,7 +39,7 @@
   transform: translate(-49px, -89px);
 }
 
-.site-header .brand-logo--light { mix-blend-mode: screen; }
+.site-header .brand-logo--light { filter: brightness(0) invert(1); mix-blend-mode: screen; }
 .site-header .brand-logo--dark { mix-blend-mode: multiply; }
 
 @media (min-width: 701px) {
