@@ -1375,7 +1375,6 @@ main.projects-grid.legacy-projects-grid.is-dragging {
 }
 
 .legacy-projects-grid > div {
-  --slide-opacity: .48;
   flex: 0 0 var(--slide-width);
   width: auto;
   height: auto;
@@ -1397,8 +1396,6 @@ main.projects-grid.legacy-projects-grid.is-dragging {
   border-radius: 0;
   background: transparent;
   box-shadow: none;
-  opacity: var(--slide-opacity);
-  transition: opacity 220ms ease;
 }
 
 .legacy-projects-grid .project-card::after { content: none; }

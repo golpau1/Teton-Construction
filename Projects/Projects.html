@@ -410,8 +410,6 @@
             let centeredIndex = -1;
             projects.forEach((project, index) => {
                 const distance = Math.abs(projectCenter(project) - viewportCenter);
-                const influence = Math.max(0, 1 - (distance / project.offsetWidth));
-                project.style.setProperty('--slide-opacity', String(.48 + (.52 * influence)));
                 if (distance <= 10) centeredIndex = index;
             });
 
