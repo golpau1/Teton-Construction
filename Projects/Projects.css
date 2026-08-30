@@ -1465,8 +1465,7 @@ main.projects-grid.legacy-projects-grid.is-dragging {
   align-items: baseline;
 }
 
-.legacy-projects-grid .project-location,
-.legacy-projects-grid .project-card-visit {
+.legacy-projects-grid .project-location {
   position: static;
   inset: auto;
   grid-area: 1 / 1;
@@ -1483,14 +1482,7 @@ main.projects-grid.legacy-projects-grid.is-dragging {
   opacity: 1;
   transform: none;
   pointer-events: none;
-  transition: opacity 180ms ease;
 }
-
-.legacy-projects-grid .project-card-visit { opacity: 0; }
-.legacy-projects-grid > div:hover .project-location,
-.legacy-projects-grid > div:focus-within .project-location { opacity: 0; }
-.legacy-projects-grid > div:hover .project-card-visit,
-.legacy-projects-grid > div:focus-within .project-card-visit { opacity: 1; }
 
 .project-slider-progress {
   --slider-progress: 0;

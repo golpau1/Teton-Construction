@@ -90,7 +90,7 @@
             </a>
             <div class="card-label">
                 <span class="project-title">The Violet</span>
-                <span class="project-card-details"><span class="project-location">Burleigh Heads</span><span class="project-card-visit">Visit</span></span>
+                <span class="project-card-details"><span class="project-location">Burleigh Heads</span></span>
             </div>
         </div>
         <div>
@@ -101,7 +101,7 @@
             </a>
             <div class="card-label">
                 <span class="project-title">85 Mountain View</span>
-                <span class="project-card-details"><span class="project-location">Miami</span><span class="project-card-visit">Visit</span></span>
+                <span class="project-card-details"><span class="project-location">Miami</span></span>
             </div>
         </div>
         <div>
@@ -112,7 +112,7 @@
             </a>
             <div class="card-label">
                 <span class="project-title">64 Dawn Parade</span>
-                <span class="project-card-details"><span class="project-location"></span><span class="project-card-visit">Visit</span></span>
+                <span class="project-card-details"><span class="project-location"></span></span>
             </div>
         </div>
         <div>
@@ -218,12 +218,6 @@
             meta.className = 'grid-project-meta';
             meta.appendChild(location);
             details.appendChild(meta);
-            if (projectLink) {
-                const visit = document.createElement('span');
-                visit.className = 'grid-project-visit';
-                visit.textContent = 'Visit';
-                details.appendChild(visit);
-            }
             info.append(name, details);
             const projectInner = document.createElement('div');
             projectInner.className = 'grid-project-inner';
