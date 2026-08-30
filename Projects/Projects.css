@@ -1546,7 +1546,6 @@ main.projects-grid.legacy-projects-grid.is-dragging {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100%;
   min-height: 0;
 }
 
