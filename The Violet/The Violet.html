@@ -45,7 +45,7 @@
       <figure class="editorial-figure opening-figure"><img src="../Assets/The Violet/violet-living-room.jpg" alt="The Violet living room" width="1600" height="1069" fetchpriority="high" decoding="async"><figcaption>Fig. 07</figcaption></figure>
 
       <div class="editorial-intro">
-        <h1 id="violet-title" class="editorial-wordmark"><img src="../Assets/The Violet/violet-wordmark.png" alt="The Violet" width="1600" height="193" fetchpriority="high" decoding="async"></h1>
+        <h1 id="violet-title">The Violet</h1>
         <p class="editorial-location">Burleigh Heads</p>
         <dl class="editorial-specs">
           <div><dt>Completion</dt><dd>2026</dd></div>
@@ -53,7 +53,11 @@
           <div><dt>Architect</dt><dd>CPO Architects</dd></div>
           <div><dt>Interiors</dt><dd>CPO Architects</dd></div>
         </dl>
-        <p class="editorial-lead">A boutique collection of nine thoughtfully designed townhouses, nestled in the quaint and historic neighbourhood of Burleigh Heads.</p>
+        <div class="editorial-lead">
+          <p>A boutique collection of nine thoughtfully designed townhouses, nestled in the quaint and historic neighbourhood of Burleigh Heads.</p>
+          <p>Blending seamlessly with the area's rich heritage, <strong>The Violet</strong> introduces a modern twist—a contemporary lifestyle precinct that captures the essence of its natural surroundings. Each townhouse is crafted to reflect the balance of convenience and vibrancy, tranquility and serenity, offering residents a harmonious coastal way of life.</p>
+          <p>Set within lush green surrounds, <strong>The Violet</strong> is a celebration of modern living in a rejuvenated and evolving pocket of Burleigh Heads—where heritage meets innovation.</p>
+        </div>
       </div>
     </section>
 
@@ -104,6 +108,22 @@
       </div>
     </nav>
   </main>
+
+  <div class="violet-lightbox" role="dialog" aria-modal="true" aria-label="The Violet image gallery" hidden>
+    <button class="violet-lightbox-close" type="button" aria-label="Close gallery">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+    <button class="violet-lightbox-prev" type="button" aria-label="Previous image">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <div class="violet-lightbox-stage">
+      <img class="violet-lightbox-image" src="" alt="">
+      <p class="violet-lightbox-count" aria-live="polite"></p>
+    </div>
+    <button class="violet-lightbox-next" type="button" aria-label="Next image">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
   <script>
   (function(){
     const galleryImages = document.querySelectorAll('.editorial-figure img');
@@ -118,6 +138,83 @@
       setOrientation();
       if (!image.complete) image.addEventListener('load', setOrientation, { once: true });
     });
+  })();
+  (function(){
+    const viewer = document.querySelector('.violet-lightbox');
+    const viewerImage = viewer.querySelector('.violet-lightbox-image');
+    const count = viewer.querySelector('.violet-lightbox-count');
+    const closeButton = viewer.querySelector('.violet-lightbox-close');
+    const previousButton = viewer.querySelector('.violet-lightbox-prev');
+    const nextButton = viewer.querySelector('.violet-lightbox-next');
+    const stage = viewer.querySelector('.violet-lightbox-stage');
+    const images = Array.from(document.querySelectorAll('.violet-editorial figure img'));
+    let currentIndex = 0;
+    let lastFocus = null;
+    let touchStartX = 0;
+
+    function render(){
+      const source = images[currentIndex];
+      viewerImage.src = source.currentSrc || source.src;
+      viewerImage.alt = source.alt;
+      count.textContent = `${currentIndex + 1} / ${images.length}`;
+    }
+    function openViewer(index){
+      currentIndex = index;
+      lastFocus = document.activeElement;
+      render();
+      viewer.hidden = false;
+      document.body.classList.add('violet-lightbox-open');
+      closeButton.focus();
+    }
+    function closeViewer(){
+      viewer.hidden = true;
+      document.body.classList.remove('violet-lightbox-open');
+      viewerImage.removeAttribute('src');
+      if (lastFocus) lastFocus.focus();
+    }
+    function move(step){
+      currentIndex = (currentIndex + step + images.length) % images.length;
+      render();
+    }
+
+    images.forEach((image, index) => {
+      image.tabIndex = 0;
+      image.setAttribute('role', 'button');
+      image.setAttribute('aria-label', `Open ${image.alt} in gallery`);
+      image.addEventListener('click', () => openViewer(index));
+      image.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openViewer(index);
+        }
+      });
+    });
+
+    closeButton.addEventListener('click', closeViewer);
+    previousButton.addEventListener('click', () => move(-1));
+    nextButton.addEventListener('click', () => move(1));
+    viewer.addEventListener('click', (event) => {
+      if (event.target === viewer || event.target === stage) closeViewer();
+    });
+    window.addEventListener('keydown', (event) => {
+      if (viewer.hidden) return;
+      if (event.key === 'Escape') closeViewer();
+      if (event.key === 'ArrowLeft') move(-1);
+      if (event.key === 'ArrowRight') move(1);
+      if (event.key === 'Tab') {
+        const controls = [closeButton, previousButton, nextButton];
+        const position = controls.indexOf(document.activeElement);
+        event.preventDefault();
+        controls[(position + (event.shiftKey ? -1 : 1) + controls.length) % controls.length].focus();
+      }
+    });
+    stage.addEventListener('touchstart', (event) => {
+      touchStartX = event.changedTouches[0].clientX;
+    }, { passive: true });
+    stage.addEventListener('touchend', (event) => {
+      const distance = event.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(distance) > 45) move(distance > 0 ? -1 : 1);
+    }, { passive: true });
   })();
   (function(){const btn=document.querySelector('.menu-toggle'),drawer=document.getElementById('mobileDrawer'),overlay=document.querySelector('.drawer-overlay'),closeBtn=document.querySelector('.drawer-close');const focusable='a,button';let last;function open(){last=document.activeElement;drawer.classList.add('open');overlay.hidden=false;document.body.classList.add('no-scroll');btn.setAttribute('aria-expanded','true');drawer.setAttribute('aria-hidden','false');const f=drawer.querySelector(focusable);f&&f.focus();trap(true);}function close(){drawer.classList.remove('open');overlay.hidden=true;document.body.classList.remove('no-scroll');btn.setAttribute('aria-expanded','false');drawer.setAttribute('aria-hidden','true');trap(false);last&&last.focus();}function toggle(){drawer.classList.contains('open')?close():open();}btn.addEventListener('click',toggle);overlay.addEventListener('click',close);closeBtn&&closeBtn.addEventListener('click',close);window.addEventListener('keydown',e=>{if(e.key==='Escape'&&drawer.classList.contains('open'))close();});function trap(en){if(!en){document.removeEventListener('focus',fh,true);return;}document.addEventListener('focus',fh,true);}function fh(e){if(!drawer.classList.contains('open'))return;if(!drawer.contains(e.target)&&e.target!==btn){const f=drawer.querySelector(focusable);f&&f.focus();}}})();
   </script>
