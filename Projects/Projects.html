@@ -128,16 +128,9 @@
 
     <div class="project-view-switcher" role="group" aria-label="Project view">
         <button class="view-switch is-active" type="button" data-view="grid" aria-pressed="true">
-            <svg class="view-switch-icon" viewBox="0 0 12 12" aria-hidden="true">
-                <rect x=".75" y=".75" width="4.25" height="4.25"></rect><rect x="7" y=".75" width="4.25" height="4.25"></rect>
-                <rect x=".75" y="7" width="4.25" height="4.25"></rect><rect x="7" y="7" width="4.25" height="4.25"></rect>
-            </svg>
             <span>Grid</span>
         </button>
         <button class="view-switch" type="button" data-view="archive" aria-pressed="false">
-            <svg class="view-switch-icon" viewBox="0 0 12 12" aria-hidden="true">
-                <path d="M.75 2h2M4.5 2h6.75M.75 6h2M4.5 6h6.75M.75 10h2M4.5 10h6.75"></path>
-            </svg>
             <span>List</span>
         </button>
     </div>
@@ -183,6 +176,7 @@
         const desktopQuery = window.matchMedia('(min-width: 1100px)');
         const grid = document.querySelector('.desktop-grid-view');
         const archive = document.querySelector('.desktop-project-index');
+        const legacyGrid = document.querySelector('.legacy-projects-grid');
         const rows = Array.from(archive.querySelectorAll('.archive-row'));
         const preview = archive.querySelector('.archive-preview img');
         const switches = Array.from(document.querySelectorAll('.view-switch'));
@@ -287,17 +281,21 @@
 
         function setView(view) {
             const showGrid = view === 'grid';
-            grid.classList.toggle('is-active', showGrid);
+            const desktop = desktopQuery.matches;
+            grid.classList.toggle('is-active', showGrid && desktop);
             archive.classList.toggle('is-active', !showGrid);
-            document.body.classList.toggle('projects-grid-active', showGrid && desktopQuery.matches);
-            grid.setAttribute('aria-hidden', String(!showGrid));
+            legacyGrid.hidden = !showGrid && !desktop;
+            document.body.classList.toggle('projects-grid-active', showGrid && desktop);
+            document.body.classList.toggle('projects-list-active', !showGrid);
+            grid.setAttribute('aria-hidden', String(!showGrid || !desktop));
+            legacyGrid.setAttribute('aria-hidden', String(!showGrid || desktop));
             archive.setAttribute('aria-hidden', String(showGrid));
             switches.forEach((button) => {
                 const active = button.dataset.view === view;
                 button.classList.toggle('is-active', active);
                 button.setAttribute('aria-pressed', String(active));
             });
-            if (showGrid) grid.scrollTo({ top: 0, behavior: 'auto' });
+            if (showGrid && desktop) grid.scrollTo({ top: 0, behavior: 'auto' });
             window.scrollTo(0, 0);
         }
 
@@ -339,15 +337,23 @@
             playGridEntrance();
         }
 
-        switches.forEach((button) => button.addEventListener('click', () => setView(button.dataset.view)));
+        let selectedView = 'grid';
+        switches.forEach((button) => button.addEventListener('click', () => {
+            selectedView = button.dataset.view;
+            setView(selectedView);
+        }));
         if (desktopQuery.matches) {
             startDesktopExperience();
+        } else {
+            setView(selectedView);
         }
         desktopQuery.addEventListener('change', (event) => {
             if (event.matches) {
-                startDesktopExperience();
+                if (selectedView === 'grid') startDesktopExperience();
+                else setView(selectedView);
             } else {
                 document.body.classList.remove('projects-grid-active');
+                setView(selectedView);
             }
         });
     })();

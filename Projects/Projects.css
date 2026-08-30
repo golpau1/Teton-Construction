@@ -1264,3 +1264,95 @@ main.projects-grid {
     pointer-events: none;
   }
 }
+
+/* Restored original Grid / List text switcher. */
+.project-view-switcher {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  transform: translateX(-50%);
+  transition: opacity 180ms ease;
+}
+
+.view-switch {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #aaa;
+  font-family: 'NType82', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: color 180ms ease;
+}
+
+.view-switch:hover,
+.view-switch:focus-visible,
+.view-switch.is-active { color: #000; }
+
+body.projects-list-active .projects-panel { overflow-y: auto; }
+
+@media (max-width: 1099px) {
+  .desktop-project-index.is-active {
+    display: block;
+    width: 100%;
+    padding: clamp(44px, 7vw, 72px) clamp(28px, 5vw, 72px) 96px;
+    box-sizing: border-box;
+  }
+
+  .archive-heading {
+    margin: 0 0 38px;
+    color: #111;
+    font-family: 'NType82', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1.05;
+  }
+
+  .archive-layout { display: block; width: 100%; }
+  .archive-preview { display: none; }
+  .archive-table { width: 100%; font-family: 'NType82', 'Helvetica Neue', Arial, sans-serif; }
+  .archive-table-head,
+  .archive-row {
+    display: grid;
+    grid-template-columns: 2.15fr 1.25fr 1.25fr .8fr 1.35fr;
+    column-gap: 18px;
+    align-items: center;
+  }
+
+  .archive-table-head {
+    min-height: 28px;
+    color: #aaa;
+    border-bottom: 1px solid #d9d9d9;
+    font-size: 11px;
+    line-height: 1.2;
+  }
+
+  .archive-row {
+    min-height: 45px;
+    color: #222;
+    border-bottom: 1px solid #dedede;
+    font-size: 14px;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .project-view-switcher { bottom: 18px; }
+  .desktop-project-index.is-active { padding: 32px 20px 80px; }
+  .archive-heading { margin-bottom: 28px; font-size: 26px; }
+  .archive-table-head,
+  .archive-row { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 16px; }
+  .archive-table-head > :nth-child(n+3),
+  .archive-row > :nth-child(n+3) { display: none; }
+}
