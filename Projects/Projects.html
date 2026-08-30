@@ -370,6 +370,14 @@
             return project.offsetLeft + (project.offsetWidth / 2);
         }
 
+        function distanceFromCenter(project){
+            return Math.abs(projectCenter(project) - (slider.scrollLeft + (slider.clientWidth / 2)));
+        }
+
+        function isProjectCentered(project){
+            return distanceFromCenter(project) <= 10;
+        }
+
         function centerProject(index, smooth = true){
             const project = projects[index];
             if (!project) return;
@@ -404,7 +412,7 @@
                 const distance = Math.abs(projectCenter(project) - viewportCenter);
                 const influence = Math.max(0, 1 - (distance / project.offsetWidth));
                 project.style.setProperty('--slide-opacity', String(.48 + (.52 * influence)));
-                if (distance <= 3) centeredIndex = index;
+                if (distance <= 10) centeredIndex = index;
             });
 
             if (centeredIndex !== activeIndex) {
@@ -440,30 +448,34 @@
             slider.scrollLeft += event.deltaY;
         }, { passive:false });
 
-        let dragging = false;
+        let pointerDown = false;
         let didDrag = false;
         let dragStartX = 0;
         let dragStartScroll = 0;
         slider.addEventListener('pointerdown', (event) => {
             if (event.pointerType !== 'mouse' || event.button !== 0) return;
-            dragging = true;
+            pointerDown = true;
             didDrag = false;
             dragStartX = event.clientX;
             dragStartScroll = slider.scrollLeft;
-            slider.classList.add('is-dragging');
-            slider.setPointerCapture(event.pointerId);
         });
         slider.addEventListener('pointermove', (event) => {
-            if (!dragging) return;
-            if (Math.abs(event.clientX - dragStartX) > 5) didDrag = true;
+            if (!pointerDown) return;
+            const movement = Math.abs(event.clientX - dragStartX);
+            if (!didDrag && movement <= 8) return;
+            if (!didDrag) {
+                didDrag = true;
+                slider.classList.add('is-dragging');
+                slider.setPointerCapture(event.pointerId);
+            }
             slider.scrollLeft = dragStartScroll - (event.clientX - dragStartX);
         });
         function stopDragging(event){
-            if (!dragging) return;
-            dragging = false;
+            if (!pointerDown) return;
+            pointerDown = false;
             slider.classList.remove('is-dragging');
             if (slider.hasPointerCapture(event.pointerId)) slider.releasePointerCapture(event.pointerId);
-            centerProject(closestProjectIndex());
+            if (didDrag) centerProject(closestProjectIndex());
         }
         slider.addEventListener('pointerup', stopDragging);
         slider.addEventListener('pointercancel', stopDragging);
@@ -474,7 +486,7 @@
             if (didDrag) {
                 event.preventDefault();
                 event.stopPropagation();
-            } else if (index !== activeIndex) {
+            } else if (!isProjectCentered(project)) {
                 event.preventDefault();
                 event.stopPropagation();
                 centerProject(index);
