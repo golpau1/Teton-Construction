@@ -37,7 +37,7 @@
   max-width: none;
   object-fit: contain;
   filter: none;
-  transform: translate(-32px, -89px);
+  transform: translate(-32px, -84px);
 }
 
 .site-header .brand-logo--light { filter: brightness(0) invert(1); mix-blend-mode: screen; }
@@ -51,7 +51,7 @@
 
   .site-header .brand-logo {
     width: 260px;
-    transform: translate(-27px, -76px);
+    transform: translate(-27px, -70px);
   }
 }
 
