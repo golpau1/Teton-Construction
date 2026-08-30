@@ -1396,9 +1396,23 @@ main.projects-grid.legacy-projects-grid.is-dragging {
   border-radius: 0;
   background: transparent;
   box-shadow: none;
+  opacity: 1;
+  filter: none;
 }
 
-.legacy-projects-grid .project-card::after { content: none; }
+.legacy-projects-grid,
+.legacy-projects-grid > div,
+.legacy-projects-grid .project-card img {
+  opacity: 1;
+  filter: none;
+}
+
+.legacy-projects-grid .project-card::before,
+.legacy-projects-grid .project-card::after {
+  content: none !important;
+  display: none !important;
+}
+
 .legacy-projects-grid .project-card img {
   display: block;
   width: 100%;
