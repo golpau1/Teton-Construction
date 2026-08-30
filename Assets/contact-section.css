@@ -12,7 +12,7 @@ body{
   font-family:'Lexend', Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
   font-weight:300;
   color:var(--ink);
-  background:#FFFDF7;
+  background:#FFFFFF;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
 }
@@ -114,7 +114,7 @@ a:hover{text-decoration:underline}
   .contact-desktop{
     display:block;
     width:100%;
-    background:#FFFDF7;
+    background:#FFFFFF;
   }
 
   .contact-primary{
@@ -122,7 +122,6 @@ a:hover{text-decoration:underline}
     grid-template-columns:minmax(0, .82fr) minmax(560px, 1.18fr);
     column-gap:clamp(72px, 8vw, 154px);
     width:min(1500px, calc(100% - 64px));
-    min-height:calc(100svh - 58px);
     margin:0 auto;
     padding:clamp(110px, 15svh, 170px) 0 clamp(120px, 18svh, 200px);
     align-items:start;
@@ -145,13 +144,24 @@ a:hover{text-decoration:underline}
   }
 
   .contact-identity{
+    position:relative;
     width:118px;
     margin-top:clamp(90px, 15svh, 160px);
     overflow:hidden;
   }
 
-  .contact-identity img,
-  .contact-signature-mark img{
+  .contact-identity::after{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:16%;
+    height:8%;
+    background:#FFFFFF;
+    pointer-events:none;
+    content:'';
+  }
+
+  .contact-identity img{
     display:block;
     width:100%;
     height:auto;
@@ -211,41 +221,6 @@ a:hover{text-decoration:underline}
     font-family:'Helvetica Neue',Arial,sans-serif;
   }
 
-  .contact-signature{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    min-height:92svh;
-    padding:18svh 32px 22svh;
-    text-align:center;
-  }
-
-  .contact-signature-mark{
-    width:clamp(116px, 9vw, 154px);
-    overflow:hidden;
-  }
-
-  .contact-signature-details{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:7px;
-    margin-top:38px;
-    color:#3c3c3c;
-    font-size:14px;
-    line-height:1.4;
-  }
-
-  .contact-signature-details a{
-    transition:opacity 180ms ease;
-  }
-
-  .contact-signature-details a:hover,
-  .contact-signature-details a:focus-visible{
-    text-decoration:none;
-    opacity:.58;
-  }
 }
 
 /* Mobile menu (match Projects mobile page) */
