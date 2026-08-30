@@ -1421,6 +1421,12 @@ main.projects-grid.legacy-projects-grid.is-dragging {
   border-radius: 0;
 }
 
+/* The unrevealed project alone receives a restrained, muted treatment. */
+.legacy-projects-grid > .unannounced-project .project-card {
+  opacity: .42;
+  filter: grayscale(100%);
+}
+
 .legacy-projects-grid .card-label {
   display: flex;
   flex-direction: row;
