@@ -1360,6 +1360,8 @@ body.projects-list-active .projects-panel { overflow-y: auto; }
 /* Horizontal project slider — the single Projects content view. */
 .projects-panel {
   --slider-gutter: clamp(40px, 5vw, 80px);
+  --slide-width: min(62vw, 940px, calc((100svh - 210px) * 1.6));
+  --slide-edge: max(var(--slider-gutter), calc((100% - var(--slide-width)) / 2));
   overflow: hidden;
 }
 
@@ -1372,16 +1374,16 @@ body.projects-list-active .projects-panel { overflow-y: auto; }
 main.projects-grid.legacy-projects-grid {
   display: flex !important;
   align-items: flex-start;
-  gap: clamp(36px, 4vw, 64px);
+  gap: clamp(48px, 6vw, 90px);
   width: 100%;
   height: auto;
   min-height: 0;
   margin: 0;
-  padding: clamp(44px, 6vh, 72px) var(--slider-gutter) 20px;
+  padding: clamp(48px, 7vh, 82px) var(--slide-edge) 20px;
   overflow-x: auto;
   overflow-y: hidden;
   box-sizing: border-box;
-  scroll-padding-inline: var(--slider-gutter);
+  scroll-padding-inline: var(--slide-edge);
   scroll-snap-type: x mandatory;
   overscroll-behavior-x: contain;
   scrollbar-width: none;
@@ -1398,13 +1400,14 @@ main.projects-grid.legacy-projects-grid.is-dragging {
 }
 
 .legacy-projects-grid > div {
-  flex: 0 0 min(72vw, 1060px, calc((100svh - 210px) * 1.6));
+  --slide-opacity: .48;
+  flex: 0 0 var(--slide-width);
   width: auto;
   height: auto;
   min-width: 0;
   padding: 0;
   overflow: visible;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
   scroll-snap-stop: always;
 }
 
@@ -1419,6 +1422,8 @@ main.projects-grid.legacy-projects-grid.is-dragging {
   border-radius: 0;
   background: transparent;
   box-shadow: none;
+  opacity: var(--slide-opacity);
+  transition: opacity 220ms ease;
 }
 
 .legacy-projects-grid .project-card::after { content: none; }
@@ -1446,7 +1451,11 @@ main.projects-grid.legacy-projects-grid.is-dragging {
   letter-spacing: 0;
   text-align: left;
   text-transform: none;
+  opacity: 0;
+  transition: opacity 180ms ease;
 }
+
+.legacy-projects-grid > div.is-active .card-label { opacity: 1; }
 
 .legacy-projects-grid .project-title { margin: 0; }
 .legacy-projects-grid .project-card-details {
@@ -1505,18 +1514,22 @@ main.projects-grid.legacy-projects-grid.is-dragging {
 }
 
 @media (max-width: 1099px) {
-  .projects-panel { --slider-gutter: clamp(28px, 5vw, 56px); }
-  .legacy-projects-grid > div { flex-basis: min(78vw, 820px); }
+  .projects-panel {
+    --slider-gutter: clamp(28px, 5vw, 56px);
+    --slide-width: min(72vw, 820px);
+  }
 }
 
 @media (max-width: 620px) {
-  .projects-panel { --slider-gutter: 20px; }
+  .projects-panel {
+    --slider-gutter: 20px;
+    --slide-width: 82vw;
+  }
   main.projects-grid.legacy-projects-grid {
     gap: 16px;
     padding-top: 32px;
     padding-bottom: 12px;
   }
-  .legacy-projects-grid > div { flex-basis: 84vw; }
   .project-slider-progress {
     width: min(220px, calc(100% - 40px));
     margin-top: 24px;

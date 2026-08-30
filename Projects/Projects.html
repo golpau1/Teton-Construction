@@ -366,14 +366,80 @@
         const slider = document.querySelector('.legacy-projects-grid');
         const progress = document.querySelector('.project-slider-progress');
         if (!slider || !progress) return;
+        const projects = Array.from(slider.children);
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        let activeIndex = -1;
+        let scrollTimer;
+        let updateFrame;
+
+        function projectCenter(project){
+            return project.offsetLeft + (project.offsetWidth / 2);
+        }
+
+        function centerProject(index, smooth = true){
+            const project = projects[index];
+            if (!project) return;
+            slider.scrollTo({
+                left: projectCenter(project) - (slider.clientWidth / 2),
+                behavior: smooth && !reducedMotion.matches ? 'smooth' : 'auto'
+            });
+        }
+
+        function closestProjectIndex(){
+            const viewportCenter = slider.scrollLeft + (slider.clientWidth / 2);
+            let closestIndex = 0;
+            let closestDistance = Infinity;
+            projects.forEach((project, index) => {
+                const distance = Math.abs(projectCenter(project) - viewportCenter);
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestIndex = index;
+                }
+            });
+            return closestIndex;
+        }
 
         function updateProgress(){
             const maxScroll = Math.max(0, slider.scrollWidth - slider.clientWidth);
             const position = maxScroll ? slider.scrollLeft / maxScroll : 0;
             progress.style.setProperty('--slider-progress', String(Math.min(1, Math.max(0, position))));
+
+            const viewportCenter = slider.scrollLeft + (slider.clientWidth / 2);
+            let centeredIndex = -1;
+            projects.forEach((project, index) => {
+                const distance = Math.abs(projectCenter(project) - viewportCenter);
+                const influence = Math.max(0, 1 - (distance / project.offsetWidth));
+                project.style.setProperty('--slide-opacity', String(.48 + (.52 * influence)));
+                if (distance <= 3) centeredIndex = index;
+            });
+
+            if (centeredIndex !== activeIndex) {
+                activeIndex = centeredIndex;
+                projects.forEach((project, index) => {
+                    const active = index === activeIndex;
+                    project.classList.toggle('is-active', active);
+                    project.querySelectorAll('a').forEach((link) => link.tabIndex = active ? 0 : -1);
+                });
+            }
         }
 
-        slider.addEventListener('scroll', updateProgress, { passive:true });
+        function requestUpdate(){
+            if (updateFrame) return;
+            updateFrame = requestAnimationFrame(() => {
+                updateFrame = 0;
+                updateProgress();
+            });
+        }
+
+        function settleToClosest(){
+            window.clearTimeout(scrollTimer);
+            scrollTimer = window.setTimeout(() => centerProject(closestProjectIndex()), 120);
+        }
+
+        slider.addEventListener('scroll', () => {
+            requestUpdate();
+            settleToClosest();
+        }, { passive:true });
         slider.addEventListener('wheel', (event) => {
             if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
             event.preventDefault();
@@ -403,15 +469,35 @@
             dragging = false;
             slider.classList.remove('is-dragging');
             if (slider.hasPointerCapture(event.pointerId)) slider.releasePointerCapture(event.pointerId);
+            centerProject(closestProjectIndex());
         }
         slider.addEventListener('pointerup', stopDragging);
         slider.addEventListener('pointercancel', stopDragging);
         slider.addEventListener('click', (event) => {
-            if (didDrag) event.preventDefault();
+            const project = projects.find((item) => item.contains(event.target));
+            if (!project) return;
+            const index = projects.indexOf(project);
+            if (didDrag) {
+                event.preventDefault();
+                event.stopPropagation();
+            } else if (index !== activeIndex) {
+                event.preventDefault();
+                event.stopPropagation();
+                centerProject(index);
+            } else if (!event.target.closest('a')) {
+                const link = project.querySelector('a[href]');
+                if (link) window.location.href = link.href;
+            }
             didDrag = false;
         }, true);
-        window.addEventListener('resize', updateProgress);
-        requestAnimationFrame(updateProgress);
+        window.addEventListener('resize', () => {
+            centerProject(activeIndex < 0 ? closestProjectIndex() : activeIndex, false);
+            requestUpdate();
+        });
+        requestAnimationFrame(() => {
+            centerProject(0, false);
+            updateProgress();
+        });
     })();
 
     (function(){
