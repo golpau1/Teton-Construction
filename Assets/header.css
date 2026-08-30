@@ -21,10 +21,10 @@
   display: flex;
   flex: 0 0 auto;
   align-items: center;
-  width: 208px;
+  width: 242px;
   height: 26px;
-  min-width: 208px;
-  overflow: hidden;
+  min-width: 242px;
+  overflow: visible;
 }
 
 .site-header .brand-logo {
@@ -35,12 +35,25 @@
   width: 306px;
   height: auto;
   max-width: none;
+  object-fit: contain;
   filter: none;
-  transform: translate(-49px, -89px);
+  transform: translate(-32px, -89px);
 }
 
 .site-header .brand-logo--light { filter: brightness(0) invert(1); mix-blend-mode: screen; }
 .site-header .brand-logo--dark { mix-blend-mode: multiply; }
+
+@media (max-width: 700px) {
+  .site-header .brand {
+    width: 206px;
+    min-width: 206px;
+  }
+
+  .site-header .brand-logo {
+    width: 260px;
+    transform: translate(-27px, -76px);
+  }
+}
 
 @media (min-width: 701px) {
   .site-header {
