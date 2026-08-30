@@ -3,7 +3,3 @@
  * All Dawn Parade content and imagery remain defined in this page's HTML.
  */
 @import url("../85 Mountain View/85 Mountain View.css");
-
-.dawn-parade-project-page .mountain-intro h1 {
-  margin-bottom: clamp(24px, 2.4vw, 34px);
-}
