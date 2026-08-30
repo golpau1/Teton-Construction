@@ -1540,3 +1540,19 @@ main.projects-grid.legacy-projects-grid.is-dragging {
   main.projects-grid.legacy-projects-grid { scroll-behavior: auto; }
   .project-slider-progress-indicator { transition: none; }
 }
+
+/* Centre the complete carousel group within the post-header viewport. */
+.projects-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  min-height: 0;
+}
+
+main.projects-grid.legacy-projects-grid {
+  flex: 0 0 auto;
+  padding-top: 0;
+}
+
+.project-slider-progress { flex: 0 0 auto; }
