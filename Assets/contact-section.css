@@ -149,11 +149,12 @@ a:hover{text-decoration:underline}
 
   .contact-identity{
     position:absolute;
-    top:calc(clamp(132px, 16svh, 168px) + clamp(132px, 16svh, 168px) + clamp(132px, 16svh, 168px) - 52px);
+    top:calc(clamp(132px, 16svh, 168px) + clamp(132px, 16svh, 168px) + clamp(132px, 16svh, 168px));
     left:0;
     width:118px;
     margin-top:0;
     overflow:hidden;
+    transform:translateY(-100%);
   }
 
   .contact-identity::after{
