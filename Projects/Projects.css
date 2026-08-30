@@ -1425,6 +1425,11 @@ main.projects-grid.legacy-projects-grid.is-dragging {
   border-radius: 0;
 }
 
+/* Subtly favour the lower portion of the 85 Mountain View render. */
+.legacy-projects-grid > div:nth-child(2) .project-card img {
+  object-position: center 56% !important;
+}
+
 /* The unrevealed project alone receives a restrained, muted treatment. */
 .legacy-projects-grid > .unannounced-project .project-card {
   opacity: .42;
