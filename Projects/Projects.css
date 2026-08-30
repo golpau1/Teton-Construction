@@ -1356,3 +1356,174 @@ body.projects-list-active .projects-panel { overflow-y: auto; }
   .archive-table-head > :nth-child(n+3),
   .archive-row > :nth-child(n+3) { display: none; }
 }
+
+/* Horizontal project slider — the single Projects content view. */
+.projects-panel {
+  --slider-gutter: clamp(40px, 5vw, 80px);
+  overflow: hidden;
+}
+
+.desktop-grid-view,
+.desktop-project-index,
+.project-view-switcher {
+  display: none !important;
+}
+
+main.projects-grid.legacy-projects-grid {
+  display: flex !important;
+  align-items: flex-start;
+  gap: clamp(36px, 4vw, 64px);
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  padding: clamp(44px, 6vh, 72px) var(--slider-gutter) 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  box-sizing: border-box;
+  scroll-padding-inline: var(--slider-gutter);
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  cursor: grab;
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
+}
+
+main.projects-grid.legacy-projects-grid::-webkit-scrollbar { display: none; }
+main.projects-grid.legacy-projects-grid.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+.legacy-projects-grid > div {
+  flex: 0 0 min(72vw, 1060px, calc((100svh - 210px) * 1.6));
+  width: auto;
+  height: auto;
+  min-width: 0;
+  padding: 0;
+  overflow: visible;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.legacy-projects-grid .project-card {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  aspect-ratio: 16 / 10;
+  margin: 0;
+  overflow: hidden;
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.legacy-projects-grid .project-card::after { content: none; }
+.legacy-projects-grid .project-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.legacy-projects-grid .card-label {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  margin-top: 11px;
+  color: #222;
+  font-family: 'NType82', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0;
+  text-align: left;
+  text-transform: none;
+}
+
+.legacy-projects-grid .project-title { margin: 0; }
+.legacy-projects-grid .project-card-details {
+  display: grid;
+  flex: 0 0 auto;
+  justify-items: end;
+  align-items: baseline;
+}
+
+.legacy-projects-grid .project-location,
+.legacy-projects-grid .project-card-visit {
+  position: static;
+  inset: auto;
+  grid-area: 1 / 1;
+  display: block;
+  margin: 0;
+  color: #777;
+  font-family: 'NType82', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0;
+  text-align: right;
+  text-shadow: none;
+  opacity: 1;
+  transform: none;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.legacy-projects-grid .project-card-visit { opacity: 0; }
+.legacy-projects-grid > div:hover .project-location,
+.legacy-projects-grid > div:focus-within .project-location { opacity: 0; }
+.legacy-projects-grid > div:hover .project-card-visit,
+.legacy-projects-grid > div:focus-within .project-card-visit { opacity: 1; }
+
+.project-slider-progress {
+  --slider-progress: 0;
+  position: relative;
+  width: min(360px, calc(100% - var(--slider-gutter) - var(--slider-gutter)));
+  height: 1px;
+  margin: clamp(26px, 4vh, 42px) auto 0;
+  overflow: hidden;
+  background: rgba(0, 0, 0, .12);
+}
+
+.project-slider-progress-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 25%;
+  height: 1px;
+  background: rgba(0, 0, 0, .62);
+  transform: translateX(calc(var(--slider-progress) * 300%));
+  transition: transform 80ms linear;
+}
+
+@media (max-width: 1099px) {
+  .projects-panel { --slider-gutter: clamp(28px, 5vw, 56px); }
+  .legacy-projects-grid > div { flex-basis: min(78vw, 820px); }
+}
+
+@media (max-width: 620px) {
+  .projects-panel { --slider-gutter: 20px; }
+  main.projects-grid.legacy-projects-grid {
+    gap: 16px;
+    padding-top: 32px;
+    padding-bottom: 12px;
+  }
+  .legacy-projects-grid > div { flex-basis: 84vw; }
+  .project-slider-progress {
+    width: min(220px, calc(100% - 40px));
+    margin-top: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main.projects-grid.legacy-projects-grid { scroll-behavior: auto; }
+  .project-slider-progress-indicator { transition: none; }
+}

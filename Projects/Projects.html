@@ -81,7 +81,7 @@
         </div>
     </main>
 
-    <main class="projects-grid legacy-projects-grid" style="color: #3c3c3c;">
+    <main class="projects-grid legacy-projects-grid" style="color: #3c3c3c;" tabindex="0" aria-label="Projects — scroll horizontally to explore">
         <div>
             <a href="../The Violet/The Violet.html" style="display:block;">
                 <div class="project-card">
@@ -125,6 +125,10 @@
             </div>
         </div>
     </main>
+
+    <div class="project-slider-progress" aria-hidden="true">
+        <span class="project-slider-progress-indicator"></span>
+    </div>
 
     <div class="project-view-switcher" role="group" aria-label="Project view">
         <button class="view-switch is-active" type="button" data-view="grid" aria-pressed="true">
@@ -288,7 +292,7 @@
             document.body.classList.toggle('projects-grid-active', showGrid && desktop);
             document.body.classList.toggle('projects-list-active', !showGrid);
             grid.setAttribute('aria-hidden', String(!showGrid || !desktop));
-            legacyGrid.setAttribute('aria-hidden', String(!showGrid || desktop));
+            legacyGrid.setAttribute('aria-hidden', String(!showGrid));
             archive.setAttribute('aria-hidden', String(showGrid));
             switches.forEach((button) => {
                 const active = button.dataset.view === view;
@@ -356,6 +360,58 @@
                 setView(selectedView);
             }
         });
+    })();
+
+    (function(){
+        const slider = document.querySelector('.legacy-projects-grid');
+        const progress = document.querySelector('.project-slider-progress');
+        if (!slider || !progress) return;
+
+        function updateProgress(){
+            const maxScroll = Math.max(0, slider.scrollWidth - slider.clientWidth);
+            const position = maxScroll ? slider.scrollLeft / maxScroll : 0;
+            progress.style.setProperty('--slider-progress', String(Math.min(1, Math.max(0, position))));
+        }
+
+        slider.addEventListener('scroll', updateProgress, { passive:true });
+        slider.addEventListener('wheel', (event) => {
+            if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+            event.preventDefault();
+            slider.scrollLeft += event.deltaY;
+        }, { passive:false });
+
+        let dragging = false;
+        let didDrag = false;
+        let dragStartX = 0;
+        let dragStartScroll = 0;
+        slider.addEventListener('pointerdown', (event) => {
+            if (event.pointerType !== 'mouse' || event.button !== 0) return;
+            dragging = true;
+            didDrag = false;
+            dragStartX = event.clientX;
+            dragStartScroll = slider.scrollLeft;
+            slider.classList.add('is-dragging');
+            slider.setPointerCapture(event.pointerId);
+        });
+        slider.addEventListener('pointermove', (event) => {
+            if (!dragging) return;
+            if (Math.abs(event.clientX - dragStartX) > 5) didDrag = true;
+            slider.scrollLeft = dragStartScroll - (event.clientX - dragStartX);
+        });
+        function stopDragging(event){
+            if (!dragging) return;
+            dragging = false;
+            slider.classList.remove('is-dragging');
+            if (slider.hasPointerCapture(event.pointerId)) slider.releasePointerCapture(event.pointerId);
+        }
+        slider.addEventListener('pointerup', stopDragging);
+        slider.addEventListener('pointercancel', stopDragging);
+        slider.addEventListener('click', (event) => {
+            if (didDrag) event.preventDefault();
+            didDrag = false;
+        }, true);
+        window.addEventListener('resize', updateProgress);
+        requestAnimationFrame(updateProgress);
     })();
 
     (function(){
