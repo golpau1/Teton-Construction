@@ -1,0 +1,42 @@
+@media (min-width: 1024px) {
+  .project-transition-image {
+    position: fixed;
+    z-index: 999999;
+    display: block;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    object-fit: cover;
+    transform: none;
+    transform-origin: center center;
+    pointer-events: none;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: top, left, width, height, opacity;
+  }
+
+  body.project-is-opening { overflow: hidden; }
+  body.project-is-opening > :not(.project-transition-image):not(script) {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 450ms ease;
+  }
+
+  html.project-transition-pending {
+    overflow: hidden;
+    background: #000;
+  }
+  html.project-transition-pending body > :not(.project-transition-image):not(script) {
+    visibility: hidden;
+  }
+
+  body.project-transition-enter > :not(.project-transition-image):not(script) {
+    opacity: 0;
+  }
+  body.project-transition-enter.project-transition-ready > :not(.project-transition-image):not(script) {
+    opacity: 1;
+    transition: opacity 600ms ease;
+  }
+}
