@@ -19,7 +19,7 @@
   </header>
   <main class="landing-page">
     <section class="landing-ocean" aria-label="Ocean">
-      <video id="landingVideo" muted autoplay loop playsinline webkit-playsinline preload="auto" poster="Assets/16.jpg"><source src="Assets/7031309_Close_up_Slow_Motion_3840x2160 (1).mp4" type="video/mp4"></video>
+      <video id="landingVideo" autoplay muted playsinline webkit-playsinline loop preload="auto"><source src="Assets/7031309_Close_up_Slow_Motion_3840x2160 (1).mp4" type="video/mp4"></video>
       <div class="landing-ocean-overlay" aria-hidden="true"></div>
       <div class="hero-content">
         <h1 class="landing-brand" id="landing-brand-title">
@@ -37,15 +37,6 @@
     window.addEventListener('sitepreloader:complete', function() {
       document.body.classList.add('landing-ready');
     });
-    (function(){
-      const video = document.getElementById('landingVideo');
-      if (!video) return;
-      function playVideo(){ if (!document.hidden) { const promise = video.play(); if (promise && promise.catch) promise.catch(function(){}); } }
-      video.addEventListener('pause', playVideo);
-      video.addEventListener('ended', function(){ video.currentTime = 0; playVideo(); });
-      document.addEventListener('visibilitychange', playVideo);
-      playVideo();
-    })();
   </script>
 </body>
 </html>
