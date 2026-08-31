@@ -1,5 +1,6 @@
 (function () {
   var desktopOnly = window.matchMedia('(min-width: 1024px)');
+  var mobileOnly = window.matchMedia('(max-width: 767px)');
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   var root = document.documentElement;
   var storageKey = 'tetonProjectPageTransition';
@@ -12,7 +13,11 @@
     incomingProject = '';
   }
 
-  if (!desktopOnly.matches || reducedMotion.matches) incomingProject = '';
+  function transitionEnabled() {
+    return (desktopOnly.matches || mobileOnly.matches) && !reducedMotion.matches;
+  }
+
+  if (!transitionEnabled()) incomingProject = '';
   if (incomingProject) root.classList.add('project-page-reveal-pending');
 
   function setUpProjectsPage() {
@@ -20,7 +25,7 @@
     if (!projectsGrid) return;
 
     projectsGrid.addEventListener('click', function (event) {
-      if (!desktopOnly.matches || reducedMotion.matches || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (!transitionEnabled() || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
 
       var link = event.target.closest('a.project-opening-link');
       if (!link || !projectsGrid.contains(link)) return;
@@ -50,17 +55,21 @@
       transitionViewport.setAttribute('aria-hidden', 'true');
       clone.classList.add('project-slide-image');
       clone.removeAttribute('loading');
+      clone.removeAttribute('decoding');
+      clone.decoding = 'sync';
       Object.assign(clone.style, {
         top: (rect.top - dividerY) + 'px',
         left: rect.left + 'px',
         width: rect.width + 'px',
         height: rect.height + 'px',
         objectFit: styles.objectFit || 'cover',
-        objectPosition: styles.objectPosition || '50% 50%'
+        objectPosition: styles.objectPosition || '50% 50%',
+        opacity: '1',
+        transform: 'translate3d(0, 0, 0)'
       });
       transitionViewport.appendChild(clone);
       document.body.appendChild(transitionViewport);
-      image.style.visibility = 'hidden';
+      clone.getBoundingClientRect();
 
       function navigate() {
         if (navigated) return;
@@ -70,9 +79,9 @@
         window.location.assign(destination);
       }
 
-      document.body.classList.add('project-is-opening');
-      window.requestAnimationFrame(function () {
-        window.setTimeout(navigate, 730);
+      function startSlide() {
+        var duration = mobileOnly.matches ? 650 : 700;
+        window.setTimeout(navigate, duration + 30);
         if (typeof clone.animate !== 'function') {
           window.setTimeout(navigate, 480);
           return;
@@ -81,11 +90,23 @@
           { transform: 'translate3d(0, 0, 0)' },
           { transform: 'translate3d(0, ' + (-(rect.bottom - dividerY + 2)) + 'px, 0)' }
         ], {
-          duration: 700,
+          duration: duration,
           easing: 'cubic-bezier(.76, 0, .24, 1)',
           fill: 'forwards'
         });
-      });
+      }
+
+      if (mobileOnly.matches) {
+        window.requestAnimationFrame(function () {
+          image.style.visibility = 'hidden';
+          document.body.classList.add('project-is-opening');
+          window.requestAnimationFrame(startSlide);
+        });
+      } else {
+        image.style.visibility = 'hidden';
+        document.body.classList.add('project-is-opening');
+        window.requestAnimationFrame(startSlide);
+      }
 
       window.addEventListener('pageshow', function restoreProjectsPage(event) {
         if (!event.persisted) return;

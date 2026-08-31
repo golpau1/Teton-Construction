@@ -1,4 +1,4 @@
-@media (min-width: 1024px) {
+@media (min-width: 1024px), (max-width: 767px) {
   html.project-page-reveal-pending,
   html.project-page-reveal-active {
     overflow: hidden;
