@@ -32,7 +32,28 @@
       event.preventDefault();
       var destination = link.href;
       var project = link.dataset.project || '';
+      var image = link.querySelector('.project-opening-image');
+      if (!image) {
+        window.location.assign(destination);
+        return;
+      }
+      var rect = image.getBoundingClientRect();
+      var styles = window.getComputedStyle(image);
+      var clone = image.cloneNode(true);
       var navigated = false;
+
+      clone.classList.add('project-slide-image');
+      clone.removeAttribute('loading');
+      Object.assign(clone.style, {
+        top: rect.top + 'px',
+        left: rect.left + 'px',
+        width: rect.width + 'px',
+        height: rect.height + 'px',
+        objectFit: styles.objectFit || 'cover',
+        objectPosition: styles.objectPosition || '50% 50%'
+      });
+      document.body.appendChild(clone);
+      image.style.visibility = 'hidden';
 
       function navigate() {
         if (navigated) return;
@@ -43,11 +64,27 @@
       }
 
       document.body.classList.add('project-is-opening');
-      window.setTimeout(navigate, 480);
+      window.requestAnimationFrame(function () {
+        window.setTimeout(navigate, 650);
+        if (typeof clone.animate !== 'function') {
+          window.setTimeout(navigate, 420);
+          return;
+        }
+        clone.animate([
+          { transform: 'translate3d(0, 0, 0)' },
+          { transform: 'translate3d(' + (-(rect.right + 40)) + 'px, 0, 0)' }
+        ], {
+          duration: 620,
+          easing: 'cubic-bezier(.76, 0, .24, 1)',
+          fill: 'forwards'
+        });
+      });
 
       window.addEventListener('pageshow', function restoreProjectsPage(event) {
         if (!event.persisted) return;
         navigated = false;
+        image.style.visibility = '';
+        clone.remove();
         document.body.classList.remove('project-is-opening');
         window.removeEventListener('pageshow', restoreProjectsPage);
       });
@@ -75,7 +112,7 @@
     document.body.addEventListener('animationend', onRevealEnd);
     root.classList.add('project-page-reveal-active');
     root.classList.remove('project-page-reveal-pending');
-    window.setTimeout(finishReveal, 750);
+    window.setTimeout(finishReveal, 650);
   }
 
   document.addEventListener('DOMContentLoaded', function () {

@@ -7,33 +7,44 @@
 
   body.project-is-opening {
     overflow: hidden;
-    opacity: 0;
-    transform: translate3d(0, -12px, 0);
-    transition:
-      opacity 480ms cubic-bezier(.76, 0, .24, 1),
-      transform 480ms cubic-bezier(.76, 0, .24, 1);
     pointer-events: none;
-    will-change: opacity, transform;
+  }
+
+  body.project-is-opening > :not(.project-slide-image):not(script) {
+    opacity: .12;
+    transition: opacity 400ms cubic-bezier(.76, 0, .24, 1);
+  }
+
+  .project-slide-image {
+    position: fixed;
+    z-index: 999999;
+    display: block;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    pointer-events: none;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
   }
 
   html.project-page-reveal-pending body {
     opacity: 0;
-    transform: translate3d(0, 15px, 0);
   }
 
   html.project-page-reveal-active body {
-    animation: tetonProjectPageReveal 560ms cubic-bezier(.76, 0, .24, 1) both;
-    will-change: opacity, transform;
+    animation: tetonProjectPageReveal 460ms cubic-bezier(.76, 0, .24, 1) both;
+    will-change: opacity;
   }
 
   @keyframes tetonProjectPageReveal {
     from {
       opacity: 0;
-      transform: translate3d(0, 15px, 0);
     }
     to {
       opacity: 1;
-      transform: translate3d(0, 0, 0);
     }
   }
 }
@@ -44,7 +55,6 @@
   html.project-page-reveal-active body {
     animation: none !important;
     opacity: 1 !important;
-    transform: none !important;
     transition: none !important;
   }
 }
