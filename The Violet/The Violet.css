@@ -623,6 +623,39 @@ html,
     border-bottom-color: rgba(32, 32, 30, .16);
   }
   .violet-project-page .menu-toggle span { background: #20201e; }
+
+  .drawings-renders {
+    --violet-page-left: 20px;
+    width: calc(100% - 40px);
+    margin-left: var(--violet-page-left);
+    overflow: hidden;
+  }
+
+  .drawings-renders-grid {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .drawings-renders-grid::-webkit-scrollbar { display: none; }
+
+  .drawings-renders-grid figure {
+    flex: 0 0 clamp(150px, 44vw, 190px);
+    width: auto;
+    scroll-snap-align: start;
+  }
+
+  .drawings-renders-grid img {
+    width: 100%;
+    height: auto;
+  }
 }
 
 /* ----------------------------------------------------------------------------

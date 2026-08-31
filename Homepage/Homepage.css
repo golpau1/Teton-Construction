@@ -34,6 +34,7 @@ a{color:inherit}
   .landing-page{height:100svh;height:100dvh;min-height:100svh}
   .landing-ocean{height:100%;transform:translate3d(0,24px,0)}
   .landing-ready .landing-ocean{opacity:1;transform:none;transition:none}
+  .hero-nav{width:100vw;transform:none}
   .hero-nav a{font-size:13px}
 }
 @media(prefers-reduced-motion:reduce){.landing-brand,.landing-ocean{opacity:1;transform:none;transition:none}}

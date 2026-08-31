@@ -45,6 +45,7 @@
 
 @media (max-width: 700px) {
   .site-header .brand {
+    align-self: center;
     width: 206px;
     min-width: 206px;
   }
@@ -185,7 +186,12 @@
 
   .menu-toggle {
     position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
     display: flex;
+    align-self: center;
     flex: 0 0 44px;
     width: 44px;
     height: 44px;
