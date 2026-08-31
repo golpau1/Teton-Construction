@@ -10,14 +10,23 @@
     pointer-events: none;
   }
 
-  body.project-is-opening > :not(.project-slide-image):not(script) {
+  body.project-is-opening > :not(.project-transition-viewport):not(.site-header):not(script) {
     opacity: .12;
-    transition: opacity 400ms cubic-bezier(.76, 0, .24, 1);
+    transition: opacity 450ms cubic-bezier(.76, 0, .24, 1);
+  }
+
+  .project-transition-viewport {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    overflow: hidden;
+    pointer-events: none;
   }
 
   .project-slide-image {
-    position: fixed;
-    z-index: 999999;
+    position: absolute;
     display: block;
     max-width: none;
     margin: 0;
