@@ -1553,12 +1553,13 @@ main.projects-grid.legacy-projects-grid {
   .legacy-projects-grid .project-card {
     aspect-ratio: 3 / 2;
     background: #f3f3f1;
+    overflow: hidden;
   }
 
   .legacy-projects-grid .project-card img,
   .legacy-projects-grid > div:nth-child(2) .project-card img,
   .legacy-projects-grid > div:nth-child(3) .project-card img {
-    object-fit: contain;
+    object-fit: cover;
     object-position: center center !important;
     transform: none !important;
   }
