@@ -31,6 +31,9 @@ a{color:inherit}
 @media(min-width:701px){:root{--header-height:58px}.home-page .site-header{display:block;position:relative;background:var(--landing-bg)}}
 @media(max-width:700px){
   .home-page .site-header{display:none}
-  .landing-page{height:100svh}.hero-nav a{font-size:13px}
+  .landing-page{height:100svh;height:100dvh;min-height:100svh}
+  .landing-ocean{height:100%;transform:translate3d(0,24px,0)}
+  .landing-ready .landing-ocean{opacity:1;transform:none;transition:none}
+  .hero-nav a{font-size:13px}
 }
 @media(prefers-reduced-motion:reduce){.landing-brand,.landing-ocean{opacity:1;transform:none;transition:none}}

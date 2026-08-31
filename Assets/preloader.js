@@ -16,6 +16,10 @@
     });
   var heroVideo = document.getElementById('landingVideo');
   var retryTimer;
+  var isMobileHomepage = Boolean(
+    heroVideo && document.body.classList.contains('home-page') &&
+    window.matchMedia('(max-width: 700px)').matches
+  );
 
   function playHeroVideo() {
     if (!heroVideo || document.hidden) return Promise.resolve();
@@ -103,6 +107,17 @@
     Promise.all(images.map(waitForImage)),
     waitForVideoPlayback()
   ]).then(function () {
+    // On mobile, make the already-decoded hero frame fully visible beneath
+    // the opaque loader before beginning its fade. This prevents the loader
+    // transition from exposing the hero's initial zero-opacity state.
+    if (!isMobileHomepage) return;
+    document.body.classList.add('landing-ready');
+    return new Promise(function (resolve) {
+      window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(resolve);
+      });
+    });
+  }).then(function () {
     loader.classList.add('is-hidden');
     return new Promise(function (resolve) {
       window.setTimeout(function () {
