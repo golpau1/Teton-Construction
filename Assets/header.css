@@ -145,8 +145,7 @@
 
 /* Shared mobile navigation — visually continuous with the mobile header. */
 @media (max-width: 700px) {
-  .site-header,
-  .home-page .site-header {
+  .site-header {
     position: sticky;
     top: 0;
     z-index: 100;
