@@ -9,6 +9,32 @@
 
   var loader = document.querySelector('.site-preloader');
   if (!loader) return;
+  var maximumWaitResolve;
+  var dismissalPromise;
+
+  function dismissLoader() {
+    if (dismissalPromise) return dismissalPromise;
+    document.body.classList.add('landing-ready');
+    loader.classList.add('is-hidden');
+    dismissalPromise = new Promise(function (resolve) {
+      window.setTimeout(function () {
+        loader.hidden = true;
+        loader.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('site-loading');
+        window.dispatchEvent(new CustomEvent('sitepreloader:complete'));
+        continuePlaybackInBackground();
+        resolve();
+      }, 460);
+    });
+    return dismissalPromise;
+  }
+
+  // This independent timer is installed before media setup, so even an
+  // unexpected synchronous error later in this script cannot trap the page.
+  var hardTimeout = window.setTimeout(function () {
+    dismissLoader();
+    if (maximumWaitResolve) maximumWaitResolve();
+  }, 2450);
 
   var images = Array.from(document.querySelectorAll('img'))
     .filter(function (element) {
@@ -16,6 +42,8 @@
     });
   var heroVideo = document.getElementById('landingVideo');
   var retryTimer;
+  var backgroundRetryTimer;
+  var stopVideoWait = function () {};
   var isMobileHomepage = Boolean(
     heroVideo && document.body.classList.contains('home-page') &&
     window.matchMedia('(max-width: 700px)').matches
@@ -54,18 +82,17 @@
       var resolved = false;
       var frameRequested = false;
       var readinessPoll;
-      var mobileFallback;
 
       function completeVideoWait() {
         if (resolved) return;
         resolved = true;
         if (readinessPoll) window.clearInterval(readinessPoll);
-        if (mobileFallback) window.clearTimeout(mobileFallback);
         heroVideo.removeEventListener('canplay', attemptPlayback);
         heroVideo.removeEventListener('playing', finishAfterDecodedFrame);
         heroVideo.removeEventListener('progress', attemptPlayback);
         resolve();
       }
+      stopVideoWait = completeVideoWait;
 
       function finishAfterDecodedFrame() {
         if (resolved || heroVideo.paused || heroVideo.readyState < HTMLMediaElement.HAVE_FUTURE_DATA) return;
@@ -110,13 +137,22 @@
             attemptPlayback();
           }
         }, 250);
-
-        // Never strand mobile users behind the loader solely because a media
-        // event or frame callback was lost. Playback recovery continues after
-        // the usable page is revealed.
-        mobileFallback = window.setTimeout(completeVideoWait, 15000);
       }
     });
+  }
+
+  function continuePlaybackInBackground() {
+    if (!heroVideo || (!heroVideo.paused && heroVideo.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA)) return;
+    playHeroVideo().catch(schedulePlaybackRecovery);
+    if (backgroundRetryTimer) return;
+    backgroundRetryTimer = window.setInterval(function () {
+      if (!heroVideo.paused && heroVideo.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+        window.clearInterval(backgroundRetryTimer);
+        backgroundRetryTimer = null;
+        return;
+      }
+      playHeroVideo().catch(schedulePlaybackRecovery);
+    }, 1000);
   }
 
   if (heroVideo) {
@@ -174,12 +210,19 @@
     : new Promise(function (resolve) { window.addEventListener('load', resolve, { once: true }); });
   var fontsLoaded = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
 
-  window.sitePreloaderFinished = Promise.all([
+  var maximumWait = new Promise(function (resolve) {
+    maximumWaitResolve = resolve;
+  });
+  var pageReadiness = Promise.all([
     pageLoaded,
     fontsLoaded,
     Promise.all(images.map(waitForImage)),
     waitForVideoPlayback()
-  ]).then(function () {
+  ]);
+
+  window.sitePreloaderFinished = Promise.race([pageReadiness, maximumWait]).then(function () {
+    window.clearTimeout(hardTimeout);
+    stopVideoWait();
     // On mobile, make the already-decoded hero frame fully visible beneath
     // the opaque loader before beginning its fade. This prevents the loader
     // transition from exposing the hero's initial zero-opacity state.
@@ -191,15 +234,6 @@
       });
     });
   }).then(function () {
-    loader.classList.add('is-hidden');
-    return new Promise(function (resolve) {
-      window.setTimeout(function () {
-        loader.hidden = true;
-        loader.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('site-loading');
-        window.dispatchEvent(new CustomEvent('sitepreloader:complete'));
-        resolve();
-      }, 460);
-    });
+    return dismissLoader();
   });
 })();
