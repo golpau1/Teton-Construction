@@ -88,6 +88,7 @@
         resolved = true;
         if (readinessPoll) window.clearInterval(readinessPoll);
         heroVideo.removeEventListener('canplay', attemptPlayback);
+        heroVideo.removeEventListener('loadeddata', attemptPlayback);
         heroVideo.removeEventListener('playing', finishAfterDecodedFrame);
         heroVideo.removeEventListener('progress', attemptPlayback);
         resolve();
@@ -119,11 +120,15 @@
       }
 
       function attemptPlayback() {
-        if (heroVideo.readyState < HTMLMediaElement.HAVE_FUTURE_DATA) return;
+        var requiredState = isMobileHomepage
+          ? HTMLMediaElement.HAVE_CURRENT_DATA
+          : HTMLMediaElement.HAVE_FUTURE_DATA;
+        if (heroVideo.readyState < requiredState) return;
         playHeroVideo().then(finishAfterDecodedFrame).catch(schedulePlaybackRecovery);
       }
 
       heroVideo.addEventListener('canplay', attemptPlayback);
+      if (isMobileHomepage) heroVideo.addEventListener('loadeddata', attemptPlayback);
       heroVideo.addEventListener('playing', finishAfterDecodedFrame);
       heroVideo.addEventListener('progress', attemptPlayback);
       heroVideo.load();
