@@ -1,39 +1,30 @@
 (function () {
   var desktopOnly = window.matchMedia('(min-width: 1024px)');
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   var root = document.documentElement;
-  var incoming = null;
+  var storageKey = 'tetonProjectWhiteTransition';
+  var incomingProject = '';
 
   try {
-    var stored = window.sessionStorage.getItem('tetonProjectTransition');
-    if (stored) {
-      window.sessionStorage.removeItem('tetonProjectTransition');
-      incoming = JSON.parse(stored);
-      if (!desktopOnly.matches) incoming = null;
-    }
+    incomingProject = window.sessionStorage.getItem(storageKey) || '';
+    if (incomingProject) window.sessionStorage.removeItem(storageKey);
   } catch (error) {
-    incoming = null;
+    incomingProject = '';
   }
-
-  if (incoming) root.classList.add('project-transition-pending');
-
-  function absoluteUrl(value) {
-    try { return new URL(value, window.location.href).href; }
-    catch (error) { return value || ''; }
-  }
+  if (!desktopOnly.matches || reducedMotion.matches) incomingProject = '';
+  if (incomingProject) root.classList.add('project-white-pending');
 
   function setUpProjectsPage() {
     var projectsGrid = document.querySelector('.legacy-projects-grid');
     if (!projectsGrid) return;
-
     projectsGrid.addEventListener('click', function (event) {
-      if (!desktopOnly.matches || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (!desktopOnly.matches || reducedMotion.matches || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       var link = event.target.closest('a.project-opening-link');
       if (!link || !projectsGrid.contains(link)) return;
       if (document.body.classList.contains('project-is-opening')) {
         event.preventDefault();
         return;
       }
-
       var image = link.querySelector('.project-opening-image');
       if (!image) return;
       event.preventDefault();
@@ -41,150 +32,112 @@
       var rect = image.getBoundingClientRect();
       var styles = window.getComputedStyle(image);
       var clone = image.cloneNode(true);
+      var whiteOverlay = document.createElement('div');
       var destination = link.href;
+      var project = link.dataset.project || '';
       var navigated = false;
 
       clone.classList.add('project-transition-image');
       clone.removeAttribute('loading');
       Object.assign(clone.style, {
-        top: rect.top + 'px',
-        left: rect.left + 'px',
-        width: rect.width + 'px',
-        height: rect.height + 'px',
+        top: rect.top + 'px', left: rect.left + 'px',
+        width: rect.width + 'px', height: rect.height + 'px',
         objectFit: styles.objectFit || 'cover',
         objectPosition: styles.objectPosition || '50% 50%'
       });
-      document.body.appendChild(clone);
+      whiteOverlay.className = 'project-white-transition';
+      whiteOverlay.setAttribute('aria-hidden', 'true');
+      document.body.append(whiteOverlay, clone);
       clone.getBoundingClientRect();
       image.style.visibility = 'hidden';
       document.body.classList.add('project-is-opening');
 
-      try {
-        window.sessionStorage.setItem('tetonProjectTransition', JSON.stringify({
-          project: link.dataset.project || '',
-          src: image.currentSrc || image.src,
-          objectPosition: styles.objectPosition || '50% 50%'
-        }));
-      } catch (error) {
-        // The outgoing animation remains usable when storage is unavailable.
-      }
-
       function navigate() {
         if (navigated) return;
         navigated = true;
+        try { window.sessionStorage.setItem(storageKey, project); }
+        catch (error) { /* Navigation still proceeds without the reveal marker. */ }
         window.location.assign(destination);
       }
 
       window.requestAnimationFrame(function () {
-        window.setTimeout(navigate, 1100);
-        if (typeof clone.animate !== 'function') {
+        window.setTimeout(navigate, 1050);
+        if (typeof clone.animate !== 'function' || typeof whiteOverlay.animate !== 'function') {
           navigate();
           return;
         }
-        var animation = clone.animate([
-          { top: rect.top + 'px', left: rect.left + 'px', width: rect.width + 'px', height: rect.height + 'px' },
-          { top: '0px', left: '0px', width: '100vw', height: '100vh' }
-        ], {
-          duration: 850,
-          easing: 'cubic-bezier(.93, .035, .35, .815)',
-          fill: 'forwards'
-        });
-        animation.finished.then(navigate).catch(navigate);
+        var liftX = rect.width * .015;
+        var liftY = rect.height * .015;
+        clone.animate([
+          { top: rect.top + 'px', left: rect.left + 'px', width: rect.width + 'px', height: rect.height + 'px', transform: 'translate3d(0,0,0)', opacity: 1 },
+          { offset: .18, top: (rect.top - liftY) + 'px', left: (rect.left - liftX) + 'px', width: (rect.width * 1.03) + 'px', height: (rect.height * 1.03) + 'px', transform: 'translate3d(0,0,0)', opacity: 1 },
+          { offset: .68, top: '50%', left: '50%', width: (rect.width * .35) + 'px', height: (rect.height * .35) + 'px', transform: 'translate3d(-50%,-50%,0)', opacity: 1 },
+          { top: '50%', left: '50%', width: '0px', height: '0px', transform: 'translate3d(-50%,-50%,0)', opacity: 0 }
+        ], { duration: 700, easing: 'cubic-bezier(.76,0,.24,1)', fill: 'forwards' });
+
+        var whiteAnimation = whiteOverlay.animate([
+          { transform: 'scale3d(0,0,1)', opacity: 1 },
+          { transform: 'scale3d(1,1,1)', opacity: 1 }
+        ], { duration: 650, delay: 180, easing: 'cubic-bezier(.76,0,.24,1)', fill: 'forwards' });
+        whiteAnimation.finished.then(navigate).catch(navigate);
+      });
+
+      window.addEventListener('pageshow', function restoreProjectsPage(event) {
+        if (!event.persisted) return;
+        image.style.visibility = '';
+        document.body.classList.remove('project-is-opening');
+        clone.remove();
+        whiteOverlay.remove();
+        window.removeEventListener('pageshow', restoreProjectsPage);
       });
     });
   }
 
   function setUpProjectDestination() {
-    if (!incoming) return;
-    var hero = document.querySelector('.opening-figure img');
-    if (!hero || !incoming.src || document.body.dataset.projectId !== incoming.project) {
-      root.classList.remove('project-transition-pending');
+    if (!incomingProject) return;
+    if (document.body.dataset.projectId !== incomingProject) {
+      root.classList.remove('project-white-pending');
       return;
     }
-
-    var overlay = document.createElement('img');
+    var revealOverlay = document.createElement('div');
+    var hero = document.querySelector('.opening-figure img');
     var started = false;
-    var cleaned = false;
-    var heroRevealed = false;
-    overlay.src = incoming.src;
-    overlay.alt = '';
-    overlay.className = 'project-transition-image';
-    Object.assign(overlay.style, {
-      top: '0px',
-      left: '0px',
-      width: '100vw',
-      height: '100vh',
-      objectFit: 'cover',
-      objectPosition: incoming.objectPosition || '50% 50%'
-    });
-    document.body.appendChild(overlay);
-    hero.style.visibility = 'hidden';
-    document.body.classList.add('project-transition-enter');
-    root.classList.remove('project-transition-pending');
+    var removed = false;
+    revealOverlay.className = 'project-transition-reveal';
+    revealOverlay.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(revealOverlay);
+    root.classList.remove('project-white-pending');
 
-    function revealHero() {
-      if (heroRevealed) return;
-      heroRevealed = true;
-      hero.style.visibility = 'visible';
+    function removeOverlay() {
+      if (removed) return;
+      removed = true;
+      revealOverlay.remove();
     }
-
-    function cleanUp() {
-      if (cleaned) return;
-      cleaned = true;
-      revealHero();
-      overlay.remove();
-      document.body.classList.remove('project-transition-enter', 'project-transition-ready');
-    }
-
     function startReveal() {
       if (started) return;
       started = true;
       window.requestAnimationFrame(function () {
         window.requestAnimationFrame(function () {
-          var targetRect = hero.getBoundingClientRect();
-          var heroStyles = window.getComputedStyle(hero);
-          var sameImage = absoluteUrl(hero.currentSrc || hero.src) === absoluteUrl(incoming.src);
-          var endFrame = {
-            top: targetRect.top + 'px',
-            left: targetRect.left + 'px',
-            width: targetRect.width + 'px',
-            height: targetRect.height + 'px',
-            objectPosition: heroStyles.objectPosition || incoming.objectPosition || '50% 50%',
-            opacity: 1
-          };
-          var frames = [
-            { top: '0px', left: '0px', width: '100vw', height: '100vh', opacity: 1 },
-            endFrame
-          ];
-
-          if (!sameImage) {
-            frames = [frames[0], Object.assign({ offset: .82 }, endFrame), Object.assign({}, endFrame, { opacity: 0 })];
-            window.setTimeout(revealHero, 615);
-          }
-
-          window.setTimeout(cleanUp, 1000);
-          if (typeof overlay.animate !== 'function') {
-            cleanUp();
+          window.setTimeout(removeOverlay, 900);
+          if (typeof revealOverlay.animate !== 'function') {
+            removeOverlay();
             return;
           }
-          var animation = overlay.animate(frames, {
-            duration: 750,
-            easing: 'cubic-bezier(.815, .035, .35, .93)',
-            fill: 'forwards'
-          });
-          window.setTimeout(function () {
-            document.body.classList.add('project-transition-ready');
-          }, 180);
-          animation.finished.then(cleanUp).catch(cleanUp);
+          var animation = revealOverlay.animate([
+            { transform: 'scaleY(1)', opacity: 1 },
+            { offset: .88, transform: 'scaleY(.002)', opacity: 1 },
+            { transform: 'scaleY(.002)', opacity: 0 }
+          ], { duration: 750, easing: 'cubic-bezier(.76,0,.24,1)', fill: 'forwards' });
+          animation.finished.then(removeOverlay).catch(removeOverlay);
         });
       });
     }
 
-    if (hero.complete && overlay.complete) startReveal();
+    if (!hero || (hero.complete && hero.naturalWidth)) window.setTimeout(startReveal, 90);
     else {
-      overlay.addEventListener('load', startReveal, { once: true });
       hero.addEventListener('load', startReveal, { once: true });
-      window.setTimeout(startReveal, 1000);
+      hero.addEventListener('error', startReveal, { once: true });
+      window.setTimeout(startReveal, 650);
     }
   }
 
