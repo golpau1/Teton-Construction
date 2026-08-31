@@ -1548,3 +1548,18 @@ main.projects-grid.legacy-projects-grid {
 }
 
 .project-slider-progress { flex: 0 0 auto; }
+
+@media (max-width: 700px) {
+  .legacy-projects-grid .project-card {
+    aspect-ratio: 3 / 2;
+    background: #f3f3f1;
+  }
+
+  .legacy-projects-grid .project-card img,
+  .legacy-projects-grid > div:nth-child(2) .project-card img,
+  .legacy-projects-grid > div:nth-child(3) .project-card img {
+    object-fit: contain;
+    object-position: center center !important;
+    transform: none !important;
+  }
+}

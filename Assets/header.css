@@ -152,7 +152,9 @@
     z-index: 100;
     display: block;
     width: 100%;
+    max-width: 100vw;
     min-height: 58px;
+    overflow-x: clip;
     border-bottom: 1px solid rgba(32, 32, 30, .12);
     background: #fff;
   }
@@ -165,14 +167,18 @@
     width: 100%;
     min-height: 58px;
     margin: 0;
-    padding: 0 14px 0 18px;
+    max-width: 100%;
+    padding: 0 18px;
     gap: 16px;
+    box-sizing: border-box;
   }
 
   .site-header .brand {
     width: 206px;
-    min-width: 206px;
+    min-width: 0;
+    max-width: 206px;
     height: 26px;
+    flex: 1 1 206px;
   }
 
   .site-header .brand-logo {
