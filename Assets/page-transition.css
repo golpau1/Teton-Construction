@@ -54,6 +54,51 @@ html.transition-reveal-active::after {
   60%, 100% { transform: translate(-50%, -50%) scaleX(1); opacity: 0; }
 }
 
+@media (max-width: 767px) {
+  html.transition-reveal-pending,
+  html.transition-reveal-active {
+    min-height: 100dvh;
+  }
+
+  html.transition-reveal-pending body {
+    min-height: 100dvh;
+    opacity: 0;
+    transform: scale3d(.12, .01, 1);
+  }
+
+  html.transition-reveal-active body {
+    min-height: 100dvh;
+    animation-name: tetonDestinationRevealMobile;
+  }
+
+  html.transition-reveal-pending::after,
+  html.transition-reveal-active::after {
+    top: 50%;
+    left: 50%;
+    height: 1px;
+    transform: translate3d(-50%, -50%, 0) scaleX(.12);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  html.transition-reveal-active::after {
+    animation-name: tetonLineRevealMobile;
+  }
+}
+
+@keyframes tetonDestinationRevealMobile {
+  0% { transform: scale3d(.12, .01, 1); opacity: 0; }
+  35% { transform: scale3d(1, .01, 1); opacity: 0; animation-timing-function: step-end; }
+  35.1% { transform: scale3d(1, .01, 1); opacity: 1; }
+  100% { transform: scale3d(1, 1, 1); opacity: 1; }
+}
+
+@keyframes tetonLineRevealMobile {
+  0% { transform: translate3d(-50%, -50%, 0) scaleX(.12); opacity: 1; }
+  35% { transform: translate3d(-50%, -50%, 0) scaleX(1); opacity: 1; animation-timing-function: step-end; }
+  35.1%, 100% { transform: translate3d(-50%, -50%, 0) scaleX(1); opacity: 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html.transition-reveal-pending body,
   html.transition-reveal-active body {
