@@ -7,16 +7,12 @@
   var destinationUrl;
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  function enterHomepage() {
+  function resetHomepage() {
     window.clearTimeout(navigationTimer);
     navigationTimer = null;
     destinationUrl = null;
     body.classList.remove('is-transitioning');
-    wrapper.classList.remove('home-exit', 'home-enter');
-    if (reducedMotion.matches) return;
-    window.requestAnimationFrame(function () {
-      wrapper.classList.add('home-enter');
-    });
+    wrapper.classList.remove('home-exit');
   }
 
   function finishNavigation() {
@@ -32,11 +28,7 @@
 
   wrapper.addEventListener('animationend', function (event) {
     if (event.target !== wrapper) return;
-    if (event.animationName === 'tetonHomeEnter') {
-      wrapper.classList.remove('home-enter');
-    } else if (event.animationName === 'tetonHomeExit') {
-      finishNavigation();
-    }
+    if (event.animationName === 'tetonHomeExit') finishNavigation();
   });
 
   document.addEventListener('click', function (event) {
@@ -61,14 +53,11 @@
 
     destinationUrl = destination.href;
     body.classList.add('is-transitioning');
-    wrapper.classList.remove('home-enter');
     wrapper.classList.add('home-exit');
-    navigationTimer = window.setTimeout(finishNavigation, 1050);
+    navigationTimer = window.setTimeout(finishNavigation, 1000);
   });
 
   window.addEventListener('pageshow', function (event) {
-    if (event.persisted || body.classList.contains('is-transitioning')) enterHomepage();
+    if (event.persisted || body.classList.contains('is-transitioning')) resetHomepage();
   });
-
-  if (reducedMotion.matches) wrapper.classList.remove('home-enter');
 })();
