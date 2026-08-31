@@ -9,11 +9,7 @@
     <link rel="stylesheet" href="../Assets/header.css">
 </head>
 <body>
-    <!-- Mobile burger menu (only visible on small screens) -->
-    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
-        <span></span>
-        <span></span>
-    </button>
+    <!-- Mobile navigation -->
     <div class="drawer-overlay" hidden></div>
     <aside id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
     <button class="drawer-close" aria-label="Close menu"></button>
@@ -29,6 +25,10 @@
             <a class="brand" href="../index.html" aria-label="Teton Construction home">
                 <img src="../Assets/teton-header-logo.png" alt="Teton Construction" class="brand-logo brand-logo--dark">
             </a>
+            <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
+                <span></span>
+                <span></span>
+            </button>
             <nav class="main-nav" aria-label="Primary">
                 <a href="../index.html">Home</a>
                 <a class="active" href="Projects.html#projects" data-section-target="projects">Projects</a>
