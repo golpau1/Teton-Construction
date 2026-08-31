@@ -3,32 +3,40 @@
   var wrapper = document.getElementById('home-transition-wrapper');
   if (!body || !body.classList.contains('home-page') || !wrapper) return;
 
-  var navigationTimer;
-  var destinationUrl;
+  var TRANSITION_DURATION = 700;
+  var FAILSAFE_DELAY = TRANSITION_DURATION + 150;
+  var homeTransitionRunning = false;
+  var homeTransitionDestination = null;
+  var navigationCommitted = false;
+  var navigationFailsafe = null;
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  function resetHomepage() {
-    window.clearTimeout(navigationTimer);
-    navigationTimer = null;
-    destinationUrl = null;
-    body.classList.remove('is-transitioning');
-    wrapper.classList.remove('home-exit');
-  }
-
-  function finishNavigation() {
-    if (!destinationUrl) return;
-    var target = destinationUrl;
-    destinationUrl = null;
-    window.location.assign(target);
-  }
 
   function canonicalPath(pathname) {
     return pathname.replace(/index\.html$/i, '').replace(/\/+$/, '') || '/';
   }
 
+  function completeHomeNavigation() {
+    if (navigationCommitted || !homeTransitionDestination) return;
+    navigationCommitted = true;
+    window.clearTimeout(navigationFailsafe);
+    navigationFailsafe = null;
+    window.location.assign(homeTransitionDestination);
+  }
+
+  function resetRestoredHomepage() {
+    window.clearTimeout(navigationFailsafe);
+    navigationFailsafe = null;
+    homeTransitionRunning = false;
+    homeTransitionDestination = null;
+    navigationCommitted = false;
+    body.classList.remove('is-transitioning');
+    wrapper.classList.remove('home-exit');
+  }
+
   wrapper.addEventListener('animationend', function (event) {
-    if (event.target !== wrapper) return;
-    if (event.animationName === 'tetonHomeExit') finishNavigation();
+    if (!homeTransitionRunning || event.target !== wrapper) return;
+    if (event.animationName !== 'tetonHomeExit' && event.animationName !== 'tetonHomeExitMobile') return;
+    completeHomeNavigation();
   });
 
   document.addEventListener('click', function (event) {
@@ -44,26 +52,32 @@
     if (canonicalPath(destination.pathname) === canonicalPath(window.location.pathname) && !destination.hash) return;
 
     event.preventDefault();
-    if (body.classList.contains('is-transitioning')) return;
+    if (homeTransitionRunning) return;
+
+    homeTransitionRunning = true;
+    homeTransitionDestination = destination.href;
+    navigationCommitted = false;
 
     try {
       window.sessionStorage.setItem('tetonHomeTransition', 'true');
     } catch (error) {
-      // Storage can be unavailable in strict privacy modes; the exit still runs.
+      // Storage can be unavailable in strict privacy modes; navigation remains atomic.
     }
 
     if (reducedMotion.matches) {
-      window.location.assign(destination.href);
+      completeHomeNavigation();
       return;
     }
 
-    destinationUrl = destination.href;
     body.classList.add('is-transitioning');
     wrapper.classList.add('home-exit');
-    navigationTimer = window.setTimeout(finishNavigation, 800);
+    navigationFailsafe = window.setTimeout(completeHomeNavigation, FAILSAFE_DELAY);
   });
 
-  window.addEventListener('pageshow', function (event) {
-    if (event.persisted || body.classList.contains('is-transitioning')) resetHomepage();
+  window.addEventListener('pageshow', function () {
+    // A pageshow after navigation (including BFCache restoration) is a genuine
+    // new presentation. Never reset a still-running, uncommitted exit.
+    if (homeTransitionRunning && !navigationCommitted) return;
+    resetRestoredHomepage();
   });
 })();
