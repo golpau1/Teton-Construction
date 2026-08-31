@@ -44,8 +44,8 @@
         width: rect.width + 'px', height: rect.height + 'px',
         objectFit: styles.objectFit || 'cover',
         objectPosition: styles.objectPosition || '50% 50%',
-        clipPath: 'polygon(0 0,100% 0,100% 50%,100% 100%,0 100%,0 50%)',
-        WebkitClipPath: 'polygon(0 0,100% 0,100% 50%,100% 100%,0 100%,0 50%)'
+        clipPath: 'polygon(0 0,100% 0,100% 100%,0 100%,0 100%,0 0)',
+        WebkitClipPath: 'polygon(0 0,100% 0,100% 100%,0 100%,0 100%,0 0)'
       });
       whiteOverlay.className = 'project-white-transition';
       whiteOverlay.setAttribute('aria-hidden', 'true');
@@ -69,9 +69,10 @@
           return;
         }
         var collapseAnimation = clone.animate([
-          { clipPath: 'polygon(0 0,100% 0,100% 50%,100% 100%,0 100%,0 50%)', webkitClipPath: 'polygon(0 0,100% 0,100% 50%,100% 100%,0 100%,0 50%)', opacity: 1 },
-          { offset: .5, clipPath: 'polygon(30% 0,70% 0,58% 50%,70% 100%,30% 100%,42% 50%)', webkitClipPath: 'polygon(30% 0,70% 0,58% 50%,70% 100%,30% 100%,42% 50%)', opacity: 1 },
-          { offset: .82, clipPath: 'polygon(47% 0,53% 0,50.5% 50%,53% 100%,47% 100%,49.5% 50%)', webkitClipPath: 'polygon(47% 0,53% 0,50.5% 50%,53% 100%,47% 100%,49.5% 50%)', opacity: 1 },
+          { clipPath: 'polygon(0 0,100% 0,100% 100%,0 100%,0 100%,0 0)', webkitClipPath: 'polygon(0 0,100% 0,100% 100%,0 100%,0 100%,0 0)', opacity: 1 },
+          { offset: .5, clipPath: 'polygon(35% 0,100% 0,100% 65%,65% 100%,0 100%,0 35%)', webkitClipPath: 'polygon(35% 0,100% 0,100% 65%,65% 100%,0 100%,0 35%)', opacity: 1 },
+          { offset: .82, clipPath: 'polygon(88% 0,100% 0,100% 12%,12% 100%,0 100%,0 88%)', webkitClipPath: 'polygon(88% 0,100% 0,100% 12%,12% 100%,0 100%,0 88%)', opacity: 1 },
+          { offset: .9, clipPath: 'polygon(98.5% 0,100% 0,100% 1.5%,1.5% 100%,0 100%,0 98.5%)', webkitClipPath: 'polygon(98.5% 0,100% 0,100% 1.5%,1.5% 100%,0 100%,0 98.5%)', opacity: 1 },
           { clipPath: 'polygon(50% 50%,50% 50%,50% 50%,50% 50%,50% 50%,50% 50%)', webkitClipPath: 'polygon(50% 50%,50% 50%,50% 50%,50% 50%,50% 50%,50% 50%)', opacity: 1 }
         ], {
           duration: 700,
