@@ -48,6 +48,8 @@
       var dividerY = header ? header.getBoundingClientRect().bottom : 0;
       var transitionViewport = document.createElement('div');
       var clone = image.cloneNode(true);
+      var selectedCenter = rect.left + (rect.width / 2);
+      var neighborEntries = [];
       var navigated = false;
 
       transitionViewport.className = 'project-transition-viewport';
@@ -68,6 +70,39 @@
         transform: 'translate3d(0, 0, 0)'
       });
       transitionViewport.appendChild(clone);
+
+      Array.prototype.forEach.call(projectsGrid.querySelectorAll('.project-card img'), function (neighborImage) {
+        if (neighborImage === image) return;
+        var neighborRect = neighborImage.getBoundingClientRect();
+        var neighborStyles = window.getComputedStyle(neighborImage);
+        var neighborClone = neighborImage.cloneNode(true);
+        var neighborCenter = neighborRect.left + (neighborRect.width / 2);
+        var direction = neighborCenter < selectedCenter ? -1 : 1;
+
+        neighborClone.classList.add('project-slide-image', 'project-neighbor-image');
+        neighborClone.removeAttribute('loading');
+        neighborClone.removeAttribute('decoding');
+        neighborClone.decoding = 'sync';
+        Object.assign(neighborClone.style, {
+          top: (neighborRect.top - dividerY) + 'px',
+          left: neighborRect.left + 'px',
+          width: neighborRect.width + 'px',
+          height: neighborRect.height + 'px',
+          objectFit: neighborStyles.objectFit || 'cover',
+          objectPosition: neighborStyles.objectPosition || '50% 50%',
+          opacity: '1',
+          transform: 'translate3d(0, 0, 0)'
+        });
+        transitionViewport.appendChild(neighborClone);
+        neighborEntries.push({
+          image: neighborImage,
+          clone: neighborClone,
+          rect: neighborRect,
+          direction: direction,
+          distanceFromSelected: Math.abs(neighborCenter - selectedCenter)
+        });
+      });
+
       document.body.appendChild(transitionViewport);
       clone.getBoundingClientRect();
 
@@ -81,6 +116,9 @@
 
       function startSlide() {
         var duration = mobileOnly.matches ? 650 : 700;
+        var orderedNeighbors = neighborEntries.slice().sort(function (a, b) {
+          return a.distanceFromSelected - b.distanceFromSelected;
+        });
         window.setTimeout(navigate, duration + 30);
         if (typeof clone.animate !== 'function') {
           window.setTimeout(navigate, 480);
@@ -94,16 +132,36 @@
           easing: 'cubic-bezier(.76, 0, .24, 1)',
           fill: 'forwards'
         });
+
+        orderedNeighbors.forEach(function (entry, index) {
+          var horizontalDistance = entry.direction < 0
+            ? -(entry.rect.right + 40)
+            : window.innerWidth - entry.rect.left + 40;
+          entry.clone.animate([
+            { transform: 'translate3d(0, 0, 0)', opacity: 1 },
+            { transform: 'translate3d(' + horizontalDistance + 'px, 0, 0)', opacity: 0 }
+          ], {
+            duration: 600,
+            delay: Math.min(index * 25, 50),
+            easing: 'cubic-bezier(.76, 0, .24, 1)',
+            fill: 'forwards'
+          });
+        });
+      }
+
+      function hideOriginalImages() {
+        image.style.visibility = 'hidden';
+        neighborEntries.forEach(function (entry) { entry.image.style.visibility = 'hidden'; });
       }
 
       if (mobileOnly.matches) {
         window.requestAnimationFrame(function () {
-          image.style.visibility = 'hidden';
+          hideOriginalImages();
           document.body.classList.add('project-is-opening');
           window.requestAnimationFrame(startSlide);
         });
       } else {
-        image.style.visibility = 'hidden';
+        hideOriginalImages();
         document.body.classList.add('project-is-opening');
         window.requestAnimationFrame(startSlide);
       }
@@ -112,6 +170,7 @@
         if (!event.persisted) return;
         navigated = false;
         image.style.visibility = '';
+        neighborEntries.forEach(function (entry) { entry.image.style.visibility = ''; });
         transitionViewport.remove();
         document.body.classList.remove('project-is-opening');
         window.removeEventListener('pageshow', restoreProjectsPage);

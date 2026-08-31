@@ -39,6 +39,15 @@
     will-change: transform;
   }
 
+  .project-neighbor-image {
+    z-index: 1;
+    will-change: transform, opacity;
+  }
+
+  .project-slide-image:not(.project-neighbor-image) {
+    z-index: 2;
+  }
+
   html.project-page-reveal-pending body {
     opacity: 0;
   }
