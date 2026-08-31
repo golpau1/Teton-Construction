@@ -50,7 +50,7 @@ a{color:inherit}
   -webkit-backface-visibility:hidden;
 }
 .home-page .home-transition-wrapper.home-exit{
-  animation:tetonHomeExit .9s cubic-bezier(.76,0,.24,1) forwards;
+  animation:tetonHomeExit .7s cubic-bezier(.76,0,.24,1) forwards;
 }
 .home-page.is-transitioning{pointer-events:none}
 .home-page::after{
@@ -68,20 +68,18 @@ a{color:inherit}
   transform-origin:center;
 }
 .home-page.is-transitioning::after{
-  animation:tetonWhiteLine .9s cubic-bezier(.76,0,.24,1) forwards;
+  animation:tetonWhiteLine .7s cubic-bezier(.76,0,.24,1) forwards;
 }
 
 @keyframes tetonHomeExit{
   0%{transform:scale(1);opacity:1}
-  48%{transform:scale(1,.002);opacity:1}
-  80%{transform:scale(.16,.002);opacity:1}
-  100%{transform:scale(.16,.002);opacity:0}
+  65%{transform:scale(1,.002);opacity:1}
+  100%{transform:scale(.12,.002);opacity:0}
 }
 @keyframes tetonWhiteLine{
   0%{transform:translate(-50%,-50%) scaleX(1);opacity:0}
-  45%{transform:translate(-50%,-50%) scaleX(1);opacity:1}
-  80%{transform:translate(-50%,-50%) scaleX(.16);opacity:1}
-  100%{transform:translate(-50%,-50%) scaleX(.16);opacity:0}
+  55%{transform:translate(-50%,-50%) scaleX(1);opacity:1}
+  100%{transform:translate(-50%,-50%) scaleX(.12);opacity:1}
 }
 
 @media(max-width:767px){

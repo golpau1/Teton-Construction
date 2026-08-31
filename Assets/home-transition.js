@@ -46,6 +46,12 @@
     event.preventDefault();
     if (body.classList.contains('is-transitioning')) return;
 
+    try {
+      window.sessionStorage.setItem('tetonHomeTransition', 'true');
+    } catch (error) {
+      // Storage can be unavailable in strict privacy modes; the exit still runs.
+    }
+
     if (reducedMotion.matches) {
       window.location.assign(destination.href);
       return;
@@ -54,7 +60,7 @@
     destinationUrl = destination.href;
     body.classList.add('is-transitioning');
     wrapper.classList.add('home-exit');
-    navigationTimer = window.setTimeout(finishNavigation, 1000);
+    navigationTimer = window.setTimeout(finishNavigation, 800);
   });
 
   window.addEventListener('pageshow', function (event) {
