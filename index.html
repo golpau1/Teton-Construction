@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="Assets/header.css">
   <link rel="stylesheet" href="Assets/preloader.css">
   <script src="Assets/preloader.js" defer></script>
+  <script src="Assets/home-transition.js" defer></script>
 </head>
 <body class="home-page site-loading">
+  <div id="home-transition-wrapper" class="home-transition-wrapper home-enter">
   <div class="site-preloader" role="status" aria-label="Loading page"><img src="Assets/teton-gif.gif" alt="Teton Construction loading"></div>
   <header class="site-header">
     <div class="header-inner">
@@ -33,6 +35,7 @@
       </div>
     </section>
   </main>
+  </div>
   <script>
     window.addEventListener('sitepreloader:complete', function() {
       document.body.classList.add('landing-ready');
