@@ -13,7 +13,7 @@
     pointer-events: none;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    will-change: top, left, width, height, opacity, transform;
+    will-change: top, left, width, height, opacity, transform, clip-path;
   }
   .project-white-transition,
   .project-transition-reveal {
@@ -29,7 +29,7 @@
     -webkit-backface-visibility: hidden;
     will-change: transform, opacity;
   }
-  .project-white-transition { opacity: 0; transform: scale3d(0, 0, 1); }
+  .project-white-transition { opacity: 0; transform: none; }
   .project-transition-reveal { z-index: 999999; opacity: 1; transform: scaleY(1); }
   body.project-is-opening { overflow: hidden; }
   body.project-is-opening > :not(.project-transition-image):not(.project-white-transition):not(script) {

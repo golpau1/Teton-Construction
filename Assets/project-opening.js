@@ -43,7 +43,9 @@
         top: rect.top + 'px', left: rect.left + 'px',
         width: rect.width + 'px', height: rect.height + 'px',
         objectFit: styles.objectFit || 'cover',
-        objectPosition: styles.objectPosition || '50% 50%'
+        objectPosition: styles.objectPosition || '50% 50%',
+        clipPath: 'polygon(0 0,100% 0,100% 50%,100% 100%,0 100%,0 50%)',
+        WebkitClipPath: 'polygon(0 0,100% 0,100% 50%,100% 100%,0 100%,0 50%)'
       });
       whiteOverlay.className = 'project-white-transition';
       whiteOverlay.setAttribute('aria-hidden', 'true');
@@ -61,25 +63,31 @@
       }
 
       window.requestAnimationFrame(function () {
-        window.setTimeout(navigate, 1050);
+        window.setTimeout(navigate, 1000);
         if (typeof clone.animate !== 'function' || typeof whiteOverlay.animate !== 'function') {
           navigate();
           return;
         }
-        var liftX = rect.width * .015;
-        var liftY = rect.height * .015;
-        clone.animate([
-          { top: rect.top + 'px', left: rect.left + 'px', width: rect.width + 'px', height: rect.height + 'px', transform: 'translate3d(0,0,0)', opacity: 1 },
-          { offset: .18, top: (rect.top - liftY) + 'px', left: (rect.left - liftX) + 'px', width: (rect.width * 1.03) + 'px', height: (rect.height * 1.03) + 'px', transform: 'translate3d(0,0,0)', opacity: 1 },
-          { offset: .68, top: '50%', left: '50%', width: (rect.width * .35) + 'px', height: (rect.height * .35) + 'px', transform: 'translate3d(-50%,-50%,0)', opacity: 1 },
-          { top: '50%', left: '50%', width: '0px', height: '0px', transform: 'translate3d(-50%,-50%,0)', opacity: 0 }
-        ], { duration: 700, easing: 'cubic-bezier(.76,0,.24,1)', fill: 'forwards' });
+        var collapseAnimation = clone.animate([
+          { clipPath: 'polygon(0 0,100% 0,100% 50%,100% 100%,0 100%,0 50%)', webkitClipPath: 'polygon(0 0,100% 0,100% 50%,100% 100%,0 100%,0 50%)', opacity: 1 },
+          { offset: .5, clipPath: 'polygon(30% 0,70% 0,58% 50%,70% 100%,30% 100%,42% 50%)', webkitClipPath: 'polygon(30% 0,70% 0,58% 50%,70% 100%,30% 100%,42% 50%)', opacity: 1 },
+          { offset: .82, clipPath: 'polygon(47% 0,53% 0,50.5% 50%,53% 100%,47% 100%,49.5% 50%)', webkitClipPath: 'polygon(47% 0,53% 0,50.5% 50%,53% 100%,47% 100%,49.5% 50%)', opacity: 1 },
+          { clipPath: 'polygon(50% 50%,50% 50%,50% 50%,50% 50%,50% 50%,50% 50%)', webkitClipPath: 'polygon(50% 50%,50% 50%,50% 50%,50% 50%,50% 50%,50% 50%)', opacity: 1 }
+        ], {
+          duration: 700,
+          delay: 120,
+          easing: 'cubic-bezier(.76,0,.24,1)',
+          fill: 'forwards'
+        });
 
-        var whiteAnimation = whiteOverlay.animate([
-          { transform: 'scale3d(0,0,1)', opacity: 1 },
-          { transform: 'scale3d(1,1,1)', opacity: 1 }
-        ], { duration: 650, delay: 180, easing: 'cubic-bezier(.76,0,.24,1)', fill: 'forwards' });
-        whiteAnimation.finished.then(navigate).catch(navigate);
+        whiteOverlay.animate([
+          { opacity: 0 },
+          { opacity: 1 }
+        ], { duration: 450, easing: 'ease', fill: 'forwards' });
+
+        collapseAnimation.finished
+          .then(function () { window.setTimeout(navigate, 70); })
+          .catch(function () { window.setTimeout(navigate, 450); });
       });
 
       window.addEventListener('pageshow', function restoreProjectsPage(event) {
