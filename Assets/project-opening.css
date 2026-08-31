@@ -1,49 +1,50 @@
 @media (min-width: 1024px) {
-  .project-transition-image {
-    position: fixed;
-    z-index: 999999;
-    display: block;
-    max-width: none;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-    object-fit: cover;
-    transform-origin: center center;
-    pointer-events: none;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    will-change: top, left, width, height, opacity, transform, clip-path;
-  }
-  .project-white-transition,
-  .project-transition-reveal {
-    position: fixed;
-    inset: 0;
-    z-index: 999998;
+  html.project-page-reveal-pending,
+  html.project-page-reveal-active {
+    overflow: hidden;
     background: #fff;
-    border: 0;
-    box-shadow: none;
-    pointer-events: none;
-    transform-origin: center center;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    will-change: transform, opacity;
   }
-  .project-white-transition { opacity: 0; transform: none; }
-  .project-transition-reveal { z-index: 999999; opacity: 1; transform: scaleY(1); }
-  body.project-is-opening { overflow: hidden; }
-  body.project-is-opening > :not(.project-transition-image):not(.project-white-transition):not(script) {
+
+  body.project-is-opening {
+    overflow: hidden;
     opacity: 0;
+    transform: translate3d(0, -12px, 0);
+    transition:
+      opacity 480ms cubic-bezier(.76, 0, .24, 1),
+      transform 480ms cubic-bezier(.76, 0, .24, 1);
     pointer-events: none;
-    transition: opacity 450ms ease;
+    will-change: opacity, transform;
   }
-  html.project-white-pending { overflow: hidden; background: #fff; }
-  html.project-white-pending body { visibility: hidden; }
-  html.project-white-pending::after {
-    position: fixed;
-    inset: 0;
-    z-index: 1000000;
-    background: #fff;
-    content: '';
+
+  html.project-page-reveal-pending body {
+    opacity: 0;
+    transform: translate3d(0, 15px, 0);
+  }
+
+  html.project-page-reveal-active body {
+    animation: tetonProjectPageReveal 560ms cubic-bezier(.76, 0, .24, 1) both;
+    will-change: opacity, transform;
+  }
+
+  @keyframes tetonProjectPageReveal {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 15px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.project-is-opening,
+  html.project-page-reveal-pending body,
+  html.project-page-reveal-active body {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
