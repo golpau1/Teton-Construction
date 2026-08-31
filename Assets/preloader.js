@@ -52,15 +52,41 @@
 
     return new Promise(function (resolve) {
       var resolved = false;
+      var frameRequested = false;
+      var readinessPoll;
+      var mobileFallback;
+
+      function completeVideoWait() {
+        if (resolved) return;
+        resolved = true;
+        if (readinessPoll) window.clearInterval(readinessPoll);
+        if (mobileFallback) window.clearTimeout(mobileFallback);
+        heroVideo.removeEventListener('canplay', attemptPlayback);
+        heroVideo.removeEventListener('playing', finishAfterDecodedFrame);
+        heroVideo.removeEventListener('progress', attemptPlayback);
+        resolve();
+      }
 
       function finishAfterDecodedFrame() {
         if (resolved || heroVideo.paused || heroVideo.readyState < HTMLMediaElement.HAVE_FUTURE_DATA) return;
-        resolved = true;
         if ('requestVideoFrameCallback' in heroVideo) {
-          heroVideo.requestVideoFrameCallback(function () { resolve(); });
+          if (frameRequested) return;
+          frameRequested = true;
+          heroVideo.requestVideoFrameCallback(completeVideoWait);
+
+          // Some mobile WebKit versions suspend frame callbacks while a page
+          // enters or leaves the back/forward cache. The current decoded frame
+          // is still safe to reveal if playback remains ready.
+          if (isMobileHomepage) {
+            window.setTimeout(function () {
+              if (!heroVideo.paused && heroVideo.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+                completeVideoWait();
+              }
+            }, 1000);
+          }
         } else {
           window.requestAnimationFrame(function () {
-            window.requestAnimationFrame(resolve);
+            window.requestAnimationFrame(completeVideoWait);
           });
         }
       }
@@ -75,6 +101,21 @@
       heroVideo.addEventListener('progress', attemptPlayback);
       heroVideo.load();
       attemptPlayback();
+
+      if (isMobileHomepage) {
+        readinessPoll = window.setInterval(function () {
+          if (heroVideo.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA && !heroVideo.paused) {
+            finishAfterDecodedFrame();
+          } else {
+            attemptPlayback();
+          }
+        }, 250);
+
+        // Never strand mobile users behind the loader solely because a media
+        // event or frame callback was lost. Playback recovery continues after
+        // the usable page is revealed.
+        mobileFallback = window.setTimeout(completeVideoWait, 15000);
+      }
     });
   }
 
@@ -93,6 +134,38 @@
       document.addEventListener(eventName, function () {
         playHeroVideo().catch(schedulePlaybackRecovery);
       }, { passive: true });
+    });
+  }
+
+  if (isMobileHomepage) {
+    window.addEventListener('pageshow', function (event) {
+      var navigation = window.performance && window.performance.getEntriesByType
+        ? window.performance.getEntriesByType('navigation')[0]
+        : null;
+      var restored = event.persisted || (navigation && navigation.type === 'back_forward');
+      if (!restored) return;
+
+      playHeroVideo().catch(schedulePlaybackRecovery);
+
+      // A completed loader can be restored in any point of its fade when a
+      // browser snapshots the page. Normalize it to the completed state.
+      if (loader.hidden || loader.classList.contains('is-hidden')) {
+        loader.hidden = true;
+        loader.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('site-loading');
+        document.body.classList.add('landing-ready');
+        return;
+      }
+
+      // If the decoded frame survived the cache, prepare it beneath the
+      // loader. The single original readiness promise owns the fade, avoiding
+      // duplicate timers and completion transitions.
+      if (heroVideo.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+        document.body.classList.add('landing-ready');
+      } else {
+        heroVideo.load();
+        schedulePlaybackRecovery();
+      }
     });
   }
 
