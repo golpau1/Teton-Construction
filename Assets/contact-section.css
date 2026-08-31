@@ -251,3 +251,126 @@ a:hover{text-decoration:underline}
   .drawer-close:hover,.drawer-close:focus-visible{opacity:1;}
   .drawer-close:focus-visible{outline:2px solid rgba(255,255,255,.6);outline-offset:2px;}
 }
+
+/* Mobile contact composition. Tablet and desktop retain their existing views. */
+@media (max-width:700px){
+  .wrap{display:none}
+
+  .contact-desktop{
+    display:block;
+    width:100%;
+    background:#fff;
+    color:#181818;
+    font-family:'NType82','Helvetica Neue',Arial,sans-serif;
+    font-weight:400;
+  }
+
+  .contact-primary{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    margin:0;
+    padding:clamp(38px,10vw,52px) 22px 52px;
+  }
+
+  .contact-intro{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .contact-intro h1{
+    margin:0 0 28px;
+    font-size:clamp(42px,13vw,56px);
+    font-weight:400;
+    line-height:.98;
+    letter-spacing:-.045em;
+  }
+
+  .contact-identity{
+    position:relative;
+    top:auto;
+    left:auto;
+    width:68px;
+    margin:0 0 38px;
+    overflow:hidden;
+    transform:none;
+  }
+
+  .contact-identity::after{
+    position:absolute;
+    right:auto;
+    bottom:0;
+    left:0;
+    width:16%;
+    height:8%;
+    background:#fff;
+    content:'';
+  }
+
+  .contact-identity img{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+
+  .contact-details{
+    width:100%;
+    border-top:1px solid rgba(0,0,0,.14);
+  }
+
+  .contact-detail-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    width:100%;
+    min-height:104px;
+    padding:20px 0;
+    border-bottom:1px solid rgba(0,0,0,.14);
+    color:#181818;
+    text-decoration:none;
+  }
+
+  .contact-detail-copy{
+    display:flex;
+    flex:1 1 auto;
+    flex-direction:column;
+    min-width:0;
+    gap:12px;
+  }
+
+  .contact-detail-label{
+    color:#8d8d8d;
+    font-size:10px;
+    line-height:1;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+  }
+
+  .contact-detail-value{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:clamp(22px,7vw,28px);
+    line-height:1.1;
+    letter-spacing:-.025em;
+    white-space:nowrap;
+  }
+
+  .contact-detail-row:first-child .contact-detail-value{
+    max-width:100%;
+    font-size:clamp(14px,4.25vw,18px);
+    overflow-wrap:anywhere;
+    white-space:normal;
+  }
+
+  .contact-detail-arrow{
+    display:flex;
+    flex:0 0 24px;
+    align-items:center;
+    justify-content:flex-end;
+    align-self:center;
+    margin-left:12px;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    font-size:19px;
+    line-height:1;
+  }
+}
