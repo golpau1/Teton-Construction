@@ -24,7 +24,7 @@
     var projectsGrid = document.querySelector('.legacy-projects-grid');
     if (!projectsGrid) return;
 
-    projectsGrid.addEventListener('click', function (event) {
+    projectsGrid.addEventListener('click', async function (event) {
       if (!transitionEnabled() || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
 
       var link = event.target.closest('a.project-opening-link');
@@ -42,6 +42,16 @@
         window.location.assign(destination);
         return;
       }
+
+      // The transition clone must reuse an image that is already available to
+      // paint. In particular, do not measure or hand off a still-decoding lazy
+      // image.
+      if (!image.complete && typeof image.decode === 'function') {
+        await image.decode().catch(function () {});
+      }
+
+      // Measure immediately before creating the transition layer so the clone
+      // begins on exactly the same pixels as the clicked image.
       var rect = image.getBoundingClientRect();
       var styles = window.getComputedStyle(image);
       var header = document.querySelector('.site-header');
@@ -56,6 +66,9 @@
       clone.classList.add('project-slide-image');
       clone.removeAttribute('loading');
       clone.removeAttribute('decoding');
+      clone.removeAttribute('srcset');
+      clone.removeAttribute('sizes');
+      clone.src = image.currentSrc || image.src;
       clone.decoding = 'sync';
       Object.assign(clone.style, {
         top: (rect.top - dividerY) + 'px',
@@ -65,7 +78,10 @@
         objectFit: styles.objectFit || 'cover',
         objectPosition: styles.objectPosition || '50% 50%',
         opacity: '1',
-        transform: 'translate3d(0, 0, 0)'
+        transform: 'translate3d(0, 0, 0)',
+        backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
+        willChange: 'transform'
       });
       transitionViewport.appendChild(clone);
       document.body.appendChild(transitionViewport);
@@ -96,17 +112,18 @@
         });
       }
 
-      if (mobileOnly.matches) {
+      // Give the clone a full frame to paint before hiding the source. Begin
+      // movement one frame after that handoff, so neither operation can expose
+      // an empty or differently positioned frame.
+      window.requestAnimationFrame(function () {
         window.requestAnimationFrame(function () {
           image.style.visibility = 'hidden';
           document.body.classList.add('project-is-opening');
-          window.requestAnimationFrame(startSlide);
+          window.requestAnimationFrame(function () {
+            startSlide();
+          });
         });
-      } else {
-        image.style.visibility = 'hidden';
-        document.body.classList.add('project-is-opening');
-        window.requestAnimationFrame(startSlide);
-      }
+      });
 
       window.addEventListener('pageshow', function restoreProjectsPage(event) {
         if (!event.persisted) return;

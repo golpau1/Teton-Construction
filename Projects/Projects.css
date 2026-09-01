@@ -1550,6 +1550,18 @@ main.projects-grid.legacy-projects-grid {
 .project-slider-progress { flex: 0 0 auto; }
 
 @media (max-width: 700px) {
+  html,
+  body.projects-page {
+    height: 100svh;
+    min-height: 100svh;
+  }
+
+  body.projects-page .combined-view {
+    flex: 0 0 calc(100svh - 58px);
+    height: calc(100svh - 58px);
+    min-height: calc(100svh - 58px);
+  }
+
   .legacy-projects-grid .project-card {
     aspect-ratio: 3 / 2;
     background: #f3f3f1;

@@ -84,6 +84,17 @@ html.transition-reveal-active::after {
   html.transition-reveal-active::after {
     animation-name: tetonLineRevealMobile;
   }
+
+}
+
+@media (max-width: 700px) {
+  /* Keep the vertically centred Projects slider on the same stable viewport
+     geometry before, during, and after the destination reveal. */
+  html.transition-reveal-pending body.projects-page,
+  html.transition-reveal-active body.projects-page {
+    height: 100svh;
+    min-height: 100svh;
+  }
 }
 
 @keyframes tetonDestinationRevealMobile {
